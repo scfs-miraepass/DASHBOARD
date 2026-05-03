@@ -28,6 +28,7 @@ export default defineNuxtConfig({
     },
 
     app: {
+        baseURL: "/admin/",
         head: {
             title: "미래패스 관리자",
             htmlAttrs: {
