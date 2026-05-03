@@ -11,15 +11,20 @@ export default defineNuxtConfig({
         strict: true
     },
 
-    modules: [
-        '@nuxt/ui',
-        '@vueuse/nuxt'
-    ],
+    modules: ['@nuxt/ui', '@vueuse/nuxt', '@nuxt/fonts'],
 
     routeRules: {
         '/api/**': {
             proxy: process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:8000/**',
         },
+    },
+
+    icon: {
+        localApiEndpoint: "/_icon/api"
+    },
+
+    fonts: {
+        families: [{ name: "Pretendard", provider: "local" }],
     },
 
     app: {
