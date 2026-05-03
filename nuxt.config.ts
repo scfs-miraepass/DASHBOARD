@@ -1,6 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: { enabled: false },
+    compatibilityDate: '2026-05-03',
 
     future: {
         compatibilityVersion: 4,
@@ -10,10 +11,7 @@ export default defineNuxtConfig({
         strict: true
     },
 
-    modules: [
-        '@nuxt/ui',
-        '@vueuse/nuxt'
-    ],
+    modules: ['@nuxt/ui', '@vueuse/nuxt', '@nuxt/fonts'],
 
     routeRules: {
         '/api/**': {
@@ -21,7 +19,16 @@ export default defineNuxtConfig({
         },
     },
 
+    icon: {
+        localApiEndpoint: "/_icon/api"
+    },
+
+    fonts: {
+        families: [{ name: "Pretendard", provider: "local" }],
+    },
+
     app: {
+        baseURL: "/admin/",
         head: {
             title: "미래패스 관리자",
             htmlAttrs: {
