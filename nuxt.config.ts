@@ -15,5 +15,11 @@ export default defineNuxtConfig({
         '@vueuse/nuxt'
     ],
 
+    routeRules: {
+        '/api/**': {
+            proxy: process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:8000/**',
+        },
+    },
+
     css: ['~/assets/css/main.css'],
 })
