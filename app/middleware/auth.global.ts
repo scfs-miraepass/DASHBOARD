@@ -21,20 +21,6 @@ export default defineNuxtRouteMiddleware(async (to) => {
         authLog(`'${to.path}'으로 페이지 이동`)
         const session = useSession()
 
-        if (import.meta.dev) {
-            session.value = {
-                "id": 1111,
-                "type": "teacher",
-                "name": "홍길동",
-                "grade": 0,
-                "number": 0,
-                "point": 0,
-                "is_admin": true,
-                "history_type": null
-            }
-            return
-        }
-
         const now = Date.now()
 
         // 공통 API 호출 및 세션 상태 업데이트 함수
