@@ -21,5 +21,17 @@ export default defineNuxtConfig({
         },
     },
 
+    app: {
+        head: {
+            title: "미래패스 관리자",
+            htmlAttrs: {
+                lang: 'ko'
+            },
+            link: [
+                { rel: 'icon', href: '/favicon.ico' }
+            ],
+        },
+    },
+
     css: ['~/assets/css/main.css'],
 })
