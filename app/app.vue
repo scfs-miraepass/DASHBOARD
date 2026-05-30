@@ -1,13 +1,13 @@
 <script setup lang="ts">
-
+const session = useSession()
 </script>
 
 <template>
     <UApp>
-        <NuxtLoadingIndicator/>
+        <NuxtLoadingIndicator />
 
-        <NuxtLayout>
-            <NuxtPage/>
+        <NuxtLayout v-if="session">
+            <NuxtPage />
         </NuxtLayout>
     </UApp>
 </template>

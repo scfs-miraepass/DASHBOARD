@@ -1,3 +1,12 @@
+# [1.1.0-dev.1](https://git.rldn.xyz/scfs.miraepass/dashboard/compare/v1.0.0...v1.1.0-dev.1) (2026-05-03)
+
+
+### Features
+
+* BaseURL 프록시 사용을 위해 수정 ([e2f93ca](https://git.rldn.xyz/scfs.miraepass/dashboard/commit/e2f93ca31f59a1283c0615901468366c635cd889))
+* Pretendard 폰트 적용 ([553f3ce](https://git.rldn.xyz/scfs.miraepass/dashboard/commit/553f3ce1f8b08c05bb9e509bf7c6f5d490e1589c))
+* 기본 레이아웃 Base ([e2a93ff](https://git.rldn.xyz/scfs.miraepass/dashboard/commit/e2a93ff93f24c8e8b1f60c9fda82a148ab648094))
+
 # 1.0.0 (2026-05-03)
 
 
