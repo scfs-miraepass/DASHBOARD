@@ -21,9 +21,6 @@
         "prepareCmd": "echo \"NEW_VERSION=${nextRelease.version}\" >> build.env"
       }
     ],
-    "@semantic-release/gitlab",
-    "@saithodev/semantic-release-backmerge", {
-      "branches": [{"from": "master", "to": "dev"}]
-    }
+    "@semantic-release/github"
   ]
 }
