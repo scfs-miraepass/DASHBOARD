@@ -21,6 +21,6 @@
         "prepareCmd": "echo \"NEW_VERSION=${nextRelease.version}\" >> build.env"
       }
     ],
-    "@semantic-release/gitlab"
+    "@semantic-release/github"
   ]
 }
