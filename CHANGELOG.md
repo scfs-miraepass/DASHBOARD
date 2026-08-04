@@ -1,3 +1,12 @@
+# [1.1.0-dev.3](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.2...v1.1.0-dev.3) (2026-08-04)
+
+
+### Features
+
+* BaseURL 프록시 사용을 위해 수정 ([6a50b43](https://github.com/scfs-miraepass/DASHBOARD/commit/6a50b43ef0ee6a3b0968cc972ec082c5a4fe3333))
+* Pretendard 폰트 적용 ([9068ee1](https://github.com/scfs-miraepass/DASHBOARD/commit/9068ee109febb7457346cb2b8b503bd8bbe559a1))
+* 기본 레이아웃 Base ([208f241](https://github.com/scfs-miraepass/DASHBOARD/commit/208f2413eb9ef68de25ac826147a62593e1fdf37))
+
 # [1.1.0-dev.2](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.1...v1.1.0-dev.2) (2026-08-04)
 
 
