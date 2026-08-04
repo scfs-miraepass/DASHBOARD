@@ -79,6 +79,20 @@ export type ErrorResponse = {
 };
 
 /**
+ * GetLimitResponse
+ */
+export type GetLimitResponse = {
+    /**
+     * Limit
+     */
+    limit: number;
+    /**
+     * Target Limit
+     */
+    target_limit: number;
+};
+
+/**
  * HTTPValidationError
  */
 export type HttpValidationError = {
@@ -123,9 +137,15 @@ export type PointHistory = {
     /**
      * Reason
      *
-     * 이유
+     * 누구의 무엇의 의해서 포인트가 변경되었는지 이유
      */
     reason: string;
+    /**
+     * Memo
+     *
+     * 포인트가 어떠한 사유로 변경되었는지 이유
+     */
+    memo?: string | null;
     /**
      * 기록 종류
      */
@@ -139,7 +159,7 @@ export type PointHistory = {
 /**
  * PointHistoryType
  */
-export type PointHistoryType = 'teacher' | 'cafe' | 'food';
+export type PointHistoryType = 'teacher' | 'cafe' | 'food' | 'etc' | 'grant' | 'quest' | 'stamp' | 'stamp_bonus';
 
 /**
  * PointOperation
@@ -159,22 +179,304 @@ export type PointOperation = {
      * 포인트를 처리하는 이유의 종류
      */
     change_type?: PointHistoryType | null;
+    /**
+     * Memo
+     *
+     * 포인트를 처리하는 이유
+     */
+    memo?: string | null;
 };
 
 /**
- * ResponseModel[List[User]]
+ * PostCreateRequest
  */
-export type ResponseModelListUser = {
+export type PostCreateRequest = {
+    /**
+     * Title
+     *
+     * 게시글 제목
+     */
+    title: string;
+    /**
+     * Content Data
+     *
+     * 게시글의 본문 데이터
+     */
+    content_data: {
+        [key: string]: unknown;
+    };
+};
+
+/**
+ * PostUpdateRequest
+ */
+export type PostUpdateRequest = {
+    /**
+     * Title
+     *
+     * 수정할 게시글 제목
+     */
+    title?: string | null;
+    /**
+     * Content Data
+     *
+     * 수정할 게시글의 본문 데이터
+     */
+    content_data?: {
+        [key: string]: unknown;
+    } | null;
+};
+
+/**
+ * Posts
+ */
+export type Posts = {
+    /**
+     * Id
+     *
+     * 게시글 고유 ID
+     */
+    id?: number | null;
+    /**
+     * Title
+     *
+     * 게시글 제목
+     */
+    title: string;
+    /**
+     * Views
+     *
+     * 게시글 조회수
+     */
+    views?: number;
+    /**
+     * Created At
+     *
+     * 게시글이 작성된 시간
+     */
+    created_at?: string;
+    /**
+     * Updated At
+     *
+     * 게시글이 수정된 마지막 시간
+     */
+    updated_at?: string;
+    /**
+     * Author Id
+     *
+     * 게시글 작성자의 고유 ID
+     */
+    author_id: number;
+};
+
+/**
+ * QuestOperation
+ */
+export type QuestOperation = {
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title: string;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description: string;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상(포인트)
+     */
+    reward: number;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date: string;
+    /**
+     * Max Repeat
+     *
+     * 퀘스트 반복 가능 횟수
+     */
+    max_repeat: number;
+};
+
+/**
+ * QuestUpdate
+ */
+export type QuestUpdate = {
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title?: string | null;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description?: string | null;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상(포인트)
+     */
+    reward?: number | null;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date?: string | null;
+    /**
+     * Max Repeat
+     *
+     * 퀘스트 반복 가능 횟수
+     */
+    max_repeat?: number | null;
+};
+
+/**
+ * Quests
+ */
+export type Quests = {
+    /**
+     * Id
+     *
+     * 퀘스트 고유 ID
+     */
+    id?: number | null;
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title: string;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description: string;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상 포인트
+     */
+    reward: number;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date: string;
+    /**
+     * Max Repeat
+     *
+     * 학생 당 최대 반복 완료 횟수
+     */
+    max_repeat?: number;
+    /**
+     * Created At
+     *
+     * 퀘스트를 작성한 시간
+     */
+    created_at?: string;
+    /**
+     * Author Id
+     *
+     * 퀘스트 생성 유저의 고유 ID
+     */
+    author_id: number;
+};
+
+/**
+ * RankingResponse
+ */
+export type RankingResponse = {
+    /**
+     * Id
+     *
+     * 고유 ID. 교사, 서비스의 경우 자동생성. 학생의 경우 학번 사용
+     */
+    id: number;
+    /**
+     * Name
+     *
+     * 이름
+     */
+    name: string;
+    /**
+     * Grade
+     *
+     * 학년
+     */
+    grade: number | null;
+    /**
+     * Number
+     *
+     * 반
+     */
+    number: number | null;
+    /**
+     * Total Point
+     *
+     * 누적 포인트
+     */
+    total_point: number;
+    /**
+     * Rank
+     *
+     * 현재 순위
+     */
+    rank: number;
+};
+
+/**
+ * ResponseModel[GetLimitResponse]
+ */
+export type ResponseModelGetLimitResponse = {
     /**
      * Success
      */
     success: boolean;
     /**
-     * Data
-     *
      * 응답 데이터
      */
-    data: Array<User>;
+    data: GetLimitResponse;
+};
+
+/**
+ * ResponseModel[Posts]
+ */
+export type ResponseModelPosts = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: Posts;
+};
+
+/**
+ * ResponseModel[Quests]
+ */
+export type ResponseModelQuests = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: Quests;
 };
 
 /**
@@ -240,6 +542,127 @@ export type ResponseModelListPointHistory = {
 };
 
 /**
+ * ResponseModel[list[Posts]]
+ */
+export type ResponseModelListPosts = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<Posts>;
+};
+
+/**
+ * ResponseModel[list[Quests]]
+ */
+export type ResponseModelListQuests = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<Quests>;
+};
+
+/**
+ * ResponseModel[list[RankingResponse]]
+ */
+export type ResponseModelListRankingResponse = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<RankingResponse>;
+};
+
+/**
+ * ResponseModel[list[StampsList]]
+ */
+export type ResponseModelListStampsList = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<StampsList>;
+};
+
+/**
+ * ResponseModel[list[User]]
+ */
+export type ResponseModelListUser = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<User>;
+};
+
+/**
+ * StampCreate
+ */
+export type StampCreate = {
+    /**
+     * User Id
+     */
+    user_id: number;
+    stamp_type: StampType;
+};
+
+/**
+ * StampType
+ *
+ * 스탬프 종류 Enum
+ * - 부스 이름은 추후 수정될 수 있습니다.
+ */
+export type StampType = '쓰레기 투호' | '철권 한판' | '큐피트의 다트' | '제기찰겨? 날찰겨?' | '팔씨름 최강자전' | '부적꾸미기' | '누르기 챌린지' | '공놀이 괴물' | '철면피 노래방' | '절대음감' | '런닝맨' | '의자뺏기' | '단체줄넘기' | '수학 키캡';
+
+/**
+ * StampsList
+ */
+export type StampsList = {
+    /**
+     * Stamp
+     */
+    stamp: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Have
+     */
+    have: boolean;
+    /**
+     * Time
+     */
+    time: string | null;
+};
+
+/**
  * User
  */
 export type User = {
@@ -278,11 +701,17 @@ export type User = {
      */
     point?: number;
     /**
-     * Is Admin
+     * Total Point
+     *
+     * 누적 포인트
+     */
+    total_point?: number;
+    /**
+     * Permissions
      *
      * 관리자 여부
      */
-    is_admin?: boolean;
+    permissions?: number;
     /**
      * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
      */
@@ -512,12 +941,79 @@ export type CheckPasswordExistsAuthPasswordExistsUserIdGetError = CheckPasswordE
 
 export type CheckPasswordExistsAuthPasswordExistsUserIdGetResponses = {
     /**
-     * Successful Response
+     * 정상 조회
      */
     200: ResponseModelBool;
 };
 
 export type CheckPasswordExistsAuthPasswordExistsUserIdGetResponse = CheckPasswordExistsAuthPasswordExistsUserIdGetResponses[keyof CheckPasswordExistsAuthPasswordExistsUserIdGetResponses];
+
+export type GetLimitPointLimitTargetUserIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Target User Id
+         */
+        target_user_id: number;
+    };
+    query?: never;
+    url: '/point/limit/{target_user_id}';
+};
+
+export type GetLimitPointLimitTargetUserIdGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetLimitPointLimitTargetUserIdGetError = GetLimitPointLimitTargetUserIdGetErrors[keyof GetLimitPointLimitTargetUserIdGetErrors];
+
+export type GetLimitPointLimitTargetUserIdGetResponses = {
+    /**
+     * 정상적으로 처리됨
+     */
+    200: ResponseModelGetLimitResponse;
+};
+
+export type GetLimitPointLimitTargetUserIdGetResponse = GetLimitPointLimitTargetUserIdGetResponses[keyof GetLimitPointLimitTargetUserIdGetResponses];
+
+export type GetLimitSessionPointLimitGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/point/limit';
+};
+
+export type GetLimitSessionPointLimitGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+};
+
+export type GetLimitSessionPointLimitGetError = GetLimitSessionPointLimitGetErrors[keyof GetLimitSessionPointLimitGetErrors];
+
+export type GetLimitSessionPointLimitGetResponses = {
+    /**
+     * 정상적으로 처리됨
+     */
+    200: ResponseModelInt;
+};
+
+export type GetLimitSessionPointLimitGetResponse = GetLimitSessionPointLimitGetResponses[keyof GetLimitSessionPointLimitGetResponses];
 
 export type GrantPointsPointGrantPostData = {
     body: PointOperation;
@@ -543,6 +1039,10 @@ export type GrantPointsPointGrantPostErrors = {
      * Validation Error
      */
     422: HttpValidationError;
+    /**
+     * 주간 포인트 지급 한도를 초과할 경우 발생합니다. 관리자 계정의 경우 한도가 적용되지 않습니다.
+     */
+    429: ErrorResponse;
 };
 
 export type GrantPointsPointGrantPostError = GrantPointsPointGrantPostErrors[keyof GrantPointsPointGrantPostErrors];
@@ -623,6 +1123,10 @@ export type PointHistoryPointHistoryGetErrors = {
      */
     401: ErrorResponse;
     /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
      * Validation Error
      */
     422: HttpValidationError;
@@ -639,6 +1143,82 @@ export type PointHistoryPointHistoryGetResponses = {
 
 export type PointHistoryPointHistoryGetResponse = PointHistoryPointHistoryGetResponses[keyof PointHistoryPointHistoryGetResponses];
 
+export type GetStudentRankingPointRankingStudentGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Offset
+         */
+        offset?: number;
+    };
+    url: '/point/ranking/student';
+};
+
+export type GetStudentRankingPointRankingStudentGetErrors = {
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetStudentRankingPointRankingStudentGetError = GetStudentRankingPointRankingStudentGetErrors[keyof GetStudentRankingPointRankingStudentGetErrors];
+
+export type GetStudentRankingPointRankingStudentGetResponses = {
+    /**
+     * 정상 처리
+     */
+    200: ResponseModelListRankingResponse;
+};
+
+export type GetStudentRankingPointRankingStudentGetResponse = GetStudentRankingPointRankingStudentGetResponses[keyof GetStudentRankingPointRankingStudentGetResponses];
+
+export type GetTeacherRankingPointRankingTeacherGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Offset
+         */
+        offset?: number;
+    };
+    url: '/point/ranking/teacher';
+};
+
+export type GetTeacherRankingPointRankingTeacherGetErrors = {
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetTeacherRankingPointRankingTeacherGetError = GetTeacherRankingPointRankingTeacherGetErrors[keyof GetTeacherRankingPointRankingTeacherGetErrors];
+
+export type GetTeacherRankingPointRankingTeacherGetResponses = {
+    /**
+     * 정상 처리
+     */
+    200: ResponseModelListRankingResponse;
+};
+
+export type GetTeacherRankingPointRankingTeacherGetResponse = GetTeacherRankingPointRankingTeacherGetResponses[keyof GetTeacherRankingPointRankingTeacherGetResponses];
+
 export type GetPointBalancePointTargetUserIdGetData = {
     body?: never;
     path: {
@@ -652,6 +1232,10 @@ export type GetPointBalancePointTargetUserIdGetData = {
 };
 
 export type GetPointBalancePointTargetUserIdGetErrors = {
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
     /**
      * 유저를 찾을 수 없음
      */
@@ -684,7 +1268,7 @@ export type SearchSearchGetData = {
         /**
          * T
          */
-        t?: Array<UserType>;
+        t?: Array<UserType> | null;
     };
     url: '/search';
 };
@@ -819,3 +1403,533 @@ export type UpdateStudentsPointAdminPointPostResponses = {
 };
 
 export type UpdateStudentsPointAdminPointPostResponse = UpdateStudentsPointAdminPointPostResponses[keyof UpdateStudentsPointAdminPointPostResponses];
+
+export type CreateQuestQuestCreatePostData = {
+    body: QuestOperation;
+    path?: never;
+    query?: never;
+    url: '/quest/create';
+};
+
+export type CreateQuestQuestCreatePostErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+    /**
+     * 퀘스트 보상 한도 초과
+     */
+    429: ErrorResponse;
+};
+
+export type CreateQuestQuestCreatePostError = CreateQuestQuestCreatePostErrors[keyof CreateQuestQuestCreatePostErrors];
+
+export type CreateQuestQuestCreatePostResponses = {
+    /**
+     * 퀘스트 생성 성공
+     */
+    201: ResponseModelQuests;
+};
+
+export type CreateQuestQuestCreatePostResponse = CreateQuestQuestCreatePostResponses[keyof CreateQuestQuestCreatePostResponses];
+
+export type ListQuestsQuestGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Limit
+         */
+        limit?: number;
+        /**
+         * Offset
+         */
+        offset?: number;
+    };
+    url: '/quest';
+};
+
+export type ListQuestsQuestGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ListQuestsQuestGetError = ListQuestsQuestGetErrors[keyof ListQuestsQuestGetErrors];
+
+export type ListQuestsQuestGetResponses = {
+    /**
+     * 퀘스트 목록 조회 성공
+     */
+    200: ResponseModelListQuests;
+};
+
+export type ListQuestsQuestGetResponse = ListQuestsQuestGetResponses[keyof ListQuestsQuestGetResponses];
+
+export type DeleteQuestQuestQuestIdDeleteData = {
+    body?: never;
+    path: {
+        /**
+         * Quest Id
+         */
+        quest_id: number;
+    };
+    query?: never;
+    url: '/quest/{quest_id}';
+};
+
+export type DeleteQuestQuestQuestIdDeleteErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 퀘스트를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteQuestQuestQuestIdDeleteError = DeleteQuestQuestQuestIdDeleteErrors[keyof DeleteQuestQuestQuestIdDeleteErrors];
+
+export type DeleteQuestQuestQuestIdDeleteResponses = {
+    /**
+     * 퀘스트 삭제 성공
+     */
+    204: void;
+};
+
+export type DeleteQuestQuestQuestIdDeleteResponse = DeleteQuestQuestQuestIdDeleteResponses[keyof DeleteQuestQuestQuestIdDeleteResponses];
+
+export type GetQuestQuestQuestIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Quest Id
+         */
+        quest_id: number;
+    };
+    query?: never;
+    url: '/quest/{quest_id}';
+};
+
+export type GetQuestQuestQuestIdGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 퀘스트를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetQuestQuestQuestIdGetError = GetQuestQuestQuestIdGetErrors[keyof GetQuestQuestQuestIdGetErrors];
+
+export type GetQuestQuestQuestIdGetResponses = {
+    /**
+     * 퀘스트 조회 성공
+     */
+    200: ResponseModelQuests;
+};
+
+export type GetQuestQuestQuestIdGetResponse = GetQuestQuestQuestIdGetResponses[keyof GetQuestQuestQuestIdGetResponses];
+
+export type UpdateQuestQuestQuestIdPutData = {
+    body: QuestUpdate;
+    path: {
+        /**
+         * Quest Id
+         */
+        quest_id: number;
+    };
+    query?: never;
+    url: '/quest/{quest_id}';
+};
+
+export type UpdateQuestQuestQuestIdPutErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 퀘스트를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+    /**
+     * 퀘스트 보상 한도 초과
+     */
+    429: ErrorResponse;
+};
+
+export type UpdateQuestQuestQuestIdPutError = UpdateQuestQuestQuestIdPutErrors[keyof UpdateQuestQuestQuestIdPutErrors];
+
+export type UpdateQuestQuestQuestIdPutResponses = {
+    /**
+     * 퀘스트 수정 성공
+     */
+    200: ResponseModelQuests;
+};
+
+export type UpdateQuestQuestQuestIdPutResponse = UpdateQuestQuestQuestIdPutResponses[keyof UpdateQuestQuestQuestIdPutResponses];
+
+export type CompleteQuestQuestQuestIdCompletePostData = {
+    body?: never;
+    path: {
+        /**
+         * Quest Id
+         */
+        quest_id: number;
+    };
+    query?: never;
+    url: '/quest/{quest_id}/complete';
+};
+
+export type CompleteQuestQuestQuestIdCompletePostErrors = {
+    /**
+     * 퀘스트 완료 불가
+     */
+    400: ErrorResponse;
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 퀘스트를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+    /**
+     * 퀘스트 반복 한도 초과
+     */
+    429: ErrorResponse;
+};
+
+export type CompleteQuestQuestQuestIdCompletePostError = CompleteQuestQuestQuestIdCompletePostErrors[keyof CompleteQuestQuestQuestIdCompletePostErrors];
+
+export type CompleteQuestQuestQuestIdCompletePostResponses = {
+    /**
+     * 퀘스트 완료 처리 성공
+     */
+    200: ResponseModelInt;
+};
+
+export type CompleteQuestQuestQuestIdCompletePostResponse = CompleteQuestQuestQuestIdCompletePostResponses[keyof CompleteQuestQuestQuestIdCompletePostResponses];
+
+export type GetPostsPostsGetData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Page
+         *
+         * 페이지 번호
+         */
+        page?: number;
+        /**
+         * Size
+         *
+         * 페이지 당 게시글 데이터 갯수 (최대 100)
+         */
+        size?: number;
+    };
+    url: '/posts';
+};
+
+export type GetPostsPostsGetErrors = {
+    /**
+     * 인증되지 않은 사용자
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetPostsPostsGetError = GetPostsPostsGetErrors[keyof GetPostsPostsGetErrors];
+
+export type GetPostsPostsGetResponses = {
+    /**
+     * 게시글 목록 조회 성공
+     */
+    200: ResponseModelListPosts;
+};
+
+export type GetPostsPostsGetResponse = GetPostsPostsGetResponses[keyof GetPostsPostsGetResponses];
+
+export type CreatePostPostsPostData = {
+    body: PostCreateRequest;
+    path?: never;
+    query?: never;
+    url: '/posts';
+};
+
+export type CreatePostPostsPostErrors = {
+    /**
+     * 인증되지 않은 사용자
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreatePostPostsPostError = CreatePostPostsPostErrors[keyof CreatePostPostsPostErrors];
+
+export type CreatePostPostsPostResponses = {
+    /**
+     * 게시글 작성 완료
+     */
+    201: ResponseModelPosts;
+};
+
+export type CreatePostPostsPostResponse = CreatePostPostsPostResponses[keyof CreatePostPostsPostResponses];
+
+export type DeletePostPostsPostIdDeleteData = {
+    body?: never;
+    path: {
+        /**
+         * Post Id
+         */
+        post_id: number;
+    };
+    query?: never;
+    url: '/posts/{post_id}';
+};
+
+export type DeletePostPostsPostIdDeleteErrors = {
+    /**
+     * 인증되지 않은 사용자
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 게시글을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeletePostPostsPostIdDeleteError = DeletePostPostsPostIdDeleteErrors[keyof DeletePostPostsPostIdDeleteErrors];
+
+export type DeletePostPostsPostIdDeleteResponses = {
+    /**
+     * 게시글 삭제 완료
+     */
+    204: void;
+};
+
+export type DeletePostPostsPostIdDeleteResponse = DeletePostPostsPostIdDeleteResponses[keyof DeletePostPostsPostIdDeleteResponses];
+
+export type GetPostPostsPostIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Post Id
+         */
+        post_id: number;
+    };
+    query?: never;
+    url: '/posts/{post_id}';
+};
+
+export type GetPostPostsPostIdGetErrors = {
+    /**
+     * 인증되지 않은 사용자
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 게시글을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetPostPostsPostIdGetError = GetPostPostsPostIdGetErrors[keyof GetPostPostsPostIdGetErrors];
+
+export type GetPostPostsPostIdGetResponses = {
+    /**
+     * 게시글 상세 조회 성공
+     */
+    200: ResponseModelPosts;
+};
+
+export type GetPostPostsPostIdGetResponse = GetPostPostsPostIdGetResponses[keyof GetPostPostsPostIdGetResponses];
+
+export type UpdatePostPostsPostIdPatchData = {
+    body: PostUpdateRequest;
+    path: {
+        /**
+         * Post Id
+         */
+        post_id: number;
+    };
+    query?: never;
+    url: '/posts/{post_id}';
+};
+
+export type UpdatePostPostsPostIdPatchErrors = {
+    /**
+     * 인증되지 않은 사용자
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 게시글을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type UpdatePostPostsPostIdPatchError = UpdatePostPostsPostIdPatchErrors[keyof UpdatePostPostsPostIdPatchErrors];
+
+export type UpdatePostPostsPostIdPatchResponses = {
+    /**
+     * 게시글 수정 완료
+     */
+    200: ResponseModelPosts;
+};
+
+export type UpdatePostPostsPostIdPatchResponse = UpdatePostPostsPostIdPatchResponses[keyof UpdatePostPostsPostIdPatchResponses];
+
+export type GetUserStampsStampGetData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/stamp';
+};
+
+export type GetUserStampsStampGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+};
+
+export type GetUserStampsStampGetError = GetUserStampsStampGetErrors[keyof GetUserStampsStampGetErrors];
+
+export type GetUserStampsStampGetResponses = {
+    /**
+     * 정상 처리
+     */
+    200: ResponseModelListStampsList;
+};
+
+export type GetUserStampsStampGetResponse = GetUserStampsStampGetResponses[keyof GetUserStampsStampGetResponses];
+
+export type CreateStampStampPostData = {
+    body: StampCreate;
+    path?: never;
+    query?: never;
+    url: '/stamp';
+};
+
+export type CreateStampStampPostErrors = {
+    /**
+     * 권한이 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 유저를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * 이미 해당 스탬프를 발급 받음
+     */
+    409: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateStampStampPostError = CreateStampStampPostErrors[keyof CreateStampStampPostErrors];
+
+export type CreateStampStampPostResponses = {
+    /**
+     * 정상 처리
+     */
+    204: void;
+};
+
+export type CreateStampStampPostResponse = CreateStampStampPostResponses[keyof CreateStampStampPostResponses];
