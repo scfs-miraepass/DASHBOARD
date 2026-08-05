@@ -1,26 +1,35 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
     devtools: { enabled: false },
-    compatibilityDate: '2026-05-03',
+    compatibilityDate: "2026-05-03",
 
     future: {
         compatibilityVersion: 4,
     },
     typescript: {
-        typeCheck: 'build',
-        strict: true
+        typeCheck: "build",
+        strict: true,
     },
 
-    modules: ['@nuxt/ui', '@vueuse/nuxt', '@nuxt/fonts'],
+    vite: {
+        server: {
+            allowedHosts: true,
+        },
+    },
+
+    modules: ["@nuxt/ui", "@vueuse/nuxt", "@nuxt/fonts"],
 
     routeRules: {
-        '/api/**': {
-            proxy: process.env.NODE_ENV === 'production' ? undefined : 'http://localhost:8000/**',
+        "/api/**": {
+            proxy:
+                process.env.NODE_ENV === "production"
+                    ? undefined
+                    : "http://localhost:8000/**",
         },
     },
 
     icon: {
-        localApiEndpoint: "/_icon/api"
+        localApiEndpoint: "/_icon/api",
     },
 
     fonts: {
@@ -32,13 +41,11 @@ export default defineNuxtConfig({
         head: {
             title: "미래패스 관리자",
             htmlAttrs: {
-                lang: 'ko'
+                lang: "ko",
             },
-            link: [
-                { rel: 'icon', href: '/favicon.ico' }
-            ],
+            link: [{ rel: "icon", href: "/favicon.ico" }],
         },
     },
 
-    css: ['~/assets/css/main.css'],
-})
+    css: ["~/assets/css/main.css"],
+});
