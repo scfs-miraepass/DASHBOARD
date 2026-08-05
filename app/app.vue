@@ -9,6 +9,5 @@ const session = useSession()
         <NuxtLayout v-if="session">
             <NuxtPage />
         </NuxtLayout>
-        <NuxtPage v-else />
     </UApp>
 </template>
