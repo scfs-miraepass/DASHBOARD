@@ -1,3 +1,10 @@
+# [1.1.0-dev.6](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.5...v1.1.0-dev.6) (2026-08-05)
+
+
+### Features
+
+* 로그인, 로그아웃 기능 ([277b365](https://github.com/scfs-miraepass/DASHBOARD/commit/277b365482dd575fc91bace6b7d60f638ecb9c61))
+
 # [1.1.0-dev.5](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.4...v1.1.0-dev.5) (2026-08-05)
 
 
