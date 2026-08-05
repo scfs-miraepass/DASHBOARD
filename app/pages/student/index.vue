@@ -14,17 +14,32 @@ const students = computed(() => {
 })
 
 // 테이블 컬럼 정의
-const columns: TableColumn<User>[] = [
-    { accessorKey: 'id', header: 'ID(학번)' },
-    { accessorKey: 'name', header: '이름' },
-    { accessorKey: 'type', header: '구분' },
-    { accessorKey: 'grade', header: '학년' },
-    { accessorKey: 'number', header: '반' },
-    { accessorKey: 'point', header: '현재 포인트' },
-    { accessorKey: 'total_point', header: '누적 포인트' }
-]
+const columns = computed<TableColumn<User>[]>(() => {
+    const UCheckbox = resolveComponent('UCheckbox')
+    return [
+        {
+            id: 'select',
+            header: ({ table }) => h(UCheckbox, {
+                modelValue: table.getIsAllPageRowsSelected(),
+                indeterminate: table.getIsSomePageRowsSelected(),
+                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value)
+            }),
+            cell: ({ row }) => h(UCheckbox, {
+                modelValue: row.getIsSelected(),
+                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value)
+            })
+        },
+        { accessorKey: 'id', header: 'ID(학번)' },
+        { accessorKey: 'name', header: '이름' },
+        { accessorKey: 'type', header: '구분' },
+        { accessorKey: 'grade', header: '학년' },
+        { accessorKey: 'number', header: '반' },
+        { accessorKey: 'point', header: '현재 포인트' },
+        { accessorKey: 'total_point', header: '누적 포인트' }
+    ]
+})
 
-const selected = ref<User[]>([])
+const rowSelection = ref<Record<string, boolean>>({})
 const search = ref('')
 
 const filteredStudents = computed(() => {
@@ -33,6 +48,11 @@ const filteredStudents = computed(() => {
         s.name.includes(search.value) || 
         String(s.id).includes(search.value)
     )
+})
+
+const selected = computed(() => {
+    const selectedIds = Object.keys(rowSelection.value).filter(key => rowSelection.value[key])
+    return filteredStudents.value.filter(s => selectedIds.includes(String(s.id)))
 })
 
 // 모달 상태
@@ -82,7 +102,7 @@ const handlePointSubmit = async () => {
         if (res.error == undefined) {
             toast.add({ title: '포인트가 성공적으로 처리되었습니다.', color: 'success' })
             isPointModalOpen.value = false
-            selected.value = []
+            rowSelection.value = {}
             await refresh()
         } else {
             toast.add({ title: '처리 중 오류가 발생했습니다.', color: 'error' })
@@ -146,23 +166,24 @@ const handleCreateUser = () => {
             </div>
 
             <UTable 
-                v-model="selected" 
+                v-model:row-selection="rowSelection" 
+                :get-row-id="(row) => String(row.id)"
                 :data="filteredStudents"
                 :columns="columns"
                 :loading="pending"
                 class="w-full"
             >
-<!--                <template #type-data="{ row }">-->
-<!--                    <UBadge :color="row. === 'student' ? 'green' : 'gray'" variant="subtle">-->
-<!--                        {{ row.type === 'student' ? '학생' : (row.type === 'teacher' ? '교사' : '서비스') }}-->
-<!--                    </UBadge>-->
-<!--                </template>-->
-<!--                <template #point-data="{ row }">-->
-<!--                    <span class="font-semibold text-primary">{{ row.point?.toLocaleString() || 0 }} P</span>-->
-<!--                </template>-->
-<!--                <template #total_point-data="{ row }">-->
-<!--                    <span class="text-gray-500">{{ row.total_point?.toLocaleString() || 0 }} P</span>-->
-<!--                </template>-->
+                <template #type-cell="{ row }">
+                    <UBadge :color="row.original.type === 'student' ? 'success' : 'neutral'" variant="subtle">
+                        {{ row.original.type === 'student' ? '학생' : (row.original.type === 'teacher' ? '교사' : '서비스') }}
+                    </UBadge>
+                </template>
+                <template #point-cell="{ row }">
+                    <span class="font-semibold text-primary">{{ row.original.point?.toLocaleString() || 0 }} P</span>
+                </template>
+                <template #total_point-cell="{ row }">
+                    <span class="text-gray-500">{{ row.original.total_point?.toLocaleString() || 0 }} P</span>
+                </template>
             </UTable>
 
             <!-- 포인트 지급/차감 모달 -->
@@ -212,7 +233,7 @@ const handleCreateUser = () => {
                         <UFormField label="구분">
                             <USelect 
                                 v-model="createUserForm.type" 
-                                :options="[{ label: '학생', value: 'student' }, { label: '교사', value: 'teacher' }, { label: '서비스', value: 'service' }]" 
+                                :items="[{ label: '학생', value: 'student' }, { label: '교사', value: 'teacher' }, { label: '서비스', value: 'service' }]" 
                             />
                         </UFormField>
 
