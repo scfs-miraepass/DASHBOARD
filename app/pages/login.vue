@@ -1,26 +1,33 @@
 <script setup lang="ts">
 import * as z from 'zod'
-import {loginAuthLoginPost} from '~/sdk'
-import type {FormSubmitEvent} from '@nuxt/ui'
+import { loginAuthLoginPost } from '~/sdk'
+import type { FormSubmitEvent } from '@nuxt/ui'
 
 const schema = z.object({
-    userid: z.string().regex(/^\d{4}$/, '사용자 ID는 숫자 4자리여야 합니다.'),
-    password: z.string().min(1, '비밀번호를 입력해주세요.')
+    userid: z.number({ error: '사용자 고유번호 4자리를 입력해주세요.' }).refine(val => String(val).length === 4, '사용자 고유번호 4자리를 입력해주세요.'),
+    password: z.string().min(1, { error: '비밀번호를 입력해주세요.' })
 })
 
 type Schema = z.output<typeof schema>
-const state = reactive<Partial<Schema>>({userid: '', password: ''})
+const state = reactive<Partial<Schema>>({ userid: undefined, password: '' })
 const isLoading = ref(false)
-const errorMessage = ref('')
+const errorMessage = ref<string | undefined>(undefined)
 
 const route = useRoute()
 
+const userIdPayload = ref<number[]>([]);
+watch(userIdPayload, () => {
+    state.userid = Number(userIdPayload.value?.join(''))
+})
+
+watch(state, () => errorMessage.value = undefined)
+
 async function onSubmit(event: FormSubmitEvent<Schema>) {
     isLoading.value = true
-    errorMessage.value = ''
+    errorMessage.value = undefined
 
     try {
-        const {data, error} = await loginAuthLoginPost({
+        const { error } = await loginAuthLoginPost({
             body: {
                 id: event.data.userid,
                 password: event.data.password
@@ -32,7 +39,6 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             return
         }
 
-        // Redirect on success
         const redirectPath = route.query.redirect as string || '/'
         await navigateTo(redirectPath)
     } finally {
@@ -52,13 +58,18 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
             </template>
 
             <UForm :schema="schema" :state="state" class="space-y-4" @submit="onSubmit">
-                <UFormField name="userid" label="사용자 ID">
-                    <UInput v-model="state.userid" type="text" placeholder="숫자 4자리 (예: 1234)" autofocus/>
+                <UFormField name="userid" label="사용자 ID" class="w-full">
+                    <UPinInput
+                        type="number"
+                        :length="4"
+                        size="lg"
+                        v-model="userIdPayload"
+                    />
                 </UFormField>
 
                 <!-- errorMessage가 있으면 해당 필드 하단에 인라인 에러가 표시되도록 구성 -->
                 <UFormField name="password" label="비밀번호" :error="errorMessage">
-                    <UInput v-model="state.password" type="password" placeholder="비밀번호를 입력해주세요"/>
+                    <UInput v-model="state.password" type="password" placeholder="비밀번호를 입력해주세요" class="w-full" />
                 </UFormField>
 
                 <UButton type="submit" label="로그인" block :loading="isLoading" class="mt-6"/>
