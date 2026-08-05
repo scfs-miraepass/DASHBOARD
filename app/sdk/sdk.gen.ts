@@ -5,17 +5,17 @@ import { client } from './client.gen';
 import type { ChangePasswordAuthPasswordPutData, ChangePasswordAuthPasswordPutErrors, ChangePasswordAuthPasswordPutResponses, ChangePasswordNewAuthPasswordPostData, ChangePasswordNewAuthPasswordPostErrors, ChangePasswordNewAuthPasswordPostResponses, CheckPasswordExistsAuthPasswordExistsUserIdGetData, CheckPasswordExistsAuthPasswordExistsUserIdGetErrors, CheckPasswordExistsAuthPasswordExistsUserIdGetResponses, CompleteQuestQuestQuestIdCompletePostData, CompleteQuestQuestQuestIdCompletePostErrors, CompleteQuestQuestQuestIdCompletePostResponses, CreatePostPostsPostData, CreatePostPostsPostErrors, CreatePostPostsPostResponses, CreateQuestQuestCreatePostData, CreateQuestQuestCreatePostErrors, CreateQuestQuestCreatePostResponses, CreateStampStampPostData, CreateStampStampPostErrors, CreateStampStampPostResponses, DeductPointsPointDeductPostData, DeductPointsPointDeductPostErrors, DeductPointsPointDeductPostResponses, DeletePostPostsPostIdDeleteData, DeletePostPostsPostIdDeleteErrors, DeletePostPostsPostIdDeleteResponses, DeleteQuestQuestQuestIdDeleteData, DeleteQuestQuestQuestIdDeleteErrors, DeleteQuestQuestQuestIdDeleteResponses, GetCurrentUserAuthGetData, GetCurrentUserAuthGetErrors, GetCurrentUserAuthGetResponses, GetLimitPointLimitTargetUserIdGetData, GetLimitPointLimitTargetUserIdGetErrors, GetLimitPointLimitTargetUserIdGetResponses, GetLimitSessionPointLimitGetData, GetLimitSessionPointLimitGetErrors, GetLimitSessionPointLimitGetResponses, GetPointBalancePointTargetUserIdGetData, GetPointBalancePointTargetUserIdGetErrors, GetPointBalancePointTargetUserIdGetResponses, GetPostPostsPostIdGetData, GetPostPostsPostIdGetErrors, GetPostPostsPostIdGetResponses, GetPostsPostsGetData, GetPostsPostsGetErrors, GetPostsPostsGetResponses, GetQuestQuestQuestIdGetData, GetQuestQuestQuestIdGetErrors, GetQuestQuestQuestIdGetResponses, GetStudentRankingPointRankingStudentGetData, GetStudentRankingPointRankingStudentGetErrors, GetStudentRankingPointRankingStudentGetResponses, GetStudentsAdminStudentGetData, GetStudentsAdminStudentGetErrors, GetStudentsAdminStudentGetResponses, GetTeacherRankingPointRankingTeacherGetData, GetTeacherRankingPointRankingTeacherGetErrors, GetTeacherRankingPointRankingTeacherGetResponses, GetUserStampsStampGetData, GetUserStampsStampGetErrors, GetUserStampsStampGetResponses, GrantPointsPointGrantPostData, GrantPointsPointGrantPostErrors, GrantPointsPointGrantPostResponses, ListQuestsQuestGetData, ListQuestsQuestGetErrors, ListQuestsQuestGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, LogoutAuthLogoutPostData, LogoutAuthLogoutPostResponses, PointHistoryPointHistoryGetData, PointHistoryPointHistoryGetErrors, PointHistoryPointHistoryGetResponses, ReadRootGetData, ReadRootGetResponses, SearchSearchGetData, SearchSearchGetErrors, SearchSearchGetResponses, TeacherGetByNameSearchTeacherUserNameGetData, TeacherGetByNameSearchTeacherUserNameGetErrors, TeacherGetByNameSearchTeacherUserNameGetResponses, UpdatePostPostsPostIdPatchData, UpdatePostPostsPostIdPatchErrors, UpdatePostPostsPostIdPatchResponses, UpdateQuestQuestQuestIdPutData, UpdateQuestQuestQuestIdPutErrors, UpdateQuestQuestQuestIdPutResponses, UpdateStudentsPointAdminPointPostData, UpdateStudentsPointAdminPointPostErrors, UpdateStudentsPointAdminPointPostResponses } from './types.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
-    /**
-     * You can provide a client instance returned by `createClient()` instead of
-     * individual options. This might be also useful if you want to implement a
-     * custom client.
-     */
-    client?: Client;
-    /**
-     * You can pass arbitrary values through the `meta` object. This can be
-     * used to access values that aren't defined as part of the SDK function.
-     */
-    meta?: keyof ClientMeta extends never ? Record<string, unknown> : ClientMeta;
+  /**
+   * You can provide a client instance returned by `createClient()` instead of
+   * individual options. This might be also useful if you want to implement a
+   * custom client.
+   */
+  client?: Client;
+  /**
+   * You can pass arbitrary values through the `meta` object. This can be
+   * used to access values that aren't defined as part of the SDK function.
+   */
+  meta?: keyof ClientMeta extends never ? Record<string, unknown> : ClientMeta;
 };
 
 /**
@@ -29,12 +29,12 @@ export const readRootGet = <ThrowOnError extends boolean = false>(options?: Opti
  * ID와 비밀번호를 통해 로그인을 진행합니다. 로그인을 성공한 경우 해당 유저의 정보를 응답합니다.
  */
 export const loginAuthLoginPost = <ThrowOnError extends boolean = false>(options: Options<LoginAuthLoginPostData, ThrowOnError>): RequestResult<LoginAuthLoginPostResponses, LoginAuthLoginPostErrors, ThrowOnError> => (options.client ?? client).post<LoginAuthLoginPostResponses, LoginAuthLoginPostErrors, ThrowOnError>({
-    url: '/auth/login',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/auth/login',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -57,12 +57,12 @@ export const getCurrentUserAuthGet = <ThrowOnError extends boolean = false>(opti
  * 첫 로그인시 비밀번호 변경을 합니다.
  */
 export const changePasswordNewAuthPasswordPost = <ThrowOnError extends boolean = false>(options: Options<ChangePasswordNewAuthPasswordPostData, ThrowOnError>): RequestResult<ChangePasswordNewAuthPasswordPostResponses, ChangePasswordNewAuthPasswordPostErrors, ThrowOnError> => (options.client ?? client).post<ChangePasswordNewAuthPasswordPostResponses, ChangePasswordNewAuthPasswordPostErrors, ThrowOnError>({
-    url: '/auth/password',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/auth/password',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -71,12 +71,12 @@ export const changePasswordNewAuthPasswordPost = <ThrowOnError extends boolean =
  * 로그인된 유저의 비밀번호를 변경합니다.
  */
 export const changePasswordAuthPasswordPut = <ThrowOnError extends boolean = false>(options: Options<ChangePasswordAuthPasswordPutData, ThrowOnError>): RequestResult<ChangePasswordAuthPasswordPutResponses, ChangePasswordAuthPasswordPutErrors, ThrowOnError> => (options.client ?? client).put<ChangePasswordAuthPasswordPutResponses, ChangePasswordAuthPasswordPutErrors, ThrowOnError>({
-    url: '/auth/password',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/auth/password',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -106,12 +106,12 @@ export const getLimitSessionPointLimitGet = <ThrowOnError extends boolean = fals
  * 특정 유저에게 포인트를 지급합니다. (교사 또는 관리자 전용)
  */
 export const grantPointsPointGrantPost = <ThrowOnError extends boolean = false>(options: Options<GrantPointsPointGrantPostData, ThrowOnError>): RequestResult<GrantPointsPointGrantPostResponses, GrantPointsPointGrantPostErrors, ThrowOnError> => (options.client ?? client).post<GrantPointsPointGrantPostResponses, GrantPointsPointGrantPostErrors, ThrowOnError>({
-    url: '/point/grant',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/point/grant',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -120,12 +120,12 @@ export const grantPointsPointGrantPost = <ThrowOnError extends boolean = false>(
  * 특정 유저의 포인트를 차감합니다. (서비스 유저 또는 관리자 전용)
  */
 export const deductPointsPointDeductPost = <ThrowOnError extends boolean = false>(options: Options<DeductPointsPointDeductPostData, ThrowOnError>): RequestResult<DeductPointsPointDeductPostResponses, DeductPointsPointDeductPostErrors, ThrowOnError> => (options.client ?? client).post<DeductPointsPointDeductPostResponses, DeductPointsPointDeductPostErrors, ThrowOnError>({
-    url: '/point/deduct',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/point/deduct',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -183,12 +183,12 @@ export const getStudentsAdminStudentGet = <ThrowOnError extends boolean = false>
  * 일괄적으로 포인트를 지급하거나 차감합니다.
  */
 export const updateStudentsPointAdminPointPost = <ThrowOnError extends boolean = false>(options: Options<UpdateStudentsPointAdminPointPostData, ThrowOnError>): RequestResult<UpdateStudentsPointAdminPointPostResponses, UpdateStudentsPointAdminPointPostErrors, ThrowOnError> => (options.client ?? client).post<UpdateStudentsPointAdminPointPostResponses, UpdateStudentsPointAdminPointPostErrors, ThrowOnError>({
-    url: '/admin/point',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/admin/point',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -197,12 +197,12 @@ export const updateStudentsPointAdminPointPost = <ThrowOnError extends boolean =
  * 퀘스트를 생성합니다. (교사 또는 관리자 전용)
  */
 export const createQuestQuestCreatePost = <ThrowOnError extends boolean = false>(options: Options<CreateQuestQuestCreatePostData, ThrowOnError>): RequestResult<CreateQuestQuestCreatePostResponses, CreateQuestQuestCreatePostErrors, ThrowOnError> => (options.client ?? client).post<CreateQuestQuestCreatePostResponses, CreateQuestQuestCreatePostErrors, ThrowOnError>({
-    url: '/quest/create',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/quest/create',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -232,12 +232,12 @@ export const getQuestQuestQuestIdGet = <ThrowOnError extends boolean = false>(op
  * 퀘스트 정보를 수정합니다. (생성한 교사 또는 관리자 전용)
  */
 export const updateQuestQuestQuestIdPut = <ThrowOnError extends boolean = false>(options: Options<UpdateQuestQuestQuestIdPutData, ThrowOnError>): RequestResult<UpdateQuestQuestQuestIdPutResponses, UpdateQuestQuestQuestIdPutErrors, ThrowOnError> => (options.client ?? client).put<UpdateQuestQuestQuestIdPutResponses, UpdateQuestQuestQuestIdPutErrors, ThrowOnError>({
-    url: '/quest/{quest_id}',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/quest/{quest_id}',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -260,12 +260,12 @@ export const getPostsPostsGet = <ThrowOnError extends boolean = false>(options?:
  * 새로운 게시글을 작성합니다.
  */
 export const createPostPostsPost = <ThrowOnError extends boolean = false>(options: Options<CreatePostPostsPostData, ThrowOnError>): RequestResult<CreatePostPostsPostResponses, CreatePostPostsPostErrors, ThrowOnError> => (options.client ?? client).post<CreatePostPostsPostResponses, CreatePostPostsPostErrors, ThrowOnError>({
-    url: '/posts',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/posts',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -288,12 +288,12 @@ export const getPostPostsPostIdGet = <ThrowOnError extends boolean = false>(opti
  * 기존 게시글을 수정합니다.
  */
 export const updatePostPostsPostIdPatch = <ThrowOnError extends boolean = false>(options: Options<UpdatePostPostsPostIdPatchData, ThrowOnError>): RequestResult<UpdatePostPostsPostIdPatchResponses, UpdatePostPostsPostIdPatchErrors, ThrowOnError> => (options.client ?? client).patch<UpdatePostPostsPostIdPatchResponses, UpdatePostPostsPostIdPatchErrors, ThrowOnError>({
-    url: '/posts/{post_id}',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/posts/{post_id}',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
 
 /**
@@ -309,10 +309,10 @@ export const getUserStampsStampGet = <ThrowOnError extends boolean = false>(opti
  * 유저에게 스탬프를 지급합니다.
  */
 export const createStampStampPost = <ThrowOnError extends boolean = false>(options: Options<CreateStampStampPostData, ThrowOnError>): RequestResult<CreateStampStampPostResponses, CreateStampStampPostErrors, ThrowOnError> => (options.client ?? client).post<CreateStampStampPostResponses, CreateStampStampPostErrors, ThrowOnError>({
-    url: '/stamp',
-    ...options,
-    headers: {
-        'Content-Type': 'application/json',
-        ...options.headers
-    }
+  url: '/stamp',
+  ...options,
+  headers: {
+    'Content-Type': 'application/json',
+    ...options.headers
+  }
 });
