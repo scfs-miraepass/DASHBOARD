@@ -1,3 +1,10 @@
+# [1.1.0-dev.5](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.4...v1.1.0-dev.5) (2026-08-05)
+
+
+### Reverts
+
+* Revert "feat: 로그인, 로그아웃 기능 추가" ([b602e3c](https://github.com/scfs-miraepass/DASHBOARD/commit/b602e3c7f7ecbb2a9a6f3e18aab930ed4aeaabb6))
+
 # [1.1.0-dev.4](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.3...v1.1.0-dev.4) (2026-08-05)
 
 
