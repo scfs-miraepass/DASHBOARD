@@ -3,13 +3,29 @@ import type { User, AdminPointRequest } from '@/client'
 import { UserPermission } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
+const maxOffset = ref<number>(0);
+const dataPage = ref<number>(1);
 const session = useSession()
 const hasManageUserPermission = computed(() => {
     return !!((session.value?.permissions ?? 0) & UserPermission.MANAGE_USER)
 })
 
-// 데이터 패치
-const { data: studentsResponse, pending, refresh } = await useAsyncData('student.', () => $API.getStudentsAdminStudentGet())
+const queryParams = computed(() => ({
+    limit: 20,
+    page: dataPage.value,
+}));
+
+const { data: studentsResponse, pending, refresh } = await useAsyncData('student.', async (_nuxtApp, { signal }) => {
+    const req = await $API.getUsersAdminUsersGet({
+        query: queryParams.value,
+        ...signal
+    })
+
+    if (!req.data?.success || req.response == undefined) return;
+    maxOffset.value = Number(req.response.headers.get("X-MAX-PAGE"));
+
+    return req.data;
+})
 
 const students = computed(() => {
     if (studentsResponse.value?.data) {
@@ -18,7 +34,6 @@ const students = computed(() => {
     return []
 })
 
-// 테이블 컬럼 정의
 const columns = computed<TableColumn<User>[]>(() => {
     const UCheckbox = resolveComponent('UCheckbox')
     const cols: TableColumn<User>[] = []
@@ -29,11 +44,11 @@ const columns = computed<TableColumn<User>[]>(() => {
             header: ({ table }) => h(UCheckbox, {
                 modelValue: table.getIsAllPageRowsSelected(),
                 indeterminate: table.getIsSomePageRowsSelected(),
-                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(!!value)
+                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value)
             }),
             cell: ({ row }) => h(UCheckbox, {
                 modelValue: row.getIsSelected(),
-                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value)
+                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value)
             })
         })
     }
