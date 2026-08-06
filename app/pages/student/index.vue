@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { getStudentsAdminStudentGet, updateStudentsPointAdminPointPost } from '@/sdk'
-import type { User, AdminPointRequest } from '@/sdk'
+import type { User, AdminPointRequest } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
 // 데이터 패치
-const { data: studentsResponse, pending, refresh } = await useAsyncData('students', () => getStudentsAdminStudentGet())
+const { data: studentsResponse, pending, refresh } = await useAsyncData('students', () => $API.getStudentsAdminStudentGet())
 
 const students = computed(() => {
     if (studentsResponse.value?.data) {
@@ -77,7 +76,7 @@ const handlePointSubmit = async () => {
             is_all_students: false
         }
         
-        const res = await updateStudentsPointAdminPointPost({ body: requestData })
+        const res = await $API.updateStudentsPointAdminPointPost({ body: requestData })
         
         if (res.error == undefined) {
             toast.add({ title: '포인트가 성공적으로 처리되었습니다.', color: 'success' })

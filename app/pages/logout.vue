@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { logoutAuthLogoutPost } from "@/sdk";
 
 definePageMeta({
     layout: false
@@ -8,7 +7,7 @@ const session = useSession()
 const { lastFetched } = useAuth()
 
 onMounted(async () => {
-    const req = await logoutAuthLogoutPost()
+    const req = await $API.logoutAuthLogoutPost()
     if (!req.error) {
         session.value = undefined
         lastFetched.value = Date.now()
