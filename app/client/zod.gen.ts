@@ -318,6 +318,16 @@ export const zUserPermission = z.union([
 ]);
 
 /**
+ * AdminUserUpdateRequest
+ */
+export const zAdminUserUpdateRequest = z.object({
+    name: z.string().nullish(),
+    grade: z.int().nullish(),
+    number: z.int().nullish(),
+    permissions: zUserPermission.nullish()
+});
+
+/**
  * UserType
  */
 export const zUserType = z.enum([
@@ -325,6 +335,17 @@ export const zUserType = z.enum([
     'teacher',
     'service'
 ]);
+
+/**
+ * AdminUserCreateRequest
+ */
+export const zAdminUserCreateRequest = z.object({
+    name: z.string(),
+    user_type: zUserType,
+    grade: z.int().nullish(),
+    number: z.int().nullish(),
+    student_no: z.int().nullish()
+});
 
 /**
  * User
@@ -523,6 +544,42 @@ export const zUpdateUsersPointAdminPointPostBody = zAdminPointRequest;
  * 정상 처리
  */
 export const zUpdateUsersPointAdminPointPostResponse = z.void();
+
+export const zCreateUserAdminUserPostBody = zAdminUserCreateRequest;
+
+/**
+ * 사용자 생성 완료
+ */
+export const zCreateUserAdminUserPostResponse = zResponseModelUser;
+
+export const zResetUserPasswordAdminUsersUserIdPasswordPatchPath = z.object({
+    user_id: z.int()
+});
+
+/**
+ * 정상 처리 (비밀번호 초기화됨)
+ */
+export const zResetUserPasswordAdminUsersUserIdPasswordPatchResponse = z.void();
+
+export const zDeleteUserAdminUsersUserIdDeletePath = z.object({
+    user_id: z.int()
+});
+
+/**
+ * 정상 처리
+ */
+export const zDeleteUserAdminUsersUserIdDeleteResponse = z.void();
+
+export const zUpdateUserAdminUsersUserIdPatchBody = zAdminUserUpdateRequest;
+
+export const zUpdateUserAdminUsersUserIdPatchPath = z.object({
+    user_id: z.int()
+});
+
+/**
+ * 사용자 정보 수정 완료
+ */
+export const zUpdateUserAdminUsersUserIdPatchResponse = zResponseModelUser;
 
 export const zCreateQuestQuestCreatePostBody = zQuestOperation;
 

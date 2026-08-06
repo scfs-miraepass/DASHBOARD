@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { ChangePasswordAuthPasswordPutData, ChangePasswordAuthPasswordPutErrors, ChangePasswordAuthPasswordPutResponses, ChangePasswordNewAuthPasswordPostData, ChangePasswordNewAuthPasswordPostErrors, ChangePasswordNewAuthPasswordPostResponses, CheckPasswordExistsAuthPasswordExistsUserIdGetData, CheckPasswordExistsAuthPasswordExistsUserIdGetErrors, CheckPasswordExistsAuthPasswordExistsUserIdGetResponses, CompleteQuestQuestQuestIdCompletePostData, CompleteQuestQuestQuestIdCompletePostErrors, CompleteQuestQuestQuestIdCompletePostResponses, CreatePostPostsPostData, CreatePostPostsPostErrors, CreatePostPostsPostResponses, CreateQuestQuestCreatePostData, CreateQuestQuestCreatePostErrors, CreateQuestQuestCreatePostResponses, CreateStampStampPostData, CreateStampStampPostErrors, CreateStampStampPostResponses, DeductPointsPointDeductPostData, DeductPointsPointDeductPostErrors, DeductPointsPointDeductPostResponses, DeletePostPostsPostIdDeleteData, DeletePostPostsPostIdDeleteErrors, DeletePostPostsPostIdDeleteResponses, DeleteQuestQuestQuestIdDeleteData, DeleteQuestQuestQuestIdDeleteErrors, DeleteQuestQuestQuestIdDeleteResponses, GetCurrentUserAuthGetData, GetCurrentUserAuthGetErrors, GetCurrentUserAuthGetResponses, GetLimitPointLimitTargetUserIdGetData, GetLimitPointLimitTargetUserIdGetErrors, GetLimitPointLimitTargetUserIdGetResponses, GetLimitSessionPointLimitGetData, GetLimitSessionPointLimitGetErrors, GetLimitSessionPointLimitGetResponses, GetPointBalancePointTargetUserIdGetData, GetPointBalancePointTargetUserIdGetErrors, GetPointBalancePointTargetUserIdGetResponses, GetPostPostsPostIdGetData, GetPostPostsPostIdGetErrors, GetPostPostsPostIdGetResponses, GetPostsPostsGetData, GetPostsPostsGetErrors, GetPostsPostsGetResponses, GetQuestQuestQuestIdGetData, GetQuestQuestQuestIdGetErrors, GetQuestQuestQuestIdGetResponses, GetStudentRankingPointRankingStudentGetData, GetStudentRankingPointRankingStudentGetErrors, GetStudentRankingPointRankingStudentGetResponses, GetTeacherRankingPointRankingTeacherGetData, GetTeacherRankingPointRankingTeacherGetErrors, GetTeacherRankingPointRankingTeacherGetResponses, GetUsersAdminUsersGetData, GetUsersAdminUsersGetErrors, GetUsersAdminUsersGetResponses, GetUserStampsStampGetData, GetUserStampsStampGetErrors, GetUserStampsStampGetResponses, GrantPointsPointGrantPostData, GrantPointsPointGrantPostErrors, GrantPointsPointGrantPostResponses, ListQuestsQuestGetData, ListQuestsQuestGetErrors, ListQuestsQuestGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, LogoutAuthLogoutPostData, LogoutAuthLogoutPostResponses, PointHistoryPointHistoryGetData, PointHistoryPointHistoryGetErrors, PointHistoryPointHistoryGetResponses, ReadRootGetData, ReadRootGetResponses, SearchSearchGetData, SearchSearchGetErrors, SearchSearchGetResponses, TeacherGetByNameSearchTeacherUserNameGetData, TeacherGetByNameSearchTeacherUserNameGetErrors, TeacherGetByNameSearchTeacherUserNameGetResponses, UpdatePostPostsPostIdPatchData, UpdatePostPostsPostIdPatchErrors, UpdatePostPostsPostIdPatchResponses, UpdateQuestQuestQuestIdPutData, UpdateQuestQuestQuestIdPutErrors, UpdateQuestQuestQuestIdPutResponses, UpdateUsersPointAdminPointPostData, UpdateUsersPointAdminPointPostErrors, UpdateUsersPointAdminPointPostResponses } from './types.gen';
-import { zChangePasswordAuthPasswordPutBody, zChangePasswordAuthPasswordPutResponse, zChangePasswordNewAuthPasswordPostBody, zChangePasswordNewAuthPasswordPostResponse, zCheckPasswordExistsAuthPasswordExistsUserIdGetPath, zCheckPasswordExistsAuthPasswordExistsUserIdGetQuery, zCheckPasswordExistsAuthPasswordExistsUserIdGetResponse, zCompleteQuestQuestQuestIdCompletePostPath, zCompleteQuestQuestQuestIdCompletePostResponse, zCreatePostPostsPostBody, zCreatePostPostsPostResponse, zCreateQuestQuestCreatePostBody, zCreateQuestQuestCreatePostResponse, zCreateStampStampPostBody, zCreateStampStampPostResponse, zDeductPointsPointDeductPostBody, zDeductPointsPointDeductPostResponse, zDeletePostPostsPostIdDeletePath, zDeletePostPostsPostIdDeleteResponse, zDeleteQuestQuestQuestIdDeletePath, zDeleteQuestQuestQuestIdDeleteResponse, zGetCurrentUserAuthGetResponse, zGetLimitPointLimitTargetUserIdGetPath, zGetLimitPointLimitTargetUserIdGetResponse, zGetLimitSessionPointLimitGetResponse, zGetPointBalancePointTargetUserIdGetPath, zGetPointBalancePointTargetUserIdGetResponse, zGetPostPostsPostIdGetPath, zGetPostPostsPostIdGetResponse, zGetPostsPostsGetQuery, zGetPostsPostsGetResponse, zGetQuestQuestQuestIdGetPath, zGetQuestQuestQuestIdGetResponse, zGetStudentRankingPointRankingStudentGetQuery, zGetStudentRankingPointRankingStudentGetResponse, zGetTeacherRankingPointRankingTeacherGetQuery, zGetTeacherRankingPointRankingTeacherGetResponse, zGetUsersAdminUsersGetQuery, zGetUsersAdminUsersGetResponse, zGetUserStampsStampGetResponse, zGrantPointsPointGrantPostBody, zGrantPointsPointGrantPostResponse, zListQuestsQuestGetQuery, zListQuestsQuestGetResponse, zLoginAuthLoginPostBody, zLoginAuthLoginPostResponse, zLogoutAuthLogoutPostResponse, zPointHistoryPointHistoryGetQuery, zPointHistoryPointHistoryGetResponse, zSearchSearchGetQuery, zSearchSearchGetResponse, zTeacherGetByNameSearchTeacherUserNameGetPath, zTeacherGetByNameSearchTeacherUserNameGetResponse, zUpdatePostPostsPostIdPatchBody, zUpdatePostPostsPostIdPatchPath, zUpdatePostPostsPostIdPatchResponse, zUpdateQuestQuestQuestIdPutBody, zUpdateQuestQuestQuestIdPutPath, zUpdateQuestQuestQuestIdPutResponse, zUpdateUsersPointAdminPointPostBody, zUpdateUsersPointAdminPointPostResponse } from './zod.gen';
+import type { ChangePasswordAuthPasswordPutData, ChangePasswordAuthPasswordPutErrors, ChangePasswordAuthPasswordPutResponses, ChangePasswordNewAuthPasswordPostData, ChangePasswordNewAuthPasswordPostErrors, ChangePasswordNewAuthPasswordPostResponses, CheckPasswordExistsAuthPasswordExistsUserIdGetData, CheckPasswordExistsAuthPasswordExistsUserIdGetErrors, CheckPasswordExistsAuthPasswordExistsUserIdGetResponses, CompleteQuestQuestQuestIdCompletePostData, CompleteQuestQuestQuestIdCompletePostErrors, CompleteQuestQuestQuestIdCompletePostResponses, CreatePostPostsPostData, CreatePostPostsPostErrors, CreatePostPostsPostResponses, CreateQuestQuestCreatePostData, CreateQuestQuestCreatePostErrors, CreateQuestQuestCreatePostResponses, CreateStampStampPostData, CreateStampStampPostErrors, CreateStampStampPostResponses, CreateUserAdminUserPostData, CreateUserAdminUserPostErrors, CreateUserAdminUserPostResponses, DeductPointsPointDeductPostData, DeductPointsPointDeductPostErrors, DeductPointsPointDeductPostResponses, DeletePostPostsPostIdDeleteData, DeletePostPostsPostIdDeleteErrors, DeletePostPostsPostIdDeleteResponses, DeleteQuestQuestQuestIdDeleteData, DeleteQuestQuestQuestIdDeleteErrors, DeleteQuestQuestQuestIdDeleteResponses, DeleteUserAdminUsersUserIdDeleteData, DeleteUserAdminUsersUserIdDeleteErrors, DeleteUserAdminUsersUserIdDeleteResponses, GetCurrentUserAuthGetData, GetCurrentUserAuthGetErrors, GetCurrentUserAuthGetResponses, GetLimitPointLimitTargetUserIdGetData, GetLimitPointLimitTargetUserIdGetErrors, GetLimitPointLimitTargetUserIdGetResponses, GetLimitSessionPointLimitGetData, GetLimitSessionPointLimitGetErrors, GetLimitSessionPointLimitGetResponses, GetPointBalancePointTargetUserIdGetData, GetPointBalancePointTargetUserIdGetErrors, GetPointBalancePointTargetUserIdGetResponses, GetPostPostsPostIdGetData, GetPostPostsPostIdGetErrors, GetPostPostsPostIdGetResponses, GetPostsPostsGetData, GetPostsPostsGetErrors, GetPostsPostsGetResponses, GetQuestQuestQuestIdGetData, GetQuestQuestQuestIdGetErrors, GetQuestQuestQuestIdGetResponses, GetStudentRankingPointRankingStudentGetData, GetStudentRankingPointRankingStudentGetErrors, GetStudentRankingPointRankingStudentGetResponses, GetTeacherRankingPointRankingTeacherGetData, GetTeacherRankingPointRankingTeacherGetErrors, GetTeacherRankingPointRankingTeacherGetResponses, GetUsersAdminUsersGetData, GetUsersAdminUsersGetErrors, GetUsersAdminUsersGetResponses, GetUserStampsStampGetData, GetUserStampsStampGetErrors, GetUserStampsStampGetResponses, GrantPointsPointGrantPostData, GrantPointsPointGrantPostErrors, GrantPointsPointGrantPostResponses, ListQuestsQuestGetData, ListQuestsQuestGetErrors, ListQuestsQuestGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, LogoutAuthLogoutPostData, LogoutAuthLogoutPostResponses, PointHistoryPointHistoryGetData, PointHistoryPointHistoryGetErrors, PointHistoryPointHistoryGetResponses, ReadRootGetData, ReadRootGetResponses, ResetUserPasswordAdminUsersUserIdPasswordPatchData, ResetUserPasswordAdminUsersUserIdPasswordPatchErrors, ResetUserPasswordAdminUsersUserIdPasswordPatchResponses, SearchSearchGetData, SearchSearchGetErrors, SearchSearchGetResponses, TeacherGetByNameSearchTeacherUserNameGetData, TeacherGetByNameSearchTeacherUserNameGetErrors, TeacherGetByNameSearchTeacherUserNameGetResponses, UpdatePostPostsPostIdPatchData, UpdatePostPostsPostIdPatchErrors, UpdatePostPostsPostIdPatchResponses, UpdateQuestQuestQuestIdPutData, UpdateQuestQuestQuestIdPutErrors, UpdateQuestQuestQuestIdPutResponses, UpdateUserAdminUsersUserIdPatchData, UpdateUserAdminUsersUserIdPatchErrors, UpdateUserAdminUsersUserIdPatchResponses, UpdateUsersPointAdminPointPostData, UpdateUsersPointAdminPointPostErrors, UpdateUsersPointAdminPointPostResponses } from './types.gen';
+import { zChangePasswordAuthPasswordPutBody, zChangePasswordAuthPasswordPutResponse, zChangePasswordNewAuthPasswordPostBody, zChangePasswordNewAuthPasswordPostResponse, zCheckPasswordExistsAuthPasswordExistsUserIdGetPath, zCheckPasswordExistsAuthPasswordExistsUserIdGetQuery, zCheckPasswordExistsAuthPasswordExistsUserIdGetResponse, zCompleteQuestQuestQuestIdCompletePostPath, zCompleteQuestQuestQuestIdCompletePostResponse, zCreatePostPostsPostBody, zCreatePostPostsPostResponse, zCreateQuestQuestCreatePostBody, zCreateQuestQuestCreatePostResponse, zCreateStampStampPostBody, zCreateStampStampPostResponse, zCreateUserAdminUserPostBody, zCreateUserAdminUserPostResponse, zDeductPointsPointDeductPostBody, zDeductPointsPointDeductPostResponse, zDeletePostPostsPostIdDeletePath, zDeletePostPostsPostIdDeleteResponse, zDeleteQuestQuestQuestIdDeletePath, zDeleteQuestQuestQuestIdDeleteResponse, zDeleteUserAdminUsersUserIdDeletePath, zDeleteUserAdminUsersUserIdDeleteResponse, zGetCurrentUserAuthGetResponse, zGetLimitPointLimitTargetUserIdGetPath, zGetLimitPointLimitTargetUserIdGetResponse, zGetLimitSessionPointLimitGetResponse, zGetPointBalancePointTargetUserIdGetPath, zGetPointBalancePointTargetUserIdGetResponse, zGetPostPostsPostIdGetPath, zGetPostPostsPostIdGetResponse, zGetPostsPostsGetQuery, zGetPostsPostsGetResponse, zGetQuestQuestQuestIdGetPath, zGetQuestQuestQuestIdGetResponse, zGetStudentRankingPointRankingStudentGetQuery, zGetStudentRankingPointRankingStudentGetResponse, zGetTeacherRankingPointRankingTeacherGetQuery, zGetTeacherRankingPointRankingTeacherGetResponse, zGetUsersAdminUsersGetQuery, zGetUsersAdminUsersGetResponse, zGetUserStampsStampGetResponse, zGrantPointsPointGrantPostBody, zGrantPointsPointGrantPostResponse, zListQuestsQuestGetQuery, zListQuestsQuestGetResponse, zLoginAuthLoginPostBody, zLoginAuthLoginPostResponse, zLogoutAuthLogoutPostResponse, zPointHistoryPointHistoryGetQuery, zPointHistoryPointHistoryGetResponse, zResetUserPasswordAdminUsersUserIdPasswordPatchPath, zResetUserPasswordAdminUsersUserIdPasswordPatchResponse, zSearchSearchGetQuery, zSearchSearchGetResponse, zTeacherGetByNameSearchTeacherUserNameGetPath, zTeacherGetByNameSearchTeacherUserNameGetResponse, zUpdatePostPostsPostIdPatchBody, zUpdatePostPostsPostIdPatchPath, zUpdatePostPostsPostIdPatchResponse, zUpdateQuestQuestQuestIdPutBody, zUpdateQuestQuestQuestIdPutPath, zUpdateQuestQuestQuestIdPutResponse, zUpdateUserAdminUsersUserIdPatchBody, zUpdateUserAdminUsersUserIdPatchPath, zUpdateUserAdminUsersUserIdPatchResponse, zUpdateUsersPointAdminPointPostBody, zUpdateUsersPointAdminPointPostResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -415,6 +415,86 @@ export class MiraepassApi extends HeyApiClient {
             }).parseAsync(data),
             responseTransformer: async (data) => await zUpdateUsersPointAdminPointPostResponse.parseAsync(data),
             url: '/admin/point',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 사용자 생성
+     *
+     * 새로운 사용자를 생성합니다. (단일 사용자 생성)
+     */
+    public createUserAdminUserPost<ThrowOnError extends boolean = false>(options: Options<CreateUserAdminUserPostData, ThrowOnError>): RequestResult<CreateUserAdminUserPostResponses, CreateUserAdminUserPostErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<CreateUserAdminUserPostResponses, CreateUserAdminUserPostErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zCreateUserAdminUserPostBody,
+                path: z.never().optional(),
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zCreateUserAdminUserPostResponse.parseAsync(data),
+            url: '/admin/user',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 사용자 비밀번호 초기화
+     *
+     * 특정 사용자의 비밀번호를 초기화(None으로 설정)합니다. 이후 사용자가 처음 로그인할 때 새로 설정하게 됩니다.
+     */
+    public resetUserPasswordAdminUsersUserIdPasswordPatch<ThrowOnError extends boolean = false>(options: Options<ResetUserPasswordAdminUsersUserIdPasswordPatchData, ThrowOnError>): RequestResult<ResetUserPasswordAdminUsersUserIdPasswordPatchResponses, ResetUserPasswordAdminUsersUserIdPasswordPatchErrors, ThrowOnError> {
+        return (options.client ?? this.client).patch<ResetUserPasswordAdminUsersUserIdPasswordPatchResponses, ResetUserPasswordAdminUsersUserIdPasswordPatchErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zResetUserPasswordAdminUsersUserIdPasswordPatchPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zResetUserPasswordAdminUsersUserIdPasswordPatchResponse.parseAsync(data),
+            url: '/admin/users/{user_id}/password',
+            ...options
+        });
+    }
+    
+    /**
+     * 사용자 삭제
+     *
+     * 특정 사용자를 삭제합니다.
+     */
+    public deleteUserAdminUsersUserIdDelete<ThrowOnError extends boolean = false>(options: Options<DeleteUserAdminUsersUserIdDeleteData, ThrowOnError>): RequestResult<DeleteUserAdminUsersUserIdDeleteResponses, DeleteUserAdminUsersUserIdDeleteErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<DeleteUserAdminUsersUserIdDeleteResponses, DeleteUserAdminUsersUserIdDeleteErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zDeleteUserAdminUsersUserIdDeletePath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zDeleteUserAdminUsersUserIdDeleteResponse.parseAsync(data),
+            url: '/admin/users/{user_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 사용자 정보 수정
+     *
+     * 특정 사용자의 정보를 수정합니다. (이름, 학년, 반, 권한 등)
+     */
+    public updateUserAdminUsersUserIdPatch<ThrowOnError extends boolean = false>(options: Options<UpdateUserAdminUsersUserIdPatchData, ThrowOnError>): RequestResult<UpdateUserAdminUsersUserIdPatchResponses, UpdateUserAdminUsersUserIdPatchErrors, ThrowOnError> {
+        return (options.client ?? this.client).patch<UpdateUserAdminUsersUserIdPatchResponses, UpdateUserAdminUsersUserIdPatchErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zUpdateUserAdminUsersUserIdPatchBody,
+                path: zUpdateUserAdminUsersUserIdPatchPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zUpdateUserAdminUsersUserIdPatchResponse.parseAsync(data),
+            url: '/admin/users/{user_id}',
             ...options,
             headers: {
                 'Content-Type': 'application/json',

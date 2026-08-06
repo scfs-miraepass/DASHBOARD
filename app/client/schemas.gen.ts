@@ -30,6 +30,116 @@ export const AdminPointRequestSchema = {
     title: 'AdminPointRequest'
 } as const;
 
+export const AdminUserCreateRequestSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name',
+            description: '사용자 이름'
+        },
+        user_type: {
+            $ref: '#/components/schemas/UserType',
+            description: '사용자 유형 (student, teacher, service)'
+        },
+        grade: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Grade',
+            description: '학년 (학생인 경우 필수)'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number',
+            description: '반 (학생인 경우 필수)'
+        },
+        student_no: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Student No',
+            description: '번호 (학생인 경우 필수)'
+        }
+    },
+    type: 'object',
+    required: [
+        'name',
+        'user_type'
+    ],
+    title: 'AdminUserCreateRequest'
+} as const;
+
+export const AdminUserUpdateRequestSchema = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name',
+            description: '사용자 이름'
+        },
+        grade: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Grade',
+            description: '학년 (학생인 경우)'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number',
+            description: '반 (학생인 경우)'
+        },
+        permissions: {
+            anyOf: [
+                {
+                    $ref: '#/components/schemas/UserPermission'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            description: '사용자 권한'
+        }
+    },
+    type: 'object',
+    title: 'AdminUserUpdateRequest'
+} as const;
+
 export const ChangePasswordFormSchema = {
     properties: {
         old_password: {
