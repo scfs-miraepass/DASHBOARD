@@ -1,22 +1,28 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { UserPermission } from '@/client'
 
-const route = useRoute()
-
+const session = useSession()
 const open = ref(false)
 
-const links = [
-    {
-        label: '메인',
-        icon: 'i-lucide-house',
-        to: '/'
-    },
-    {
-        label: "학생관리",
-        icon: 'i-lucide-users',
-        to: '/student'
-    }
-] satisfies NavigationMenuItem[]
+const links = computed(() => {
+
+    const items = [
+        {
+            label: '메인',
+            icon: 'i-lucide-house',
+            to: '/'
+        },
+        {
+            label: "학생관리",
+            icon: 'i-lucide-users',
+            to: '/student'
+        }
+    ] satisfies NavigationMenuItem[]
+
+    if (!!((session.value?.permissions ?? 0) & UserPermission.MANAGE_USER))
+
+})
 </script>
 
 <template>

@@ -1,4 +1,4 @@
-import type { User } from "@/sdk";
+import type { User } from "@/client";
 
-
-export const useSession = () => useState<User | undefined>("session.user", () => undefined)
+export const useSession = () =>
+    useState<User | undefined>("session.user", () => undefined);
