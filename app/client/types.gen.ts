@@ -120,46 +120,60 @@ export type LoginForm = {
  * PointHistory
  */
 export type PointHistory = {
-  /**
-   * Id
-   */
-  id?: number | null;
-  /**
-   * User Id
-   */
-  user_id: number;
-  /**
-   * Changed Amount
-   *
-   * 변경된 포인트의 정도
-   */
-  changed_amount: number;
-  /**
-   * Reason
-   *
-   * 누구의 무엇의 의해서 포인트가 변경되었는지 이유
-   */
-  reason: string;
-  /**
-   * Memo
-   *
-   * 포인트가 어떠한 사유로 변경되었는지 이유
-   */
-  memo?: string | null;
-  /**
-   * 기록 종류
-   */
-  type?: PointHistoryType | null;
-  /**
-   * Created At
-   */
-  created_at?: string;
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * User Id
+     */
+    user_id: number;
+    /**
+     * Changed Amount
+     *
+     * 변경된 포인트의 정도
+     */
+    changed_amount: number;
+    /**
+     * Reason
+     *
+     * 누구의 무엇의 의해서 포인트가 변경되었는지 이유
+     */
+    reason: string;
+    /**
+     * Memo
+     *
+     * 포인트가 어떠한 사유로 변경되었는지 이유
+     */
+    memo?: string | null;
+    /**
+     * 기록 종류
+     */
+    type?: PointHistoryType | null;
+    /**
+     * Created At
+     */
+    created_at?: string;
 };
 
 /**
  * PointHistoryType
  */
-export type PointHistoryType = 'teacher' | 'cafe' | 'food' | 'etc' | 'grant' | 'quest' | 'stamp' | 'stamp_bonus';
+export const PointHistoryType = {
+    TEACHER: 'teacher',
+    CAFE: 'cafe',
+    FOOD: 'food',
+    ETC: 'etc',
+    GRANT: 'grant',
+    QUEST: 'quest',
+    STAMP: 'stamp',
+    STAMP_BONUS: 'stamp_bonus'
+} as const;
+
+/**
+ * PointHistoryType
+ */
+export type PointHistoryType = typeof PointHistoryType[keyof typeof PointHistoryType];
 
 /**
  * PointOperation
@@ -231,168 +245,168 @@ export type PostUpdateRequest = {
  * Posts
  */
 export type Posts = {
-  /**
-   * Id
-   *
-   * 게시글 고유 ID
-   */
-  id?: number | null;
-  /**
-   * Title
-   *
-   * 게시글 제목
-   */
-  title: string;
-  /**
-   * Views
-   *
-   * 게시글 조회수
-   */
-  views?: number;
-  /**
-   * Created At
-   *
-   * 게시글이 작성된 시간
-   */
-  created_at?: string;
-  /**
-   * Updated At
-   *
-   * 게시글이 수정된 마지막 시간
-   */
-  updated_at?: string;
-  /**
-   * Author Id
-   *
-   * 게시글 작성자의 고유 ID
-   */
-  author_id: number;
+    /**
+     * Id
+     *
+     * 게시글 고유 ID
+     */
+    id?: number | null;
+    /**
+     * Title
+     *
+     * 게시글 제목
+     */
+    title: string;
+    /**
+     * Views
+     *
+     * 게시글 조회수
+     */
+    views?: number;
+    /**
+     * Created At
+     *
+     * 게시글이 작성된 시간
+     */
+    created_at?: string;
+    /**
+     * Updated At
+     *
+     * 게시글이 수정된 마지막 시간
+     */
+    updated_at?: string;
+    /**
+     * Author Id
+     *
+     * 게시글 작성자의 고유 ID
+     */
+    author_id: number;
 };
 
 /**
  * QuestOperation
  */
 export type QuestOperation = {
-  /**
-   * Title
-   *
-   * 퀘스트 제목
-   */
-  title: string;
-  /**
-   * Description
-   *
-   * 퀘스트 내용
-   */
-  description: string;
-  /**
-   * Reward
-   *
-   * 퀘스트 보상(포인트)
-   */
-  reward: number;
-  /**
-   * End Date
-   *
-   * 퀘스트 종료 날짜
-   */
-  end_date: string;
-  /**
-   * Max Repeat
-   *
-   * 퀘스트 반복 가능 횟수
-   */
-  max_repeat: number;
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title: string;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description: string;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상(포인트)
+     */
+    reward: number;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date: string;
+    /**
+     * Max Repeat
+     *
+     * 퀘스트 반복 가능 횟수
+     */
+    max_repeat: number;
 };
 
 /**
  * QuestUpdate
  */
 export type QuestUpdate = {
-  /**
-   * Title
-   *
-   * 퀘스트 제목
-   */
-  title?: string | null;
-  /**
-   * Description
-   *
-   * 퀘스트 내용
-   */
-  description?: string | null;
-  /**
-   * Reward
-   *
-   * 퀘스트 보상(포인트)
-   */
-  reward?: number | null;
-  /**
-   * End Date
-   *
-   * 퀘스트 종료 날짜
-   */
-  end_date?: string | null;
-  /**
-   * Max Repeat
-   *
-   * 퀘스트 반복 가능 횟수
-   */
-  max_repeat?: number | null;
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title?: string | null;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description?: string | null;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상(포인트)
+     */
+    reward?: number | null;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date?: string | null;
+    /**
+     * Max Repeat
+     *
+     * 퀘스트 반복 가능 횟수
+     */
+    max_repeat?: number | null;
 };
 
 /**
  * Quests
  */
 export type Quests = {
-  /**
-   * Id
-   *
-   * 퀘스트 고유 ID
-   */
-  id?: number | null;
-  /**
-   * Title
-   *
-   * 퀘스트 제목
-   */
-  title: string;
-  /**
-   * Description
-   *
-   * 퀘스트 내용
-   */
-  description: string;
-  /**
-   * Reward
-   *
-   * 퀘스트 보상 포인트
-   */
-  reward: number;
-  /**
-   * End Date
-   *
-   * 퀘스트 종료 날짜
-   */
-  end_date: string;
-  /**
-   * Max Repeat
-   *
-   * 학생 당 최대 반복 완료 횟수
-   */
-  max_repeat?: number;
-  /**
-   * Created At
-   *
-   * 퀘스트를 작성한 시간
-   */
-  created_at?: string;
-  /**
-   * Author Id
-   *
-   * 퀘스트 생성 유저의 고유 ID
-   */
-  author_id: number;
+    /**
+     * Id
+     *
+     * 퀘스트 고유 ID
+     */
+    id?: number | null;
+    /**
+     * Title
+     *
+     * 퀘스트 제목
+     */
+    title: string;
+    /**
+     * Description
+     *
+     * 퀘스트 내용
+     */
+    description: string;
+    /**
+     * Reward
+     *
+     * 퀘스트 보상 포인트
+     */
+    reward: number;
+    /**
+     * End Date
+     *
+     * 퀘스트 종료 날짜
+     */
+    end_date: string;
+    /**
+     * Max Repeat
+     *
+     * 학생 당 최대 반복 완료 횟수
+     */
+    max_repeat?: number;
+    /**
+     * Created At
+     *
+     * 퀘스트를 작성한 시간
+     */
+    created_at?: string;
+    /**
+     * Author Id
+     *
+     * 퀘스트 생성 유저의 고유 ID
+     */
+    author_id: number;
 };
 
 /**
@@ -638,90 +652,229 @@ export type StampCreate = {
  * 스탬프 종류 Enum
  * - 부스 이름은 추후 수정될 수 있습니다.
  */
-export type StampType = '쓰레기 투호' | '철권 한판' | '큐피트의 다트' | '제기찰겨? 날찰겨?' | '팔씨름 최강자전' | '부적꾸미기' | '누르기 챌린지' | '공놀이 괴물' | '철면피 노래방' | '절대음감' | '런닝맨' | '의자뺏기' | '단체줄넘기' | '수학 키캡';
+export const StampType = {
+    쓰레기_투호: '쓰레기 투호',
+    철권_한판: '철권 한판',
+    큐피트의_다트: '큐피트의 다트',
+    '제기찰겨?_날찰겨?': '제기찰겨? 날찰겨?',
+    팔씨름_최강자전: '팔씨름 최강자전',
+    부적꾸미기: '부적꾸미기',
+    누르기_챌린지: '누르기 챌린지',
+    공놀이_괴물: '공놀이 괴물',
+    철면피_노래방: '철면피 노래방',
+    절대음감: '절대음감',
+    런닝맨: '런닝맨',
+    의자뺏기: '의자뺏기',
+    단체줄넘기: '단체줄넘기',
+    수학_키캡: '수학 키캡'
+} as const;
+
+/**
+ * StampType
+ *
+ * 스탬프 종류 Enum
+ * - 부스 이름은 추후 수정될 수 있습니다.
+ */
+export type StampType = typeof StampType[keyof typeof StampType];
 
 /**
  * StampsList
  */
 export type StampsList = {
-  /**
-   * Stamp
-   */
-  stamp: string;
-  /**
-   * Name
-   */
-  name: string;
-  /**
-   * Have
-   */
-  have: boolean;
-  /**
-   * Time
-   */
-  time: string | null;
+    /**
+     * Stamp
+     */
+    stamp: string;
+    /**
+     * Name
+     */
+    name: string;
+    /**
+     * Have
+     */
+    have: boolean;
+    /**
+     * Time
+     */
+    time: string | null;
 };
 
 /**
  * User
  */
 export type User = {
-  /**
-   * Id
-   *
-   * 고유 ID. 교사, 서비스의 경우 자동생성. 학생의 경우 학번 사용
-   */
-  id?: number | null;
-  /**
-   * 유저 종류 (학생, 교사, 서비스)
-   */
-  type: UserType;
-  /**
-   * Name
-   *
-   * 이름
-   */
-  name: string;
-  /**
-   * Grade
-   *
-   * 학년
-   */
-  grade: number | null;
-  /**
-   * Number
-   *
-   * 반
-   */
-  number: number | null;
-  /**
-   * Point
-   *
-   * 보유 포인트
-   */
-  point?: number;
-  /**
-   * Total Point
-   *
-   * 누적 포인트
-   */
-  total_point?: number;
-  /**
-   * Permissions
-   *
-   * 관리자 여부
-   */
-  permissions?: number;
-  /**
-   * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
-   */
-  history_type?: PointHistoryType | null;
+    /**
+     * Id
+     *
+     * 고유 ID. 교사, 서비스의 경우 자동생성. 학생의 경우 학번 사용
+     */
+    id?: number | null;
+    /**
+     * 유저 종류 (학생, 교사, 서비스)
+     */
+    type: UserType;
+    /**
+     * Name
+     *
+     * 이름
+     */
+    name: string;
+    /**
+     * Grade
+     *
+     * 학년
+     */
+    grade: number | null;
+    /**
+     * Number
+     *
+     * 반
+     */
+    number: number | null;
+    /**
+     * Point
+     *
+     * 보유 포인트
+     */
+    point?: number;
+    /**
+     * Total Point
+     *
+     * 누적 포인트
+     */
+    total_point?: number;
+    /**
+     * Permissions
+     *
+     * 관리자 여부
+     */
+    permissions?: number;
+    /**
+     * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
+     */
+    history_type?: PointHistoryType | null;
 };
+
+/**
+ * UserPermission
+ *
+ * 유저 권한 IntFlag.
+ * 작명시 `동사_목적`으로 작성하며, 대문자로만 작성한다.
+ * 예) 포인트 관리 -> MANAGE_POINT
+ */
+export const UserPermission = {
+    /**
+     * NONE
+     */
+    NONE: 0,
+    /**
+     * SEARCH_USER
+     */
+    SEARCH_USER: 131072,
+    /**
+     * DEDUCT_POINT
+     */
+    DEDUCT_POINT: 131073,
+    /**
+     * GRANT_POINT
+     */
+    GRANT_POINT: 131074,
+    /**
+     * NO_LIMIT_POINT
+     */
+    NO_LIMIT_POINT: 4,
+    /**
+     * CREATE_QUEST
+     */
+    CREATE_QUEST: 8,
+    /**
+     * MANAGE_QUEST
+     */
+    MANAGE_QUEST: 16,
+    /**
+     * GIVE_STAMP
+     */
+    GIVE_STAMP: 131104,
+    /**
+     * VIEW_RANK
+     */
+    VIEW_RANK: 64,
+    /**
+     * VIEW_POINT
+     */
+    VIEW_POINT: 128,
+    /**
+     * VIEW_POINT_HISTORY
+     */
+    VIEW_POINT_HISTORY: 256,
+    /**
+     * MANAGE_POST
+     */
+    MANAGE_POST: 512,
+    /**
+     * CREATE_POST
+     */
+    CREATE_POST: 1024,
+    /**
+     * VIEW_USER_POINT
+     */
+    VIEW_USER_POINT: 133120,
+    /**
+     * JOIN_QUEST
+     */
+    JOIN_QUEST: 4096,
+    /**
+     * MANAGE_USER
+     */
+    MANAGE_USER: 139264,
+    /**
+     * VIEW_POST
+     */
+    VIEW_POST: 16384,
+    /**
+     * VIEW_STAMP
+     */
+    VIEW_STAMP: 32768,
+    /**
+     * VIEW_QUEST
+     */
+    VIEW_QUEST: 65536,
+    /**
+     * STUDENT
+     */
+    STUDENT: 119232,
+    /**
+     * TEACHER
+     */
+    TEACHER: 182730,
+    /**
+     * ADMIN
+     */
+    ADMIN: 140816
+} as const;
+
+/**
+ * UserPermission
+ *
+ * 유저 권한 IntFlag.
+ * 작명시 `동사_목적`으로 작성하며, 대문자로만 작성한다.
+ * 예) 포인트 관리 -> MANAGE_POINT
+ */
+export type UserPermission = typeof UserPermission[keyof typeof UserPermission];
 
 /**
  * UserType
  */
-export type UserType = 'student' | 'teacher' | 'service';
+export const UserType = {
+    STUDENT: 'student',
+    TEACHER: 'teacher',
+    SERVICE: 'service'
+} as const;
+
+/**
+ * UserType
+ */
+export type UserType = typeof UserType[keyof typeof UserType];
 
 /**
  * ValidationError
