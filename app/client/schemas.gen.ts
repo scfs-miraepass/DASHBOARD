@@ -3,19 +3,12 @@
 export const AdminPointRequestSchema = {
     properties: {
         user_ids: {
-            anyOf: [
-                {
-                    items: {
-                        type: 'integer'
-                    },
-                    type: 'array'
-                },
-                {
-                    type: 'null'
-                }
-            ],
+            items: {
+                type: 'integer'
+            },
+            type: 'array',
             title: 'User Ids',
-            description: '포인트를 지급/차감할 학생 ID 목록. 전체 학생 대상일 경우 생략하거나 null/빈 리스트 전달'
+            description: '포인트를 지급/차감할 대상 유저 ID 목록'
         },
         amount: {
             type: 'integer',
@@ -26,16 +19,11 @@ export const AdminPointRequestSchema = {
             type: 'string',
             title: 'Reason',
             description: '포인트 변동 사유'
-        },
-        is_all_students: {
-            type: 'boolean',
-            title: 'Is All Students',
-            description: '전체 학생 대상 여부. true일 경우 user_ids는 무시됩니다.',
-            default: false
         }
     },
     type: 'object',
     required: [
+        'user_ids',
         'amount',
         'reason'
     ],

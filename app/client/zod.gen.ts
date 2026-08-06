@@ -6,10 +6,9 @@ import * as z from 'zod';
  * AdminPointRequest
  */
 export const zAdminPointRequest = z.object({
-    user_ids: z.array(z.int()).nullish(),
+    user_ids: z.array(z.int()),
     amount: z.int(),
-    reason: z.string(),
-    is_all_students: z.boolean().optional().default(false)
+    reason: z.string()
 });
 
 /**
@@ -506,22 +505,24 @@ export const zTeacherGetByNameSearchTeacherUserNameGetPath = z.object({
  */
 export const zTeacherGetByNameSearchTeacherUserNameGetResponse = zResponseModelUser;
 
-export const zGetStudentsAdminStudentGetQuery = z.object({
+export const zGetUsersAdminUsersGetQuery = z.object({
     page: z.int().gte(1).optional().default(1),
-    size: z.int().gte(1).lte(100).optional().default(20)
+    size: z.int().gte(1).lte(100).optional().default(20),
+    user_type: zUserType.nullish(),
+    permission: zUserPermission.nullish()
 });
 
 /**
  * 정상적으로 처리 됨
  */
-export const zGetStudentsAdminStudentGetResponse = zResponseModelListUser;
+export const zGetUsersAdminUsersGetResponse = zResponseModelListUser;
 
-export const zUpdateStudentsPointAdminPointPostBody = zAdminPointRequest;
+export const zUpdateUsersPointAdminPointPostBody = zAdminPointRequest;
 
 /**
  * 정상 처리
  */
-export const zUpdateStudentsPointAdminPointPostResponse = z.void();
+export const zUpdateUsersPointAdminPointPostResponse = z.void();
 
 export const zCreateQuestQuestCreatePostBody = zQuestOperation;
 
