@@ -1,5 +1,4 @@
-import type { UseFetchOptions } from 'nuxt/app'
-import { $fetch } from "./$fetch"
+import type { UseFetchOptions } from "nuxt/app";
 
 export const useAPI = <T>(
     url: string | (() => string),
@@ -7,6 +6,6 @@ export const useAPI = <T>(
 ) => {
     return useFetch(url, {
         ...options,
-        $fetch: $fetch as typeof globalThis.$fetch
-    })
-}
+        $fetch: _fetch as typeof globalThis.$fetch,
+    });
+};
