@@ -1,4 +1,3 @@
-import { getCurrentUserAuthGet } from "~/sdk";
 import { authLog } from "~/middleware/auth.global"
 
 export const fetchSession = async () => {
@@ -11,7 +10,7 @@ export const fetchSession = async () => {
     // 중복 호출 방지 (요청 중일 때 기존 Promise 재사용)
     if (!fetchPromise.value) {
         authLog('새로운 API 요청 시작')
-        fetchPromise.value = getCurrentUserAuthGet().finally(() => {
+        fetchPromise.value = $API.getCurrentUserAuthGet().finally(() => {
             fetchPromise.value = null
         })
     } else {
