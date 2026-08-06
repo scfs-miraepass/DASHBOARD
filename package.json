@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "typecheck": "nuxt typecheck",
-    "sdk-gen": "npx @hey-api/openapi-ts -i http://localhost:8000/openapi.json -o app/sdk -c @hey-api/client-ofetch"
+    "sdk-gen": "openapi-ts"
   },
   "dependencies": {
     "@iconify-json/lucide": "^1.2.104",
@@ -28,13 +28,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
-    "@semantic-release/changelog": "^7.0.0",
-    "@semantic-release/commit-analyzer": "^13.0.1",
-    "@semantic-release/exec": "^7.1.0",
-    "@semantic-release/git": "^11.0.1",
-    "@semantic-release/github": "^12.0.9",
-    "@semantic-release/npm": "^13.1.5",
-    "@semantic-release/release-notes-generator": "^14.1.1",
+    "@hey-api/openapi-ts": "^0.99.0",
     "@types/node": "^25.6.0",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.2.7"

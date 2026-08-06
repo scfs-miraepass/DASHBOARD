@@ -153,13 +153,27 @@ export type PointHistory = {
     /**
      * Created At
      */
-    created_at?: string;
+    created_at?: Date;
 };
 
 /**
  * PointHistoryType
  */
-export type PointHistoryType = 'teacher' | 'cafe' | 'food' | 'etc' | 'grant' | 'quest' | 'stamp' | 'stamp_bonus';
+export const PointHistoryType = {
+    TEACHER: 'teacher',
+    CAFE: 'cafe',
+    FOOD: 'food',
+    ETC: 'etc',
+    GRANT: 'grant',
+    QUEST: 'quest',
+    STAMP: 'stamp',
+    STAMP_BONUS: 'stamp_bonus'
+} as const;
+
+/**
+ * PointHistoryType
+ */
+export type PointHistoryType = typeof PointHistoryType[keyof typeof PointHistoryType];
 
 /**
  * PointOperation
@@ -254,13 +268,13 @@ export type Posts = {
      *
      * 게시글이 작성된 시간
      */
-    created_at?: string;
+    created_at?: Date;
     /**
      * Updated At
      *
      * 게시글이 수정된 마지막 시간
      */
-    updated_at?: string;
+    updated_at?: Date;
     /**
      * Author Id
      *
@@ -296,7 +310,7 @@ export type QuestOperation = {
      *
      * 퀘스트 종료 날짜
      */
-    end_date: string;
+    end_date: Date;
     /**
      * Max Repeat
      *
@@ -332,7 +346,7 @@ export type QuestUpdate = {
      *
      * 퀘스트 종료 날짜
      */
-    end_date?: string | null;
+    end_date?: Date | null;
     /**
      * Max Repeat
      *
@@ -374,7 +388,7 @@ export type Quests = {
      *
      * 퀘스트 종료 날짜
      */
-    end_date: string;
+    end_date: Date;
     /**
      * Max Repeat
      *
@@ -386,7 +400,7 @@ export type Quests = {
      *
      * 퀘스트를 작성한 시간
      */
-    created_at?: string;
+    created_at?: Date;
     /**
      * Author Id
      *
@@ -638,7 +652,30 @@ export type StampCreate = {
  * 스탬프 종류 Enum
  * - 부스 이름은 추후 수정될 수 있습니다.
  */
-export type StampType = '쓰레기 투호' | '철권 한판' | '큐피트의 다트' | '제기찰겨? 날찰겨?' | '팔씨름 최강자전' | '부적꾸미기' | '누르기 챌린지' | '공놀이 괴물' | '철면피 노래방' | '절대음감' | '런닝맨' | '의자뺏기' | '단체줄넘기' | '수학 키캡';
+export const StampType = {
+    쓰레기_투호: '쓰레기 투호',
+    철권_한판: '철권 한판',
+    큐피트의_다트: '큐피트의 다트',
+    '제기찰겨?_날찰겨?': '제기찰겨? 날찰겨?',
+    팔씨름_최강자전: '팔씨름 최강자전',
+    부적꾸미기: '부적꾸미기',
+    누르기_챌린지: '누르기 챌린지',
+    공놀이_괴물: '공놀이 괴물',
+    철면피_노래방: '철면피 노래방',
+    절대음감: '절대음감',
+    런닝맨: '런닝맨',
+    의자뺏기: '의자뺏기',
+    단체줄넘기: '단체줄넘기',
+    수학_키캡: '수학 키캡'
+} as const;
+
+/**
+ * StampType
+ *
+ * 스탬프 종류 Enum
+ * - 부스 이름은 추후 수정될 수 있습니다.
+ */
+export type StampType = typeof StampType[keyof typeof StampType];
 
 /**
  * StampsList
@@ -659,7 +696,7 @@ export type StampsList = {
     /**
      * Time
      */
-    time: string | null;
+    time: Date | null;
 };
 
 /**
@@ -707,11 +744,9 @@ export type User = {
      */
     total_point?: number;
     /**
-     * Permissions
-     *
      * 관리자 여부
      */
-    permissions?: number;
+    permissions?: UserPermission;
     /**
      * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
      */
@@ -719,9 +754,125 @@ export type User = {
 };
 
 /**
+ * UserPermission
+ *
+ * 유저 권한 IntFlag.
+ * 작명시 `동사_목적`으로 작성하며, 대문자로만 작성한다.
+ * 예) 포인트 관리 -> MANAGE_POINT
+ */
+export const UserPermission = {
+    /**
+     * NONE
+     */
+    NONE: 0,
+    /**
+     * SEARCH_USER
+     */
+    SEARCH_USER: 131072,
+    /**
+     * DEDUCT_POINT
+     */
+    DEDUCT_POINT: 131073,
+    /**
+     * GRANT_POINT
+     */
+    GRANT_POINT: 131074,
+    /**
+     * NO_LIMIT_POINT
+     */
+    NO_LIMIT_POINT: 4,
+    /**
+     * CREATE_QUEST
+     */
+    CREATE_QUEST: 8,
+    /**
+     * MANAGE_QUEST
+     */
+    MANAGE_QUEST: 16,
+    /**
+     * GIVE_STAMP
+     */
+    GIVE_STAMP: 131104,
+    /**
+     * VIEW_RANK
+     */
+    VIEW_RANK: 64,
+    /**
+     * VIEW_POINT
+     */
+    VIEW_POINT: 128,
+    /**
+     * VIEW_POINT_HISTORY
+     */
+    VIEW_POINT_HISTORY: 256,
+    /**
+     * MANAGE_POST
+     */
+    MANAGE_POST: 512,
+    /**
+     * CREATE_POST
+     */
+    CREATE_POST: 1024,
+    /**
+     * VIEW_USER_POINT
+     */
+    VIEW_USER_POINT: 133120,
+    /**
+     * JOIN_QUEST
+     */
+    JOIN_QUEST: 4096,
+    /**
+     * MANAGE_USER
+     */
+    MANAGE_USER: 139264,
+    /**
+     * VIEW_POST
+     */
+    VIEW_POST: 16384,
+    /**
+     * VIEW_STAMP
+     */
+    VIEW_STAMP: 32768,
+    /**
+     * VIEW_QUEST
+     */
+    VIEW_QUEST: 65536,
+    /**
+     * STUDENT
+     */
+    STUDENT: 119232,
+    /**
+     * TEACHER
+     */
+    TEACHER: 182730,
+    /**
+     * ADMIN
+     */
+    ADMIN: 140816
+} as const;
+
+/**
+ * UserPermission
+ *
+ * 유저 권한 IntFlag.
+ * 작명시 `동사_목적`으로 작성하며, 대문자로만 작성한다.
+ * 예) 포인트 관리 -> MANAGE_POINT
+ */
+export type UserPermission = typeof UserPermission[keyof typeof UserPermission];
+
+/**
  * UserType
  */
-export type UserType = 'student' | 'teacher' | 'service';
+export const UserType = {
+    STUDENT: 'student',
+    TEACHER: 'teacher',
+    SERVICE: 'service'
+} as const;
+
+/**
+ * UserType
+ */
+export type UserType = typeof UserType[keyof typeof UserType];
 
 /**
  * ValidationError
