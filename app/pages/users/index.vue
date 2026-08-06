@@ -1,9 +1,15 @@
 <script setup lang="ts">
 import type { User, AdminPointRequest } from '@/client'
+import { UserPermission } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
+const session = useSession()
+const hasManageUserPermission = computed(() => {
+    return !!((session.value?.permissions ?? 0) & UserPermission.MANAGE_USER)
+})
+
 // 데이터 패치
-const { data: studentsResponse, pending, refresh } = await useAsyncData('students', () => $API.getStudentsAdminStudentGet())
+const { data: studentsResponse, pending, refresh } = await useAsyncData('student.', () => $API.getStudentsAdminStudentGet())
 
 const students = computed(() => {
     if (studentsResponse.value?.data) {
@@ -15,8 +21,10 @@ const students = computed(() => {
 // 테이블 컬럼 정의
 const columns = computed<TableColumn<User>[]>(() => {
     const UCheckbox = resolveComponent('UCheckbox')
-    return [
-        {
+    const cols: TableColumn<User>[] = []
+    
+    if (hasManageUserPermission.value) {
+        cols.push({
             id: 'select',
             header: ({ table }) => h(UCheckbox, {
                 modelValue: table.getIsAllPageRowsSelected(),
@@ -27,7 +35,10 @@ const columns = computed<TableColumn<User>[]>(() => {
                 modelValue: row.getIsSelected(),
                 'onUpdate:modelValue': (value: boolean) => row.toggleSelected(!!value)
             })
-        },
+        })
+    }
+
+    cols.push(
         { accessorKey: 'id', header: 'ID(학번)' },
         { accessorKey: 'name', header: '이름' },
         { accessorKey: 'type', header: '구분' },
@@ -35,7 +46,9 @@ const columns = computed<TableColumn<User>[]>(() => {
         { accessorKey: 'number', header: '반' },
         { accessorKey: 'point', header: '현재 포인트' },
         { accessorKey: 'total_point', header: '누적 포인트' }
-    ]
+    )
+    
+    return cols
 })
 
 const rowSelection = ref<Record<string, boolean>>({})
