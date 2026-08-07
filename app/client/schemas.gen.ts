@@ -127,12 +127,13 @@ export const AdminUserUpdateRequestSchema = {
         permissions: {
             anyOf: [
                 {
-                    $ref: '#/components/schemas/UserPermission'
+                    type: 'integer'
                 },
                 {
                     type: 'null'
                 }
             ],
+            title: 'Permissions',
             description: '사용자 권한'
         }
     },
@@ -1105,7 +1106,8 @@ export const UserSchema = {
             default: 0
         },
         permissions: {
-            $ref: '#/components/schemas/UserPermission',
+            type: 'integer',
+            title: 'Permissions',
             description: '관리자 여부',
             default: 0
         },
@@ -1136,19 +1138,24 @@ export const UserPermissionSchema = {
     enum: [
         0,
         131072,
+        1,
         131073,
+        2,
         131074,
         4,
         8,
         16,
+        32,
         131104,
         64,
         128,
         256,
         512,
         1024,
+        2048,
         133120,
         4096,
+        8192,
         139264,
         16384,
         32768,
@@ -1162,19 +1169,24 @@ export const UserPermissionSchema = {
     'x-enum-varnames': [
         'NONE',
         'SEARCH_USER',
+        '_DEDUCT_POINT',
         'DEDUCT_POINT',
+        '_GRANT_POINT',
         'GRANT_POINT',
         'NO_LIMIT_POINT',
         'CREATE_QUEST',
         'MANAGE_QUEST',
+        '_GIVE_STAMP',
         'GIVE_STAMP',
         'VIEW_RANK',
         'VIEW_POINT',
         'VIEW_POINT_HISTORY',
         'MANAGE_POST',
         'CREATE_POST',
+        '_VIEW_USER_POINT',
         'VIEW_USER_POINT',
         'JOIN_QUEST',
+        '_MANAGE_USER',
         'MANAGE_USER',
         'VIEW_POST',
         'VIEW_STAMP',
@@ -1186,19 +1198,24 @@ export const UserPermissionSchema = {
     'x-enumNames': [
         'NONE',
         'SEARCH_USER',
+        '_DEDUCT_POINT',
         'DEDUCT_POINT',
+        '_GRANT_POINT',
         'GRANT_POINT',
         'NO_LIMIT_POINT',
         'CREATE_QUEST',
         'MANAGE_QUEST',
+        '_GIVE_STAMP',
         'GIVE_STAMP',
         'VIEW_RANK',
         'VIEW_POINT',
         'VIEW_POINT_HISTORY',
         'MANAGE_POST',
         'CREATE_POST',
+        '_VIEW_USER_POINT',
         'VIEW_USER_POINT',
         'JOIN_QUEST',
+        '_MANAGE_USER',
         'MANAGE_USER',
         'VIEW_POST',
         'VIEW_STAMP',

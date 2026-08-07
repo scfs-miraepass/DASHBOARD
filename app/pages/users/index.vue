@@ -1,21 +1,49 @@
 <script setup lang="ts">
 import type { User, AdminPointRequest } from '@/client'
-import { UserPermission } from '@/client'
+import { UserType, UserPermission } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
+definePageMeta({
+    permissions: [ UserPermission.MANAGE_USER ]
+})
+
+const toast = useToast()
+
+const filterUser = reactive<{
+    type?: UserType
+    permission?: number
+}>({
+    type: undefined,
+    permission: undefined
+})
 const maxOffset = ref<number>(0);
 const dataPage = ref<number>(1);
-const session = useSession()
-const hasManageUserPermission = computed(() => {
-    return !!((session.value?.permissions ?? 0) & UserPermission.MANAGE_USER)
+const isPointModalOpen = ref(false)
+const isCreateUserModalOpen = ref(false)
+
+const pointForm = ref({
+    amount: 0,
+    reason: ''
 })
+const isSubmittingPoints = ref(false)
+
+const createUserForm = ref({
+    name: '',
+    type: 'student',
+    grade: 1,
+    number: 1
+})
+
+const rowSelection = ref<Record<string, boolean>>({})
+const search = ref('')
 
 const queryParams = computed(() => ({
     limit: 20,
     page: dataPage.value,
+    user_type: filterUser.type,
+    permission: filterUser.permission
 }));
-
-const { data: studentsResponse, pending, refresh } = await useAsyncData('student.', async (_nuxtApp, { signal }) => {
+const { data: studentsResponse, pending, refresh } = await useAsyncData('users.getUsersAdminUsersGet', async (_nuxtApp, { signal }) => {
     const req = await $API.getUsersAdminUsersGet({
         query: queryParams.value,
         ...signal
@@ -25,11 +53,11 @@ const { data: studentsResponse, pending, refresh } = await useAsyncData('student
     maxOffset.value = Number(req.response.headers.get("X-MAX-PAGE"));
 
     return req.data;
-})
+}, { watch: [ queryParams ] })
 
 const students = computed(() => {
-    if (studentsResponse.value?.data) {
-        return studentsResponse.value.data.data
+    if (studentsResponse.value?.success) {
+        return studentsResponse.value.data
     }
     return []
 })
@@ -37,21 +65,19 @@ const students = computed(() => {
 const columns = computed<TableColumn<User>[]>(() => {
     const UCheckbox = resolveComponent('UCheckbox')
     const cols: TableColumn<User>[] = []
-    
-    if (hasManageUserPermission.value) {
-        cols.push({
-            id: 'select',
-            header: ({ table }) => h(UCheckbox, {
-                modelValue: table.getIsAllPageRowsSelected(),
-                indeterminate: table.getIsSomePageRowsSelected(),
-                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value)
-            }),
-            cell: ({ row }) => h(UCheckbox, {
-                modelValue: row.getIsSelected(),
-                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value)
-            })
+
+    cols.push({
+        id: 'select',
+        header: ({ table }) => h(UCheckbox, {
+            modelValue: table.getIsAllPageRowsSelected(),
+            indeterminate: table.getIsSomePageRowsSelected(),
+            'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value)
+        }),
+        cell: ({ row }) => h(UCheckbox, {
+            modelValue: row.getIsSelected(),
+            'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value)
         })
-    }
+    })
 
     cols.push(
         { accessorKey: 'id', header: 'ID(학번)' },
@@ -62,17 +88,14 @@ const columns = computed<TableColumn<User>[]>(() => {
         { accessorKey: 'point', header: '현재 포인트' },
         { accessorKey: 'total_point', header: '누적 포인트' }
     )
-    
+
     return cols
 })
 
-const rowSelection = ref<Record<string, boolean>>({})
-const search = ref('')
-
 const filteredStudents = computed(() => {
     if (!search.value) return students.value
-    return students.value.filter(s => 
-        s.name.includes(search.value) || 
+    return students.value.filter(s =>
+        s.name.includes(search.value) ||
         String(s.id).includes(search.value)
     )
 })
@@ -81,18 +104,6 @@ const selected = computed(() => {
     const selectedIds = Object.keys(rowSelection.value).filter(key => rowSelection.value[key])
     return filteredStudents.value.filter(s => selectedIds.includes(String(s.id)))
 })
-
-// 모달 상태
-const isPointModalOpen = ref(false)
-const isCreateUserModalOpen = ref(false)
-
-// 포인트 지급 폼 상태
-const pointForm = ref({
-    amount: 0,
-    reason: ''
-})
-const isSubmittingPoints = ref(false)
-const toast = useToast()
 
 const openPointModal = () => {
     pointForm.value = { amount: 0, reason: '' }
@@ -121,10 +132,9 @@ const handlePointSubmit = async () => {
             user_ids: selected.value.map(s => s.id as number),
             amount: pointForm.value.amount,
             reason: pointForm.value.reason,
-            is_all_students: false
         }
         
-        const res = await $API.updateStudentsPointAdminPointPost({ body: requestData })
+        const res = await $API.updateUsersPointAdminPointPost({ body: requestData })
         
         if (res.error == undefined) {
             toast.add({ title: '포인트가 성공적으로 처리되었습니다.', color: 'success' })
@@ -141,14 +151,6 @@ const handlePointSubmit = async () => {
         isSubmittingPoints.value = false
     }
 }
-
-// 사용자 생성 폼 상태 (UI Only)
-const createUserForm = ref({
-    name: '',
-    type: 'student',
-    grade: 1,
-    number: 1
-})
 
 const handleCreateUser = () => {
     console.log('Create User (UI Only):', createUserForm.value)
