@@ -52,26 +52,79 @@ const students = computed(() => {
 
 const columns = computed<TableColumn<User>[]>(() => {
     const UCheckbox = resolveComponent('UCheckbox')
+    const UDropdownMenu = resolveComponent('UDropdownMenu')
+    const UButton = resolveComponent('UButton')
+
     const cols: TableColumn<User>[] = [
         {
             id: 'select',
             header: ({ table }) => h(UCheckbox, {
                 modelValue: table.getIsAllPageRowsSelected(),
                 indeterminate: table.getIsSomePageRowsSelected(),
-                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value)
+                'onUpdate:modelValue': (value: boolean) => table.toggleAllPageRowsSelected(value),
+                ui: {
+                    base: "cursor-pointer"
+                }
             }),
             cell: ({ row }) => h(UCheckbox, {
                 modelValue: row.getIsSelected(),
-                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value)
+                'onUpdate:modelValue': (value: boolean) => row.toggleSelected(value),
+                ui: {
+                    base: "cursor-pointer"
+                }
             })
         },
-        { accessorKey: 'id', header: 'ID(학번)' },
+        { accessorKey: 'id', header: '고유번호' },
         { accessorKey: 'name', header: '이름' },
         { accessorKey: 'type', header: '구분' },
         { accessorKey: 'grade', header: '학년' },
         { accessorKey: 'number', header: '반' },
         { accessorKey: 'point', header: '현재 포인트' },
-        { accessorKey: 'total_point', header: '누적 포인트' }
+        { accessorKey: 'total_point', header: '누적 포인트' },
+        {
+            id: 'actions',
+            meta: {
+                class: {
+                    td: 'text-right'
+                }
+            },
+            cell: () => {
+                return h(
+                    UDropdownMenu,
+                    {
+                        content: {
+                            align: 'end'
+                        },
+                        items: [
+                            {
+                                label: '사용자 삭제',
+                                onSelect() {
+                                    // TODO
+                                },
+                                icon: 'i-lucide-trash-2',
+                                color: "error"
+                            },
+                            {
+                                label: '사용자 수정',
+                                onSelect() {
+                                    // TODO
+                                },
+                                icon: 'i-lucide-file-pen-line'
+                            }
+                        ]
+                    },
+                    () =>
+                        h(UButton, {
+                            icon: 'i-lucide-ellipsis-vertical',
+                            color: 'neutral',
+                            variant: 'ghost',
+                            ui: {
+                                base: 'cursor-pointer hover:bg-accented dark:hover:bg-elevated'
+                            }
+                        })
+                )
+            }
+        }
     ]
 
     return cols
@@ -84,14 +137,16 @@ const selected = computed(() => {
 
 const onSearch = async (event: InputEvent) => {
     search.value = (event.target as HTMLInputElement).value;
-    if (search.value.replaceAll(" ", "").length <= 0) {
-        searchUsers.value = undefined
-        return
-    }
+
     searchUsers.value = []
 
     if (searchTimeout) clearTimeout(searchTimeout);
     searchTimeout = setTimeout(async () => {
+        if (search.value.replaceAll(" ", "").length <= 0) {
+            searchUsers.value = undefined
+            return
+        }
+
         searchLoading.value = true
         const search_req = await $API.searchSearchGet({
             query: {
