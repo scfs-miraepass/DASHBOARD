@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { User } from '@/client'
-import { UserType, UserPermission } from '@/client'
+import { UserType, UserPermission, type User } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
 definePageMeta({
@@ -19,6 +18,9 @@ const dataPage = ref<number>(1);
 
 const rowSelection = ref<Record<string, boolean>>({})
 const search = ref('')
+const searchLoading = ref<boolean>(false)
+const searchUsers = ref<User[] | undefined>(undefined)
+let searchTimeout: NodeJS.Timeout | null = null
 
 const queryParams = computed(() => ({
     limit: 20,
@@ -39,6 +41,9 @@ const { data: studentsResponse, pending } = await useAsyncData('users.getUsersAd
 }, { watch: [ queryParams ] })
 
 const students = computed(() => {
+    if (searchUsers.value != undefined) {
+        return searchUsers.value
+    }
     if (studentsResponse.value?.success) {
         return studentsResponse.value.data
     }
@@ -72,19 +77,32 @@ const columns = computed<TableColumn<User>[]>(() => {
     return cols
 })
 
-// TODO: 검색기능 다시.. API 로 검색하는 방식으로
-const filteredStudents = computed(() => {
-    if (!search.value) return students.value
-    return students.value.filter(s =>
-        s.name.includes(search.value) ||
-        String(s.id).includes(search.value)
-    )
-})
-
 const selected = computed(() => {
     const selectedIds = Object.keys(rowSelection.value).filter(key => rowSelection.value[key])
-    return filteredStudents.value.filter(s => selectedIds.includes(String(s.id)))
+    return students.value.filter(s => selectedIds.includes(String(s.id)))
 })
+
+const onSearch = async (event: InputEvent) => {
+    search.value = (event.target as HTMLInputElement).value;
+    if (search.value.replaceAll(" ", "").length <= 0) {
+        searchUsers.value = undefined
+        return
+    }
+    searchUsers.value = []
+
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(async () => {
+        searchLoading.value = true
+        const search_req = await $API.searchSearchGet({
+            query: {
+                q: search.value
+            }
+        })
+        if (!search_req.data?.success || search_req.response == undefined) return;
+        searchUsers.value = search_req.data.data
+        searchLoading.value = false
+    }, 200);
+}
 </script>
 
 <template>
@@ -103,7 +121,7 @@ const selected = computed(() => {
         <template #body>
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-2">
-                    <UInput v-model="search" icon="i-lucide-search" placeholder="이름 또는 학번 검색..." class="w-64" />
+                    <UInput v-model="search" @input="onSearch" icon="i-lucide-search" placeholder="이름 또는 학번 검색..." class="w-64" />
                     <UButton 
                         v-if="selected.length > 0" 
                         color="primary" 
@@ -126,9 +144,9 @@ const selected = computed(() => {
             <UTable 
                 v-model:row-selection="rowSelection" 
                 :get-row-id="(row) => String(row.id)"
-                :data="filteredStudents"
+                :data="students"
                 :columns="columns"
-                :loading="pending"
+                :loading="pending || searchLoading"
                 class="w-full"
             >
                 <template #type-cell="{ row }">
@@ -143,7 +161,7 @@ const selected = computed(() => {
                     <span class="text-gray-500">{{ row.original.total_point?.toLocaleString() || 0 }} P</span>
                 </template>
             </UTable>
-            <UPagination v-model:page="dataPage" :total="maxPage" :items-per-page="1" />
+            <UPagination v-model:page="dataPage" :total="maxPage" :items-per-page="1" v-if="searchUsers == undefined" />
 
         </template>
     </UDashboardPanel>
