@@ -7,21 +7,17 @@ const open = ref(false)
 
 const links = computed(() => {
 
-    const items = [
-        {
-            label: '메인',
-            icon: 'i-lucide-house',
-            to: '/'
-        },
-        {
-            label: "학생관리",
+    const items: NavigationMenuItem[] = []
+
+    if (hasPermission(session.value?.permissions, UserPermission.MANAGE_USER)) {
+        items.push({
+            label: "사용자 관리",
             icon: 'i-lucide-users',
-            to: '/student'
-        }
-    ] satisfies NavigationMenuItem[]
+            to: '/users'
+        })
+    }
 
-    if (!!((session.value?.permissions ?? 0) & UserPermission.MANAGE_USER))
-
+    return items
 })
 </script>
 

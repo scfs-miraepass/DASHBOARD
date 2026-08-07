@@ -85,9 +85,11 @@ export type AdminUserUpdateRequest = {
      */
     number?: number | null;
     /**
+     * Permissions
+     *
      * 사용자 권한
      */
-    permissions?: UserPermission | null;
+    permissions?: number | null;
 };
 
 /**
@@ -800,9 +802,11 @@ export type User = {
      */
     total_point?: number;
     /**
+     * Permissions
+     *
      * 관리자 여부
      */
-    permissions?: UserPermission;
+    permissions?: number;
     /**
      * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
      */
@@ -826,9 +830,17 @@ export const UserPermission = {
      */
     SEARCH_USER: 131072,
     /**
+     * _DEDUCT_POINT
+     */
+    _DEDUCT_POINT: 1,
+    /**
      * DEDUCT_POINT
      */
     DEDUCT_POINT: 131073,
+    /**
+     * _GRANT_POINT
+     */
+    _GRANT_POINT: 2,
     /**
      * GRANT_POINT
      */
@@ -845,6 +857,10 @@ export const UserPermission = {
      * MANAGE_QUEST
      */
     MANAGE_QUEST: 16,
+    /**
+     * _GIVE_STAMP
+     */
+    _GIVE_STAMP: 32,
     /**
      * GIVE_STAMP
      */
@@ -870,6 +886,10 @@ export const UserPermission = {
      */
     CREATE_POST: 1024,
     /**
+     * _VIEW_USER_POINT
+     */
+    _VIEW_USER_POINT: 2048,
+    /**
      * VIEW_USER_POINT
      */
     VIEW_USER_POINT: 133120,
@@ -877,6 +897,10 @@ export const UserPermission = {
      * JOIN_QUEST
      */
     JOIN_QUEST: 4096,
+    /**
+     * _MANAGE_USER
+     */
+    _MANAGE_USER: 8192,
     /**
      * MANAGE_USER
      */
@@ -961,9 +985,23 @@ export type ValidationError = {
 export type ReadRootGetData = {
     body?: never;
     path?: never;
-    query?: never;
+    query?: {
+        /**
+         *
+         */
+        _?: UserPermission | null;
+    };
     url: '/';
 };
+
+export type ReadRootGetErrors = {
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type ReadRootGetError = ReadRootGetErrors[keyof ReadRootGetErrors];
 
 export type ReadRootGetResponses = {
     /**
@@ -1567,7 +1605,7 @@ export type GetUsersAdminUsersGetData = {
          *
          * 유저 권한 필터 (해당 권한을 포함하는 유저 검색)
          */
-        permission?: UserPermission | null;
+        permission?: number | null;
     };
     url: '/admin/users';
 };
