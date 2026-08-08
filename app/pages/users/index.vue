@@ -10,6 +10,7 @@ definePageMeta({
     permissions: [ UserPermission.MANAGE_USER ]
 })
 
+const session = useSession()
 const actionsUser = ref<{
     action: 'delete' | 'edit' | 'password',
     user: User
@@ -112,6 +113,7 @@ const columns = computed<TableColumn<User>[]>(() => {
                                         user: row.original
                                     }
                                 },
+                                disabled: row.original.id == session.value!.id,
                                 icon: 'i-lucide-trash-2',
                                 color: "error"
                             },
@@ -123,6 +125,7 @@ const columns = computed<TableColumn<User>[]>(() => {
                                         user: row.original
                                     }
                                 },
+                                disabled: row.original.id == session.value!.id,
                                 icon: 'i-lucide-file-pen-line'
                             },
                             {
