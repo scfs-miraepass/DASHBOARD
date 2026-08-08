@@ -241,14 +241,6 @@ const onSearch = async (event: InputEvent) => {
                         포인트 관리 ({{ selectedIds.length }}명)
                     </UButton>
                 </div>
-                
-                <UButton 
-                    color="error"
-                    variant="solid" 
-                    icon="i-lucide-user-plus"
-                >
-                    사용자 생성
-                </UButton>
             </div>
 
             <UTable 
