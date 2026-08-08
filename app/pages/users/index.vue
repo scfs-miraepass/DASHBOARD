@@ -5,6 +5,7 @@ import type { TableColumn } from '@nuxt/ui'
 import DeleteModal from "@/components/users/userDeleteModal.vue"
 import PasswordResetModal from "@/components/users/userPasswordResetModal.vue"
 import EditSlideover from "@/components/users/userEditSlideover.vue"
+import PointManageModal from "@/components/users/userPointManageModal.vue"
 
 definePageMeta({
     permissions: [ UserPermission.MANAGE_USER ]
@@ -30,6 +31,11 @@ const search = ref('')
 const searchLoading = ref<boolean>(false)
 const searchUsers = ref<User[] | undefined>(undefined)
 let searchTimeout: NodeJS.Timeout | null = null
+const isPointManageModalOpen = ref(false)
+
+const canGrantPoint = computed(() => ((session.value?.permissions || 0) & UserPermission._GRANT_POINT) === UserPermission._GRANT_POINT)
+const canDeductPoint = computed(() => ((session.value?.permissions || 0) & UserPermission._DEDUCT_POINT) === UserPermission._DEDUCT_POINT)
+const canManagePoint = computed(() => canGrantPoint.value || canDeductPoint.value)
 
 const queryParams = computed(() => ({
     limit: 20,
@@ -157,10 +163,7 @@ const columns = computed<TableColumn<User>[]>(() => {
     return cols
 })
 
-const selected = computed(() => {
-    const selectedIds = Object.keys(rowSelection.value).filter(key => rowSelection.value[key])
-    return students.value.filter(s => selectedIds.includes(String(s.id)))
-})
+const selectedIds = computed(() => Object.keys(rowSelection.value).filter(key => rowSelection.value[key]))
 
 const onSearch = async (event: InputEvent) => {
     search.value = (event.target as HTMLInputElement).value;
@@ -205,6 +208,12 @@ const onSearch = async (event: InputEvent) => {
         @close="actionsUser = undefined"
         @edit="refresh"
     />
+    <PointManageModal
+        v-if="isPointManageModalOpen"
+        :users="selectedIds"
+        @close="isPointManageModalOpen = false"
+        @success="() => { isPointManageModalOpen = false; refresh(); rowSelection = {}; }"
+    />
 
     <UDashboardPanel :ui="{
         root: 'overflow-y-auto',
@@ -223,12 +232,13 @@ const onSearch = async (event: InputEvent) => {
                 <div class="flex items-center gap-2">
                     <UInput v-model="search" @input="onSearch" icon="i-lucide-search" placeholder="이름 또는 학번 검색..." class="w-64" />
                     <UButton 
-                        v-if="selected.length > 0" 
+                        v-if="selectedIds.length > 0 && canManagePoint"
                         color="primary" 
                         variant="solid" 
                         icon="i-lucide-coins"
+                        @click="isPointManageModalOpen = true"
                     >
-                        포인트 관리 ({{ selected.length }}명)
+                        포인트 관리 ({{ selectedIds.length }}명)
                     </UButton>
                 </div>
                 
