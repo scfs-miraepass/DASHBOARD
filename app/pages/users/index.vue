@@ -2,10 +2,16 @@
 import { UserType, UserPermission, type User } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
+import DeleteModal from "@/components/users/userDeleteModal.vue"
+
 definePageMeta({
     permissions: [ UserPermission.MANAGE_USER ]
 })
 
+const actionsUser = ref<{
+    action: 'delete' | 'edit',
+    user: User
+} | undefined>()
 const filterUser = reactive<{
     type?: UserType
     permission?: number
@@ -28,7 +34,7 @@ const queryParams = computed(() => ({
     user_type: filterUser.type,
     permission: filterUser.permission
 }));
-const { data: studentsResponse, pending } = await useAsyncData('users.getUsersAdminUsersGet', async (_nuxtApp, { signal }) => {
+const { data: studentsResponse, pending, refresh } = await useAsyncData('users.getUsersAdminUsersGet', async (_nuxtApp, { signal }) => {
     const req = await $API.getUsersAdminUsersGet({
         query: queryParams.value,
         ...signal
@@ -88,7 +94,7 @@ const columns = computed<TableColumn<User>[]>(() => {
                     td: 'text-right'
                 }
             },
-            cell: () => {
+            cell: ({ row }) => {
                 return h(
                     UDropdownMenu,
                     {
@@ -99,7 +105,10 @@ const columns = computed<TableColumn<User>[]>(() => {
                             {
                                 label: '사용자 삭제',
                                 onSelect() {
-                                    // TODO
+                                    actionsUser.value = {
+                                        action: "delete",
+                                        user: row.original
+                                    }
                                 },
                                 icon: 'i-lucide-trash-2',
                                 color: "error"
@@ -107,7 +116,10 @@ const columns = computed<TableColumn<User>[]>(() => {
                             {
                                 label: '사용자 수정',
                                 onSelect() {
-                                    // TODO
+                                    actionsUser.value = {
+                                        action: "edit",
+                                        user: row.original
+                                    }
                                 },
                                 icon: 'i-lucide-file-pen-line'
                             }
@@ -161,6 +173,12 @@ const onSearch = async (event: InputEvent) => {
 </script>
 
 <template>
+    <DeleteModal
+        v-if="actionsUser?.action == 'delete'"
+        :user="actionsUser.user"
+        @close="actionsUser = undefined"
+        @delete="refresh"
+    />
     <UDashboardPanel :ui="{
         root: 'overflow-y-auto',
         body: 'min-h-fit'
