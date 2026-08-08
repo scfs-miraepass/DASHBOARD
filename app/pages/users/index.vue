@@ -4,6 +4,7 @@ import type { TableColumn } from '@nuxt/ui'
 
 import DeleteModal from "@/components/users/userDeleteModal.vue"
 import PasswordResetModal from "@/components/users/userPasswordResetModal.vue"
+import EditSlideover from "@/components/users/userEditSlideover.vue"
 
 definePageMeta({
     permissions: [ UserPermission.MANAGE_USER ]
@@ -194,6 +195,12 @@ const onSearch = async (event: InputEvent) => {
         v-if="actionsUser?.action == 'password'"
         :user="actionsUser!.user"
         @close="actionsUser = undefined"
+    />
+    <EditSlideover
+        v-if="actionsUser?.action == 'edit'"
+        :user="actionsUser!.user"
+        @close="actionsUser = undefined"
+        @edit="refresh"
     />
 
     <UDashboardPanel :ui="{
