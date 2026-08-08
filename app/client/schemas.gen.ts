@@ -100,30 +100,6 @@ export const AdminUserUpdateRequestSchema = {
             title: 'Name',
             description: '사용자 이름'
         },
-        grade: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Grade',
-            description: '학년 (학생인 경우)'
-        },
-        number: {
-            anyOf: [
-                {
-                    type: 'integer'
-                },
-                {
-                    type: 'null'
-                }
-            ],
-            title: 'Number',
-            description: '반 (학생인 경우)'
-        },
         permissions: {
             anyOf: [
                 {

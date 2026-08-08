@@ -14,8 +14,6 @@ const toast = useToast()
 
 const isDirty = computed(() => {
     return form.value.name !== user.name ||
-        form.value.grade !== user.grade ||
-        form.value.number !== user.number ||
         form.value.permissions !== (user.permissions || 0)
 })
 
@@ -34,8 +32,6 @@ const forceClose = () => {
 
 const form = ref({
     name: user.name,
-    grade: user.grade as number | undefined,
-    number: user.number as number | undefined,
     permissions: user.permissions || 0
 })
 
@@ -122,35 +118,6 @@ const onSubmit = async () => {
                     <UInput v-model="form.name" />
                 </UFormField>
                 
-                <div v-if="user.type === 'student'" class="flex gap-4">
-                    <UFormField label="학년" name="grade">
-                        <USelect 
-                            v-model="form.grade" 
-                            :items="[
-                                { label: '1학년', value: 1 },
-                                { label: '2학년', value: 2 },
-                                { label: '3학년', value: 3 }
-                            ]" 
-                            placeholder="학년 선택"
-                            class="w-25"
-                        />
-                    </UFormField>
-                    <UFormField label="반" name="number">
-                        <USelect 
-                            v-model="form.number" 
-                            :items="[
-                                { label: '1반', value: 1 },
-                                { label: '2반', value: 2 },
-                                { label: '3반', value: 3 },
-                                { label: '4반', value: 4 },
-                                { label: '5반', value: 5 },
-                                { label: '6반', value: 6 }
-                            ]" 
-                            placeholder="반 선택"
-                            class="w-25"
-                        />
-                    </UFormField>
-                </div>
                 <div class="pt-4 border-t border-gray-200 dark:border-gray-800">
                     <div class="flex items-center justify-between mb-2">
                         <h3 class="text-sm font-medium">권한 설정</h3>

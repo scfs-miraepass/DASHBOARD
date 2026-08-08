@@ -16,8 +16,6 @@ export const zAdminPointRequest = z.object({
  */
 export const zAdminUserUpdateRequest = z.object({
     name: z.string().nullish(),
-    grade: z.int().nullish(),
-    number: z.int().nullish(),
     permissions: z.int().nullish()
 });
 

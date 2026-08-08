@@ -484,7 +484,7 @@ export class MiraepassApi extends HeyApiClient {
     /**
      * 사용자 정보 수정
      *
-     * 특정 사용자의 정보를 수정합니다. (이름, 학년, 반, 권한 등)
+     * 특정 사용자의 정보를 수정합니다. (이름, 권한 등)
      */
     public updateUserAdminUsersUserIdPatch<ThrowOnError extends boolean = false>(options: Options<UpdateUserAdminUsersUserIdPatchData, ThrowOnError>): RequestResult<UpdateUserAdminUsersUserIdPatchResponses, UpdateUserAdminUsersUserIdPatchErrors, ThrowOnError> {
         return (options.client ?? this.client).patch<UpdateUserAdminUsersUserIdPatchResponses, UpdateUserAdminUsersUserIdPatchErrors, ThrowOnError>({

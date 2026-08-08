@@ -73,18 +73,6 @@ export type AdminUserUpdateRequest = {
      */
     name?: string | null;
     /**
-     * Grade
-     *
-     * 학년 (학생인 경우)
-     */
-    grade?: number | null;
-    /**
-     * Number
-     *
-     * 반 (학생인 경우)
-     */
-    number?: number | null;
-    /**
      * Permissions
      *
      * 사용자 권한
