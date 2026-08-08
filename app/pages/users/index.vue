@@ -3,13 +3,14 @@ import { UserType, UserPermission, type User } from '@/client'
 import type { TableColumn } from '@nuxt/ui'
 
 import DeleteModal from "@/components/users/userDeleteModal.vue"
+import PasswordResetModal from "@/components/users/userPasswordResetModal.vue"
 
 definePageMeta({
     permissions: [ UserPermission.MANAGE_USER ]
 })
 
 const actionsUser = ref<{
-    action: 'delete' | 'edit',
+    action: 'delete' | 'edit' | 'password',
     user: User
 } | undefined>()
 const filterUser = reactive<{
@@ -122,6 +123,16 @@ const columns = computed<TableColumn<User>[]>(() => {
                                     }
                                 },
                                 icon: 'i-lucide-file-pen-line'
+                            },
+                            {
+                                label: '비밀번호 초기화',
+                                onSelect() {
+                                    actionsUser.value = {
+                                        action: "password",
+                                        user: row.original
+                                    }
+                                },
+                                icon: 'i-lucide-key-round'
                             }
                         ]
                     },
@@ -175,10 +186,16 @@ const onSearch = async (event: InputEvent) => {
 <template>
     <DeleteModal
         v-if="actionsUser?.action == 'delete'"
-        :user="actionsUser.user"
+        :user="actionsUser!.user"
         @close="actionsUser = undefined"
         @delete="refresh"
     />
+    <PasswordResetModal
+        v-if="actionsUser?.action == 'password'"
+        :user="actionsUser!.user"
+        @close="actionsUser = undefined"
+    />
+
     <UDashboardPanel :ui="{
         root: 'overflow-y-auto',
         body: 'min-h-fit'
