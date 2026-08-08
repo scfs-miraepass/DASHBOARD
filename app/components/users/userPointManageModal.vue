@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, computed } from 'vue'
-import { UserPermission, type User } from '@/client'
+import { UserPermission } from '@/client'
 
 const props = defineProps<{
     users: string[]
