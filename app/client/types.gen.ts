@@ -11,9 +11,9 @@ export type AdminPointRequest = {
     /**
      * User Ids
      *
-     * 포인트를 지급/차감할 대상 유저 ID 목록
+     * 포인트를 지급/차감할 학생 ID 목록. 전체 학생 대상일 경우 생략하거나 null/빈 리스트 전달
      */
-    user_ids: Array<number>;
+    user_ids?: Array<number> | null;
     /**
      * Amount
      *
@@ -26,58 +26,12 @@ export type AdminPointRequest = {
      * 포인트 변동 사유
      */
     reason: string;
-};
-
-/**
- * AdminUserCreateRequest
- */
-export type AdminUserCreateRequest = {
     /**
-     * Name
+     * Is All Students
      *
-     * 사용자 이름
+     * 전체 학생 대상 여부. true일 경우 user_ids는 무시됩니다.
      */
-    name: string;
-    /**
-     * 사용자 유형 (student, teacher, service)
-     */
-    user_type: UserType;
-    /**
-     * Grade
-     *
-     * 학년 (학생인 경우 필수)
-     */
-    grade?: number | null;
-    /**
-     * Number
-     *
-     * 반 (학생인 경우 필수)
-     */
-    number?: number | null;
-    /**
-     * Student No
-     *
-     * 번호 (학생인 경우 필수)
-     */
-    student_no?: number | null;
-};
-
-/**
- * AdminUserUpdateRequest
- */
-export type AdminUserUpdateRequest = {
-    /**
-     * Name
-     *
-     * 사용자 이름
-     */
-    name?: string | null;
-    /**
-     * Permissions
-     *
-     * 사용자 권한
-     */
-    permissions?: number | null;
+    is_all_students?: boolean;
 };
 
 /**
@@ -790,11 +744,9 @@ export type User = {
      */
     total_point?: number;
     /**
-     * Permissions
-     *
      * 관리자 여부
      */
-    permissions?: number;
+    permissions?: UserPermission;
     /**
      * 해당 유저가 포인트 지급/차감시 포인트 기록 타입
      */
@@ -818,17 +770,9 @@ export const UserPermission = {
      */
     SEARCH_USER: 131072,
     /**
-     * _DEDUCT_POINT
-     */
-    _DEDUCT_POINT: 1,
-    /**
      * DEDUCT_POINT
      */
     DEDUCT_POINT: 131073,
-    /**
-     * _GRANT_POINT
-     */
-    _GRANT_POINT: 2,
     /**
      * GRANT_POINT
      */
@@ -845,10 +789,6 @@ export const UserPermission = {
      * MANAGE_QUEST
      */
     MANAGE_QUEST: 16,
-    /**
-     * _GIVE_STAMP
-     */
-    _GIVE_STAMP: 32,
     /**
      * GIVE_STAMP
      */
@@ -874,10 +814,6 @@ export const UserPermission = {
      */
     CREATE_POST: 1024,
     /**
-     * _VIEW_USER_POINT
-     */
-    _VIEW_USER_POINT: 2048,
-    /**
      * VIEW_USER_POINT
      */
     VIEW_USER_POINT: 133120,
@@ -885,10 +821,6 @@ export const UserPermission = {
      * JOIN_QUEST
      */
     JOIN_QUEST: 4096,
-    /**
-     * _MANAGE_USER
-     */
-    _MANAGE_USER: 8192,
     /**
      * MANAGE_USER
      */
@@ -973,23 +905,9 @@ export type ValidationError = {
 export type ReadRootGetData = {
     body?: never;
     path?: never;
-    query?: {
-        /**
-         *
-         */
-        _?: UserPermission | null;
-    };
+    query?: never;
     url: '/';
 };
-
-export type ReadRootGetErrors = {
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type ReadRootGetError = ReadRootGetErrors[keyof ReadRootGetErrors];
 
 export type ReadRootGetResponses = {
     /**
@@ -1566,7 +1484,7 @@ export type TeacherGetByNameSearchTeacherUserNameGetResponses = {
 
 export type TeacherGetByNameSearchTeacherUserNameGetResponse = TeacherGetByNameSearchTeacherUserNameGetResponses[keyof TeacherGetByNameSearchTeacherUserNameGetResponses];
 
-export type GetUsersAdminUsersGetData = {
+export type GetStudentsAdminStudentGetData = {
     body?: never;
     path?: never;
     query?: {
@@ -1582,23 +1500,11 @@ export type GetUsersAdminUsersGetData = {
          * 페이지 당 유저 데이터 갯수 (최대 100)
          */
         size?: number;
-        /**
-         * User Type
-         *
-         * 유저 타입 필터 (student, teacher, service)
-         */
-        user_type?: UserType | null;
-        /**
-         * Permission
-         *
-         * 유저 권한 필터 (해당 권한을 포함하는 유저 검색)
-         */
-        permission?: number | null;
     };
-    url: '/admin/users';
+    url: '/admin/student';
 };
 
-export type GetUsersAdminUsersGetErrors = {
+export type GetStudentsAdminStudentGetErrors = {
     /**
      * 권한 거부
      */
@@ -1609,25 +1515,25 @@ export type GetUsersAdminUsersGetErrors = {
     422: HttpValidationError;
 };
 
-export type GetUsersAdminUsersGetError = GetUsersAdminUsersGetErrors[keyof GetUsersAdminUsersGetErrors];
+export type GetStudentsAdminStudentGetError = GetStudentsAdminStudentGetErrors[keyof GetStudentsAdminStudentGetErrors];
 
-export type GetUsersAdminUsersGetResponses = {
+export type GetStudentsAdminStudentGetResponses = {
     /**
      * 정상적으로 처리 됨
      */
     200: ResponseModelListUser;
 };
 
-export type GetUsersAdminUsersGetResponse = GetUsersAdminUsersGetResponses[keyof GetUsersAdminUsersGetResponses];
+export type GetStudentsAdminStudentGetResponse = GetStudentsAdminStudentGetResponses[keyof GetStudentsAdminStudentGetResponses];
 
-export type UpdateUsersPointAdminPointPostData = {
+export type UpdateStudentsPointAdminPointPostData = {
     body: AdminPointRequest;
     path?: never;
     query?: never;
     url: '/admin/point';
 };
 
-export type UpdateUsersPointAdminPointPostErrors = {
+export type UpdateStudentsPointAdminPointPostErrors = {
     /**
      * 권한 거부
      */
@@ -1638,171 +1544,16 @@ export type UpdateUsersPointAdminPointPostErrors = {
     422: HttpValidationError;
 };
 
-export type UpdateUsersPointAdminPointPostError = UpdateUsersPointAdminPointPostErrors[keyof UpdateUsersPointAdminPointPostErrors];
+export type UpdateStudentsPointAdminPointPostError = UpdateStudentsPointAdminPointPostErrors[keyof UpdateStudentsPointAdminPointPostErrors];
 
-export type UpdateUsersPointAdminPointPostResponses = {
+export type UpdateStudentsPointAdminPointPostResponses = {
     /**
      * 정상 처리
      */
     204: void;
 };
 
-export type UpdateUsersPointAdminPointPostResponse = UpdateUsersPointAdminPointPostResponses[keyof UpdateUsersPointAdminPointPostResponses];
-
-export type CreateUserAdminUserPostData = {
-    body: AdminUserCreateRequest;
-    path?: never;
-    query?: never;
-    url: '/admin/user';
-};
-
-export type CreateUserAdminUserPostErrors = {
-    /**
-     * Invalid request parameters
-     */
-    400: ErrorResponse;
-    /**
-     * Permission denied
-     */
-    403: ErrorResponse;
-    /**
-     * User already exists (e.g., duplicated student ID)
-     */
-    409: ErrorResponse;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type CreateUserAdminUserPostError = CreateUserAdminUserPostErrors[keyof CreateUserAdminUserPostErrors];
-
-export type CreateUserAdminUserPostResponses = {
-    /**
-     * 사용자 생성 완료
-     */
-    201: ResponseModelUser;
-};
-
-export type CreateUserAdminUserPostResponse = CreateUserAdminUserPostResponses[keyof CreateUserAdminUserPostResponses];
-
-export type ResetUserPasswordAdminUsersUserIdPasswordPatchData = {
-    body?: never;
-    path: {
-        /**
-         * User Id
-         */
-        user_id: number;
-    };
-    query?: never;
-    url: '/admin/users/{user_id}/password';
-};
-
-export type ResetUserPasswordAdminUsersUserIdPasswordPatchErrors = {
-    /**
-     * Permission denied
-     */
-    403: ErrorResponse;
-    /**
-     * User not found
-     */
-    404: ErrorResponse;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type ResetUserPasswordAdminUsersUserIdPasswordPatchError = ResetUserPasswordAdminUsersUserIdPasswordPatchErrors[keyof ResetUserPasswordAdminUsersUserIdPasswordPatchErrors];
-
-export type ResetUserPasswordAdminUsersUserIdPasswordPatchResponses = {
-    /**
-     * 정상 처리 (비밀번호 초기화됨)
-     */
-    204: void;
-};
-
-export type ResetUserPasswordAdminUsersUserIdPasswordPatchResponse = ResetUserPasswordAdminUsersUserIdPasswordPatchResponses[keyof ResetUserPasswordAdminUsersUserIdPasswordPatchResponses];
-
-export type DeleteUserAdminUsersUserIdDeleteData = {
-    body?: never;
-    path: {
-        /**
-         * User Id
-         */
-        user_id: number;
-    };
-    query?: never;
-    url: '/admin/users/{user_id}';
-};
-
-export type DeleteUserAdminUsersUserIdDeleteErrors = {
-    /**
-     * Permission denied
-     */
-    403: ErrorResponse;
-    /**
-     * User not found
-     */
-    404: ErrorResponse;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type DeleteUserAdminUsersUserIdDeleteError = DeleteUserAdminUsersUserIdDeleteErrors[keyof DeleteUserAdminUsersUserIdDeleteErrors];
-
-export type DeleteUserAdminUsersUserIdDeleteResponses = {
-    /**
-     * 정상 처리
-     */
-    204: void;
-};
-
-export type DeleteUserAdminUsersUserIdDeleteResponse = DeleteUserAdminUsersUserIdDeleteResponses[keyof DeleteUserAdminUsersUserIdDeleteResponses];
-
-export type UpdateUserAdminUsersUserIdPatchData = {
-    body: AdminUserUpdateRequest;
-    path: {
-        /**
-         * User Id
-         */
-        user_id: number;
-    };
-    query?: never;
-    url: '/admin/users/{user_id}';
-};
-
-export type UpdateUserAdminUsersUserIdPatchErrors = {
-    /**
-     * Invalid request parameters
-     */
-    400: ErrorResponse;
-    /**
-     * Permission denied
-     */
-    403: ErrorResponse;
-    /**
-     * User not found
-     */
-    404: ErrorResponse;
-    /**
-     * Validation Error
-     */
-    422: HttpValidationError;
-};
-
-export type UpdateUserAdminUsersUserIdPatchError = UpdateUserAdminUsersUserIdPatchErrors[keyof UpdateUserAdminUsersUserIdPatchErrors];
-
-export type UpdateUserAdminUsersUserIdPatchResponses = {
-    /**
-     * 사용자 정보 수정 완료
-     */
-    200: ResponseModelUser;
-};
-
-export type UpdateUserAdminUsersUserIdPatchResponse = UpdateUserAdminUsersUserIdPatchResponses[keyof UpdateUserAdminUsersUserIdPatchResponses];
+export type UpdateStudentsPointAdminPointPostResponse = UpdateStudentsPointAdminPointPostResponses[keyof UpdateStudentsPointAdminPointPostResponses];
 
 export type CreateQuestQuestCreatePostData = {
     body: QuestOperation;
