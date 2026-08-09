@@ -1,3 +1,10 @@
+# [1.1.0-dev.7](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.6...v1.1.0-dev.7) (2026-08-09)
+
+
+### Features
+
+* 유저 관리 기능 및 페이지 추가 ([4a5220f](https://github.com/scfs-miraepass/DASHBOARD/commit/4a5220f5c208193e8ec5224b64c12a9ee5113f14))
+
 # [1.1.0-dev.6](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.5...v1.1.0-dev.6) (2026-08-05)
 
 
