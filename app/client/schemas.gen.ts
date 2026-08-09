@@ -3,19 +3,12 @@
 export const AdminPointRequestSchema = {
     properties: {
         user_ids: {
-            anyOf: [
-                {
-                    items: {
-                        type: 'integer'
-                    },
-                    type: 'array'
-                },
-                {
-                    type: 'null'
-                }
-            ],
+            items: {
+                type: 'integer'
+            },
+            type: 'array',
             title: 'User Ids',
-            description: '포인트를 지급/차감할 학생 ID 목록. 전체 학생 대상일 경우 생략하거나 null/빈 리스트 전달'
+            description: '포인트를 지급/차감할 대상 유저 ID 목록'
         },
         amount: {
             type: 'integer',
@@ -26,20 +19,102 @@ export const AdminPointRequestSchema = {
             type: 'string',
             title: 'Reason',
             description: '포인트 변동 사유'
-        },
-        is_all_students: {
-            type: 'boolean',
-            title: 'Is All Students',
-            description: '전체 학생 대상 여부. true일 경우 user_ids는 무시됩니다.',
-            default: false
         }
     },
     type: 'object',
     required: [
+        'user_ids',
         'amount',
         'reason'
     ],
     title: 'AdminPointRequest'
+} as const;
+
+export const AdminUserCreateRequestSchema = {
+    properties: {
+        name: {
+            type: 'string',
+            title: 'Name',
+            description: '사용자 이름'
+        },
+        user_type: {
+            $ref: '#/components/schemas/UserType',
+            description: '사용자 유형 (student, teacher, service)'
+        },
+        grade: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Grade',
+            description: '학년 (학생인 경우 필수)'
+        },
+        number: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Number',
+            description: '반 (학생인 경우 필수)'
+        },
+        student_no: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Student No',
+            description: '번호 (학생인 경우 필수)'
+        }
+    },
+    type: 'object',
+    required: [
+        'name',
+        'user_type'
+    ],
+    title: 'AdminUserCreateRequest'
+} as const;
+
+export const AdminUserUpdateRequestSchema = {
+    properties: {
+        name: {
+            anyOf: [
+                {
+                    type: 'string'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Name',
+            description: '사용자 이름'
+        },
+        permissions: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Permissions',
+            description: '사용자 권한'
+        }
+    },
+    type: 'object',
+    title: 'AdminUserUpdateRequest'
 } as const;
 
 export const ChangePasswordFormSchema = {
@@ -1007,7 +1082,8 @@ export const UserSchema = {
             default: 0
         },
         permissions: {
-            $ref: '#/components/schemas/UserPermission',
+            type: 'integer',
+            title: 'Permissions',
             description: '관리자 여부',
             default: 0
         },
@@ -1038,19 +1114,24 @@ export const UserPermissionSchema = {
     enum: [
         0,
         131072,
+        1,
         131073,
+        2,
         131074,
         4,
         8,
         16,
+        32,
         131104,
         64,
         128,
         256,
         512,
         1024,
+        2048,
         133120,
         4096,
+        8192,
         139264,
         16384,
         32768,
@@ -1064,19 +1145,24 @@ export const UserPermissionSchema = {
     'x-enum-varnames': [
         'NONE',
         'SEARCH_USER',
+        '_DEDUCT_POINT',
         'DEDUCT_POINT',
+        '_GRANT_POINT',
         'GRANT_POINT',
         'NO_LIMIT_POINT',
         'CREATE_QUEST',
         'MANAGE_QUEST',
+        '_GIVE_STAMP',
         'GIVE_STAMP',
         'VIEW_RANK',
         'VIEW_POINT',
         'VIEW_POINT_HISTORY',
         'MANAGE_POST',
         'CREATE_POST',
+        '_VIEW_USER_POINT',
         'VIEW_USER_POINT',
         'JOIN_QUEST',
+        '_MANAGE_USER',
         'MANAGE_USER',
         'VIEW_POST',
         'VIEW_STAMP',
@@ -1088,19 +1174,24 @@ export const UserPermissionSchema = {
     'x-enumNames': [
         'NONE',
         'SEARCH_USER',
+        '_DEDUCT_POINT',
         'DEDUCT_POINT',
+        '_GRANT_POINT',
         'GRANT_POINT',
         'NO_LIMIT_POINT',
         'CREATE_QUEST',
         'MANAGE_QUEST',
+        '_GIVE_STAMP',
         'GIVE_STAMP',
         'VIEW_RANK',
         'VIEW_POINT',
         'VIEW_POINT_HISTORY',
         'MANAGE_POST',
         'CREATE_POST',
+        '_VIEW_USER_POINT',
         'VIEW_USER_POINT',
         'JOIN_QUEST',
+        '_MANAGE_USER',
         'MANAGE_USER',
         'VIEW_POST',
         'VIEW_STAMP',
