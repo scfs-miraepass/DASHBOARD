@@ -46,7 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           touch build.env
-          semantic-release
+          yarn semantic-release
       - name: Export version variable
 
         id: extract
