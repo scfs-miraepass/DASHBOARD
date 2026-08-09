@@ -7,7 +7,7 @@ COPY package.json yarn.lock ./
 
 RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
-    && yarn install --frozen-lockfile
+    && yarn install
 
 COPY . .
 RUN yarn postinstall && yarn build
