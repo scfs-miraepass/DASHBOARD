@@ -1,3 +1,20 @@
+# [1.1.0](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.0.0...v1.1.0) (2026-08-18)
+
+
+### Features
+
+* BaseURL 프록시 사용을 위해 수정 ([6a50b43](https://github.com/scfs-miraepass/DASHBOARD/commit/6a50b43ef0ee6a3b0968cc972ec082c5a4fe3333))
+* BaseURL 프록시 사용을 위해 수정 ([1638774](https://github.com/scfs-miraepass/DASHBOARD/commit/1638774246e6c01e9d08cdb43dcaa77fec7ea372))
+* BaseURL 프록시 사용을 위해 수정 ([e2f93ca](https://github.com/scfs-miraepass/DASHBOARD/commit/e2f93ca31f59a1283c0615901468366c635cd889))
+* Pretendard 폰트 적용 ([9068ee1](https://github.com/scfs-miraepass/DASHBOARD/commit/9068ee109febb7457346cb2b8b503bd8bbe559a1))
+* Pretendard 폰트 적용 ([2e4167a](https://github.com/scfs-miraepass/DASHBOARD/commit/2e4167a8272b72aebf50c8d3d241113b5ea6fca9))
+* Pretendard 폰트 적용 ([553f3ce](https://github.com/scfs-miraepass/DASHBOARD/commit/553f3ce1f8b08c05bb9e509bf7c6f5d490e1589c))
+* 기본 레이아웃 Base ([208f241](https://github.com/scfs-miraepass/DASHBOARD/commit/208f2413eb9ef68de25ac826147a62593e1fdf37))
+* 기본 레이아웃 Base ([9a48b1d](https://github.com/scfs-miraepass/DASHBOARD/commit/9a48b1d606eb18592b9e46a8921fd3f995d8a6e9))
+* 기본 레이아웃 Base ([e2a93ff](https://github.com/scfs-miraepass/DASHBOARD/commit/e2a93ff93f24c8e8b1f60c9fda82a148ab648094))
+* 로그인, 로그아웃 기능 ([277b365](https://github.com/scfs-miraepass/DASHBOARD/commit/277b365482dd575fc91bace6b7d60f638ecb9c61))
+* 유저 관리 기능 및 페이지 추가 ([4a5220f](https://github.com/scfs-miraepass/DASHBOARD/commit/4a5220f5c208193e8ec5224b64c12a9ee5113f14))
+
 # [1.1.0-dev.7](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0-dev.6...v1.1.0-dev.7) (2026-08-09)
 
 
