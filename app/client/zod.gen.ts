@@ -52,6 +52,105 @@ export const zGetLimitResponse = z.object({
 });
 
 /**
+ * KaraokeBidCreate
+ */
+export const zKaraokeBidCreate = z.object({
+    amount: z.int().gt(0)
+});
+
+/**
+ * KaraokeBids
+ */
+export const zKaraokeBids = z.object({
+    id: z.int().nullish(),
+    auction_id: z.int(),
+    bidder_id: z.int(),
+    party_id: z.int().nullable(),
+    amount: z.int(),
+    created_at: z.iso.datetime().optional()
+});
+
+/**
+ * KaraokeCreate
+ */
+export const zKaraokeCreate = z.object({
+    date: z.iso.date(),
+    time: z.int().gte(1).lte(8),
+    start_time: z.iso.datetime(),
+    end_time: z.iso.datetime(),
+    min_point: z.int().optional().default(0)
+});
+
+/**
+ * KaraokeInviteAction
+ */
+export const zKaraokeInviteAction = z.object({
+    accept: z.boolean()
+});
+
+/**
+ * KaraokeInviteCreate
+ */
+export const zKaraokeInviteCreate = z.object({
+    user_id: z.int()
+});
+
+/**
+ * KaraokeMembers
+ */
+export const zKaraokeMembers = z.object({
+    party_id: z.int(),
+    user_id: z.int(),
+    pending: z.boolean().optional().default(true)
+});
+
+/**
+ * KaraokePartis
+ */
+export const zKaraokePartis = z.object({
+    id: z.int().nullish(),
+    auction_id: z.int(),
+    leader_id: z.int(),
+    dispersed: z.boolean().optional().default(false)
+});
+
+/**
+ * KaraokeStatus
+ */
+export const zKaraokeStatus = z.enum([
+    'Pending',
+    'In_Progress',
+    'Confirmed'
+]);
+
+/**
+ * KaraokeResponse
+ */
+export const zKaraokeResponse = z.object({
+    id: z.int().nullish(),
+    date: z.iso.date(),
+    time: z.int(),
+    status: zKaraokeStatus.optional().default('Pending'),
+    start_time: z.iso.datetime(),
+    end_time: z.iso.datetime(),
+    min_point: z.int().optional().default(0),
+    highest_bid: z.int().nullish()
+});
+
+/**
+ * Karaokes
+ */
+export const zKaraokes = z.object({
+    id: z.int().nullish(),
+    date: z.iso.date(),
+    time: z.int(),
+    status: zKaraokeStatus.optional().default('Pending'),
+    start_time: z.iso.datetime(),
+    end_time: z.iso.datetime(),
+    min_point: z.int().optional().default(0)
+});
+
+/**
  * LoginForm
  */
 export const zLoginForm = z.object({
@@ -70,7 +169,9 @@ export const zPointHistoryType = z.enum([
     'grant',
     'quest',
     'stamp',
-    'stamp_bonus'
+    'stamp_bonus',
+    'karaoke_bid',
+    'karaoke_cancel'
 ]);
 
 /**
@@ -181,6 +282,46 @@ export const zResponseModelGetLimitResponse = z.object({
 });
 
 /**
+ * ResponseModel[KaraokeBids]
+ */
+export const zResponseModelKaraokeBids = z.object({
+    success: z.boolean(),
+    data: zKaraokeBids
+});
+
+/**
+ * ResponseModel[KaraokePartis]
+ */
+export const zResponseModelKaraokePartis = z.object({
+    success: z.boolean(),
+    data: zKaraokePartis
+});
+
+/**
+ * ResponseModel[KaraokeResponse]
+ */
+export const zResponseModelKaraokeResponse = z.object({
+    success: z.boolean(),
+    data: zKaraokeResponse
+});
+
+/**
+ * ResponseModel[Karaokes]
+ */
+export const zResponseModelKaraokes = z.object({
+    success: z.boolean(),
+    data: zKaraokes
+});
+
+/**
+ * ResponseModel[PointHistory]
+ */
+export const zResponseModelPointHistory = z.object({
+    success: z.boolean(),
+    data: zPointHistory
+});
+
+/**
  * ResponseModel[Posts]
  */
 export const zResponseModelPosts = z.object({
@@ -210,6 +351,22 @@ export const zResponseModelBool = z.object({
 export const zResponseModelInt = z.object({
     success: z.boolean(),
     data: z.int()
+});
+
+/**
+ * ResponseModel[list[KaraokeMembers]]
+ */
+export const zResponseModelListKaraokeMembers = z.object({
+    success: z.boolean(),
+    data: z.array(zKaraokeMembers)
+});
+
+/**
+ * ResponseModel[list[KaraokeResponse]]
+ */
+export const zResponseModelListKaraokeResponse = z.object({
+    success: z.boolean(),
+    data: z.array(zKaraokeResponse)
 });
 
 /**
@@ -325,9 +482,12 @@ export const zUserPermission = z.union([
     z.literal(16384),
     z.literal(32768),
     z.literal(65536),
-    z.literal(119232),
+    z.literal(262144),
+    z.literal(524288),
+    z.literal(1048576),
+    z.literal(1561024),
     z.literal(182730),
-    z.literal(140816)
+    z.literal(665104)
 ]);
 
 /**
@@ -363,6 +523,47 @@ export const zUser = z.object({
     total_point: z.int().optional().default(0),
     permissions: z.int().optional().default(0),
     history_type: zPointHistoryType.nullish()
+});
+
+/**
+ * KaraokeFinalBidResponse
+ */
+export const zKaraokeFinalBidResponse = z.object({
+    id: z.int(),
+    auction_id: z.int(),
+    party_id: z.int().nullable(),
+    amount: z.int(),
+    created_at: z.iso.datetime(),
+    bidder: zUser
+});
+
+/**
+ * KaraokePartyDetail
+ */
+export const zKaraokePartyDetail = z.object({
+    id: z.int(),
+    auction_id: z.int(),
+    leader_id: z.int(),
+    dispersed: z.boolean(),
+    leader: zUser,
+    members: z.array(zUser),
+    pending_members: z.array(zUser)
+});
+
+/**
+ * ResponseModel[KaraokeFinalBidResponse]
+ */
+export const zResponseModelKaraokeFinalBidResponse = z.object({
+    success: z.boolean(),
+    data: zKaraokeFinalBidResponse
+});
+
+/**
+ * ResponseModel[KaraokePartyDetail]
+ */
+export const zResponseModelKaraokePartyDetail = z.object({
+    success: z.boolean(),
+    data: zKaraokePartyDetail
 });
 
 /**
@@ -475,7 +676,7 @@ export const zDeductPointsPointDeductPostResponse = z.union([
     z.void()
 ]);
 
-export const zPointHistoryPointHistoryGetQuery = z.object({
+export const zGetHistoryListPointHistoryGetQuery = z.object({
     limit: z.int().optional().default(20),
     offset: z.int().optional().default(0)
 });
@@ -483,7 +684,16 @@ export const zPointHistoryPointHistoryGetQuery = z.object({
 /**
  * 정상처리
  */
-export const zPointHistoryPointHistoryGetResponse = zResponseModelListPointHistory;
+export const zGetHistoryListPointHistoryGetResponse = zResponseModelListPointHistory;
+
+export const zGetHistoryPointHistoryTargetIdGetPath = z.object({
+    target_id: z.int()
+});
+
+/**
+ * 정상처리
+ */
+export const zGetHistoryPointHistoryTargetIdGetResponse = zResponseModelPointHistory;
 
 export const zGetStudentRankingPointRankingStudentGetQuery = z.object({
     limit: z.int().optional().default(20),
@@ -700,3 +910,139 @@ export const zCreateStampStampPostBody = zStampCreate;
  * 정상 처리
  */
 export const zCreateStampStampPostResponse = z.void();
+
+export const zGetKaraokeListQuery = z.object({
+    date: z.iso.date().nullish()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zGetKaraokeListResponse = zResponseModelListKaraokeResponse;
+
+export const zCreateKaraokeBody = zKaraokeCreate;
+
+/**
+ * 정상적으로 생성이 완료됨
+ */
+export const zCreateKaraokeResponse = zResponseModelKaraokes;
+
+export const zDeleteKaraokePath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zDeleteKaraokeResponse = z.void();
+
+export const zGetKaraokePath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zGetKaraokeResponse = zResponseModelKaraokeResponse;
+
+export const zCreateKaraokePartyPath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 파티 생성 완료
+ */
+export const zCreateKaraokePartyResponse = zResponseModelKaraokePartis;
+
+export const zGetMyKaraokePartyPath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zGetMyKaraokePartyResponse = zResponseModelKaraokePartyDetail;
+
+export const zCreateKaraokeBidBody = zKaraokeBidCreate;
+
+export const zCreateKaraokeBidPath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 입찰 완료
+ */
+export const zCreateKaraokeBidResponse = zResponseModelKaraokeBids;
+
+export const zGetKaraokeFinalBidPath = z.object({
+    karaoke_id: z.int()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zGetKaraokeFinalBidResponse = zResponseModelKaraokeFinalBidResponse;
+
+export const zDisperseKaraokePartyPath = z.object({
+    party_id: z.int()
+});
+
+/**
+ * 정상적으로 파티 해산 완료
+ */
+export const zDisperseKaraokePartyResponse = z.void();
+
+export const zGetKaraokePartyPath = z.object({
+    party_id: z.int()
+});
+
+/**
+ * 정상적으로 처리됨.
+ */
+export const zGetKaraokePartyResponse = zResponseModelKaraokePartyDetail;
+
+export const zLeaveKaraokePartyPath = z.object({
+    party_id: z.int()
+});
+
+/**
+ * 정상적으로 파티 탈퇴 완료
+ */
+export const zLeaveKaraokePartyResponse = z.void();
+
+export const zKickKaraokePartyMemberPath = z.object({
+    party_id: z.int(),
+    user_id: z.int()
+});
+
+/**
+ * 정상적으로 멤버 강퇴 완료
+ */
+export const zKickKaraokePartyMemberResponse = zResponseModelKaraokePartyDetail;
+
+export const zInviteKaraokePartyMemberBody = zKaraokeInviteCreate;
+
+export const zInviteKaraokePartyMemberPath = z.object({
+    party_id: z.int()
+});
+
+/**
+ * 정상적으로 초대 완료
+ */
+export const zInviteKaraokePartyMemberResponse = z.void();
+
+/**
+ * Successful Response
+ */
+export const zGetMyKaraokePartyInvitesResponse = zResponseModelListKaraokeMembers;
+
+export const zDecideKaraokePartyInviteBody = zKaraokeInviteAction;
+
+export const zDecideKaraokePartyInvitePath = z.object({
+    party_id: z.int()
+});
+
+/**
+ * 정상적으로 수락/거절 완료
+ */
+export const zDecideKaraokePartyInviteResponse = zResponseModelBool;

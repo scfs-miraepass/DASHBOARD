@@ -149,6 +149,338 @@ export type HttpValidationError = {
 };
 
 /**
+ * KaraokeBidCreate
+ */
+export type KaraokeBidCreate = {
+    /**
+     * Amount
+     *
+     * 입찰 금액
+     */
+    amount: number;
+};
+
+/**
+ * KaraokeBids
+ */
+export type KaraokeBids = {
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Auction Id
+     *
+     * 연결된 경매의 고유 ID
+     */
+    auction_id: number;
+    /**
+     * Bidder Id
+     *
+     * 입찰한 유저의 고유ID
+     */
+    bidder_id: number;
+    /**
+     * Party Id
+     *
+     * 입찰한 유저의 파티 고유 ID
+     */
+    party_id: number | null;
+    /**
+     * Amount
+     *
+     * 입찰 금액
+     */
+    amount: number;
+    /**
+     * Created At
+     *
+     * 입찰된 시간
+     */
+    created_at?: Date;
+};
+
+/**
+ * KaraokeCreate
+ */
+export type KaraokeCreate = {
+    /**
+     * Date
+     *
+     * 일자
+     */
+    date: Date;
+    /**
+     * Time
+     *
+     * 시간 (1~7교시, 점심시간 8)
+     */
+    time: number;
+    /**
+     * Start Time
+     *
+     * 경매 시작 시간
+     */
+    start_time: Date;
+    /**
+     * End Time
+     *
+     * 경매 종료 시간, 'start_time' 시간보다 앞서 있으면 안됩니다.
+     */
+    end_time: Date;
+    /**
+     * Min Point
+     *
+     * 최소 입찰가
+     */
+    min_point?: number;
+};
+
+/**
+ * KaraokeFinalBidResponse
+ */
+export type KaraokeFinalBidResponse = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Auction Id
+     */
+    auction_id: number;
+    /**
+     * Party Id
+     */
+    party_id: number | null;
+    /**
+     * Amount
+     */
+    amount: number;
+    /**
+     * Created At
+     */
+    created_at: Date;
+    bidder: User;
+};
+
+/**
+ * KaraokeInviteAction
+ */
+export type KaraokeInviteAction = {
+    /**
+     * Accept
+     *
+     * 초대 수락 여부
+     */
+    accept: boolean;
+};
+
+/**
+ * KaraokeInviteCreate
+ */
+export type KaraokeInviteCreate = {
+    /**
+     * User Id
+     *
+     * 초대할 유저의 ID
+     */
+    user_id: number;
+};
+
+/**
+ * KaraokeMembers
+ */
+export type KaraokeMembers = {
+    /**
+     * Party Id
+     *
+     * 소속된 파티의 고유 ID
+     */
+    party_id: number;
+    /**
+     * User Id
+     *
+     * 파티 멤버의 고유 ID
+     */
+    user_id: number;
+    /**
+     * Pending
+     *
+     * 멤버 참여가 수락 대기중인지 여부
+     */
+    pending?: boolean;
+};
+
+/**
+ * KaraokePartis
+ */
+export type KaraokePartis = {
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Auction Id
+     *
+     * 연결된 경매의 고유 ID
+     */
+    auction_id: number;
+    /**
+     * Leader Id
+     *
+     * 파티 대표 유저의 고유ID
+     */
+    leader_id: number;
+    /**
+     * Dispersed
+     *
+     * 파티 해산 여부
+     */
+    dispersed?: boolean;
+};
+
+/**
+ * KaraokePartyDetail
+ */
+export type KaraokePartyDetail = {
+    /**
+     * Id
+     */
+    id: number;
+    /**
+     * Auction Id
+     */
+    auction_id: number;
+    /**
+     * Leader Id
+     */
+    leader_id: number;
+    /**
+     * Dispersed
+     */
+    dispersed: boolean;
+    leader: User;
+    /**
+     * Members
+     *
+     * 파티에 소속된 멤버 목록 (초대 수락 완료)
+     */
+    members: Array<User>;
+    /**
+     * Pending Members
+     *
+     * 파티에 초대되어 수락 대기중인 멤버 목록
+     */
+    pending_members: Array<User>;
+};
+
+/**
+ * KaraokeResponse
+ */
+export type KaraokeResponse = {
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Date
+     *
+     * 예약 일자
+     */
+    date: Date;
+    /**
+     * Time
+     *
+     * 예약 시간 (1~7교시, 점심시간 8)
+     */
+    time: number;
+    /**
+     * 현재 예약 상태
+     */
+    status?: KaraokeStatus;
+    /**
+     * Start Time
+     *
+     * 경매 시작 시간
+     */
+    start_time: Date;
+    /**
+     * End Time
+     *
+     * 경매 종료 시간
+     */
+    end_time: Date;
+    /**
+     * Min Point
+     *
+     * 최소 입찰가
+     */
+    min_point?: number;
+    /**
+     * Highest Bid
+     */
+    highest_bid?: number | null;
+};
+
+/**
+ * KaraokeStatus
+ */
+export const KaraokeStatus = {
+    PENDING: 'Pending',
+    IN_PROGRESS: 'In_Progress',
+    CONFIRMED: 'Confirmed'
+} as const;
+
+/**
+ * KaraokeStatus
+ */
+export type KaraokeStatus = typeof KaraokeStatus[keyof typeof KaraokeStatus];
+
+/**
+ * Karaokes
+ */
+export type Karaokes = {
+    /**
+     * Id
+     */
+    id?: number | null;
+    /**
+     * Date
+     *
+     * 예약 일자
+     */
+    date: Date;
+    /**
+     * Time
+     *
+     * 예약 시간 (1~7교시, 점심시간 8)
+     */
+    time: number;
+    /**
+     * 현재 예약 상태
+     */
+    status?: KaraokeStatus;
+    /**
+     * Start Time
+     *
+     * 경매 시작 시간
+     */
+    start_time: Date;
+    /**
+     * End Time
+     *
+     * 경매 종료 시간
+     */
+    end_time: Date;
+    /**
+     * Min Point
+     *
+     * 최소 입찰가
+     */
+    min_point?: number;
+};
+
+/**
  * LoginForm
  */
 export type LoginForm = {
@@ -213,7 +545,9 @@ export const PointHistoryType = {
     GRANT: 'grant',
     QUEST: 'quest',
     STAMP: 'stamp',
-    STAMP_BONUS: 'stamp_bonus'
+    STAMP_BONUS: 'stamp_bonus',
+    KARAOKE_BID: 'karaoke_bid',
+    KARAOKE_CANCEL: 'karaoke_cancel'
 } as const;
 
 /**
@@ -512,6 +846,104 @@ export type ResponseModelGetLimitResponse = {
 };
 
 /**
+ * ResponseModel[KaraokeBids]
+ */
+export type ResponseModelKaraokeBids = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: KaraokeBids;
+};
+
+/**
+ * ResponseModel[KaraokeFinalBidResponse]
+ */
+export type ResponseModelKaraokeFinalBidResponse = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: KaraokeFinalBidResponse;
+};
+
+/**
+ * ResponseModel[KaraokePartis]
+ */
+export type ResponseModelKaraokePartis = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: KaraokePartis;
+};
+
+/**
+ * ResponseModel[KaraokePartyDetail]
+ */
+export type ResponseModelKaraokePartyDetail = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: KaraokePartyDetail;
+};
+
+/**
+ * ResponseModel[KaraokeResponse]
+ */
+export type ResponseModelKaraokeResponse = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: KaraokeResponse;
+};
+
+/**
+ * ResponseModel[Karaokes]
+ */
+export type ResponseModelKaraokes = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: Karaokes;
+};
+
+/**
+ * ResponseModel[PointHistory]
+ */
+export type ResponseModelPointHistory = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * 응답 데이터
+     */
+    data: PointHistory;
+};
+
+/**
  * ResponseModel[Posts]
  */
 export type ResponseModelPosts = {
@@ -583,6 +1015,38 @@ export type ResponseModelInt = {
      * 응답 데이터
      */
     data: number;
+};
+
+/**
+ * ResponseModel[list[KaraokeMembers]]
+ */
+export type ResponseModelListKaraokeMembers = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<KaraokeMembers>;
+};
+
+/**
+ * ResponseModel[list[KaraokeResponse]]
+ */
+export type ResponseModelListKaraokeResponse = {
+    /**
+     * Success
+     */
+    success: boolean;
+    /**
+     * Data
+     *
+     * 응답 데이터
+     */
+    data: Array<KaraokeResponse>;
 };
 
 /**
@@ -792,7 +1256,7 @@ export type User = {
     /**
      * Permissions
      *
-     * 관리자 여부
+     * 사용자 권한
      */
     permissions?: number;
     /**
@@ -906,9 +1370,21 @@ export const UserPermission = {
      */
     VIEW_QUEST: 65536,
     /**
+     * JOIN_KARAOKE
+     */
+    JOIN_KARAOKE: 262144,
+    /**
+     * MANAGE_KARAOKE
+     */
+    MANAGE_KARAOKE: 524288,
+    /**
+     * VIEW_KARAOKE
+     */
+    VIEW_KARAOKE: 1048576,
+    /**
      * STUDENT
      */
-    STUDENT: 119232,
+    STUDENT: 1561024,
     /**
      * TEACHER
      */
@@ -916,7 +1392,7 @@ export const UserPermission = {
     /**
      * ADMIN
      */
-    ADMIN: 140816
+    ADMIN: 665104
 } as const;
 
 /**
@@ -1334,7 +1810,7 @@ export type DeductPointsPointDeductPostResponses = {
 
 export type DeductPointsPointDeductPostResponse = DeductPointsPointDeductPostResponses[keyof DeductPointsPointDeductPostResponses];
 
-export type PointHistoryPointHistoryGetData = {
+export type GetHistoryListPointHistoryGetData = {
     body?: never;
     path?: never;
     query?: {
@@ -1350,7 +1826,7 @@ export type PointHistoryPointHistoryGetData = {
     url: '/point/history';
 };
 
-export type PointHistoryPointHistoryGetErrors = {
+export type GetHistoryListPointHistoryGetErrors = {
     /**
      * 세션이 만료되었거나 유효하지 않음
      */
@@ -1365,16 +1841,58 @@ export type PointHistoryPointHistoryGetErrors = {
     422: HttpValidationError;
 };
 
-export type PointHistoryPointHistoryGetError = PointHistoryPointHistoryGetErrors[keyof PointHistoryPointHistoryGetErrors];
+export type GetHistoryListPointHistoryGetError = GetHistoryListPointHistoryGetErrors[keyof GetHistoryListPointHistoryGetErrors];
 
-export type PointHistoryPointHistoryGetResponses = {
+export type GetHistoryListPointHistoryGetResponses = {
     /**
      * 정상처리
      */
     200: ResponseModelListPointHistory;
 };
 
-export type PointHistoryPointHistoryGetResponse = PointHistoryPointHistoryGetResponses[keyof PointHistoryPointHistoryGetResponses];
+export type GetHistoryListPointHistoryGetResponse = GetHistoryListPointHistoryGetResponses[keyof GetHistoryListPointHistoryGetResponses];
+
+export type GetHistoryPointHistoryTargetIdGetData = {
+    body?: never;
+    path: {
+        /**
+         * Target Id
+         */
+        target_id: number;
+    };
+    query?: never;
+    url: '/point/history/{target_id}';
+};
+
+export type GetHistoryPointHistoryTargetIdGetErrors = {
+    /**
+     * 세션이 만료되었거나 유효하지 않음
+     */
+    401: ErrorResponse;
+    /**
+     * 포인트 기록을 볼 권한이 없습니다.
+     */
+    403: ErrorResponse;
+    /**
+     * 포인트 기록을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetHistoryPointHistoryTargetIdGetError = GetHistoryPointHistoryTargetIdGetErrors[keyof GetHistoryPointHistoryTargetIdGetErrors];
+
+export type GetHistoryPointHistoryTargetIdGetResponses = {
+    /**
+     * 정상처리
+     */
+    200: ResponseModelPointHistory;
+};
+
+export type GetHistoryPointHistoryTargetIdGetResponse = GetHistoryPointHistoryTargetIdGetResponses[keyof GetHistoryPointHistoryTargetIdGetResponses];
 
 export type GetStudentRankingPointRankingStudentGetData = {
     body?: never;
@@ -2333,3 +2851,578 @@ export type CreateStampStampPostResponses = {
 };
 
 export type CreateStampStampPostResponse = CreateStampStampPostResponses[keyof CreateStampStampPostResponses];
+
+export type GetKaraokeListData = {
+    body?: never;
+    path?: never;
+    query?: {
+        /**
+         * Date
+         */
+        date?: Date | null;
+    };
+    url: '/karaoke';
+};
+
+export type GetKaraokeListErrors = {
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetKaraokeListError = GetKaraokeListErrors[keyof GetKaraokeListErrors];
+
+export type GetKaraokeListResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    200: ResponseModelListKaraokeResponse;
+};
+
+export type GetKaraokeListResponse = GetKaraokeListResponses[keyof GetKaraokeListResponses];
+
+export type CreateKaraokeData = {
+    body: KaraokeCreate;
+    path?: never;
+    query?: never;
+    url: '/karaoke';
+};
+
+export type CreateKaraokeErrors = {
+    /**
+     * 잘못된 요청 데이터
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 중복된 경매 존재
+     */
+    409: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateKaraokeError = CreateKaraokeErrors[keyof CreateKaraokeErrors];
+
+export type CreateKaraokeResponses = {
+    /**
+     * 정상적으로 생성이 완료됨
+     */
+    201: ResponseModelKaraokes;
+};
+
+export type CreateKaraokeResponse = CreateKaraokeResponses[keyof CreateKaraokeResponses];
+
+export type DeleteKaraokeData = {
+    body?: never;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}';
+};
+
+export type DeleteKaraokeErrors = {
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DeleteKaraokeError = DeleteKaraokeErrors[keyof DeleteKaraokeErrors];
+
+export type DeleteKaraokeResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    204: void;
+};
+
+export type DeleteKaraokeResponse = DeleteKaraokeResponses[keyof DeleteKaraokeResponses];
+
+export type GetKaraokeData = {
+    body?: never;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}';
+};
+
+export type GetKaraokeErrors = {
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetKaraokeError = GetKaraokeErrors[keyof GetKaraokeErrors];
+
+export type GetKaraokeResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    200: ResponseModelKaraokeResponse;
+};
+
+export type GetKaraokeResponse = GetKaraokeResponses[keyof GetKaraokeResponses];
+
+export type CreateKaraokePartyData = {
+    body?: never;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}/party';
+};
+
+export type CreateKaraokePartyErrors = {
+    /**
+     * 파티 생성 조건 불만족 (이미 생성 등)
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateKaraokePartyError = CreateKaraokePartyErrors[keyof CreateKaraokePartyErrors];
+
+export type CreateKaraokePartyResponses = {
+    /**
+     * 정상적으로 파티 생성 완료
+     */
+    201: ResponseModelKaraokePartis;
+};
+
+export type CreateKaraokePartyResponse = CreateKaraokePartyResponses[keyof CreateKaraokePartyResponses];
+
+export type GetMyKaraokePartyData = {
+    body?: never;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}/party/me';
+};
+
+export type GetMyKaraokePartyErrors = {
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약을 찾을 수 없거나, 속한 파티가 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetMyKaraokePartyError = GetMyKaraokePartyErrors[keyof GetMyKaraokePartyErrors];
+
+export type GetMyKaraokePartyResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    200: ResponseModelKaraokePartyDetail;
+};
+
+export type GetMyKaraokePartyResponse = GetMyKaraokePartyResponses[keyof GetMyKaraokePartyResponses];
+
+export type CreateKaraokeBidData = {
+    body: KaraokeBidCreate;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}/bid';
+};
+
+export type CreateKaraokeBidErrors = {
+    /**
+     * 입찰 조건 불만족 (금액 부족 등)
+     */
+    400: ErrorResponse;
+    /**
+     * 포인트 부족
+     */
+    402: ErrorResponse;
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약/파티를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type CreateKaraokeBidError = CreateKaraokeBidErrors[keyof CreateKaraokeBidErrors];
+
+export type CreateKaraokeBidResponses = {
+    /**
+     * 정상적으로 입찰 완료
+     */
+    201: ResponseModelKaraokeBids;
+};
+
+export type CreateKaraokeBidResponse = CreateKaraokeBidResponses[keyof CreateKaraokeBidResponses];
+
+export type GetKaraokeFinalBidData = {
+    body?: never;
+    path: {
+        /**
+         * Karaoke Id
+         */
+        karaoke_id: number;
+    };
+    query?: never;
+    url: '/karaoke/{karaoke_id}/final-bid';
+};
+
+export type GetKaraokeFinalBidErrors = {
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 예약을 찾을 수 없거나, 입찰 기록이 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetKaraokeFinalBidError = GetKaraokeFinalBidErrors[keyof GetKaraokeFinalBidErrors];
+
+export type GetKaraokeFinalBidResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    200: ResponseModelKaraokeFinalBidResponse;
+};
+
+export type GetKaraokeFinalBidResponse = GetKaraokeFinalBidResponses[keyof GetKaraokeFinalBidResponses];
+
+export type DisperseKaraokePartyData = {
+    body?: never;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}';
+};
+
+export type DisperseKaraokePartyErrors = {
+    /**
+     * 이미 해산된 파티
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음 (파티장이 아님)
+     */
+    403: ErrorResponse;
+    /**
+     * 파티를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DisperseKaraokePartyError = DisperseKaraokePartyErrors[keyof DisperseKaraokePartyErrors];
+
+export type DisperseKaraokePartyResponses = {
+    /**
+     * 정상적으로 파티 해산 완료
+     */
+    204: void;
+};
+
+export type DisperseKaraokePartyResponse = DisperseKaraokePartyResponses[keyof DisperseKaraokePartyResponses];
+
+export type GetKaraokePartyData = {
+    body?: never;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}';
+};
+
+export type GetKaraokePartyErrors = {
+    /**
+     * 권한 없음 (파티에 소속되거나 초대받지 않음)
+     */
+    403: ErrorResponse;
+    /**
+     * 파티를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type GetKaraokePartyError = GetKaraokePartyErrors[keyof GetKaraokePartyErrors];
+
+export type GetKaraokePartyResponses = {
+    /**
+     * 정상적으로 처리됨.
+     */
+    200: ResponseModelKaraokePartyDetail;
+};
+
+export type GetKaraokePartyResponse = GetKaraokePartyResponses[keyof GetKaraokePartyResponses];
+
+export type LeaveKaraokePartyData = {
+    body?: never;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}/leave';
+};
+
+export type LeaveKaraokePartyErrors = {
+    /**
+     * 파티장은 탈퇴할 수 없음 (해산 API 사용 필요)
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음
+     */
+    403: ErrorResponse;
+    /**
+     * 파티를 찾을 수 없거나, 소속된 멤버가 아님
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type LeaveKaraokePartyError = LeaveKaraokePartyErrors[keyof LeaveKaraokePartyErrors];
+
+export type LeaveKaraokePartyResponses = {
+    /**
+     * 정상적으로 파티 탈퇴 완료
+     */
+    204: void;
+};
+
+export type LeaveKaraokePartyResponse = LeaveKaraokePartyResponses[keyof LeaveKaraokePartyResponses];
+
+export type KickKaraokePartyMemberData = {
+    body?: never;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+        /**
+         * User Id
+         */
+        user_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}/members/{user_id}';
+};
+
+export type KickKaraokePartyMemberErrors = {
+    /**
+     * 파티장은 강퇴할 수 없음
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음 (파티장이 아님)
+     */
+    403: ErrorResponse;
+    /**
+     * 파티, 유저 또는 파티 멤버를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type KickKaraokePartyMemberError = KickKaraokePartyMemberErrors[keyof KickKaraokePartyMemberErrors];
+
+export type KickKaraokePartyMemberResponses = {
+    /**
+     * 정상적으로 멤버 강퇴 완료
+     */
+    200: ResponseModelKaraokePartyDetail;
+};
+
+export type KickKaraokePartyMemberResponse = KickKaraokePartyMemberResponses[keyof KickKaraokePartyMemberResponses];
+
+export type InviteKaraokePartyMemberData = {
+    body: KaraokeInviteCreate;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}/invite';
+};
+
+export type InviteKaraokePartyMemberErrors = {
+    /**
+     * 해산된 파티이거나, 파티장 자신을 초대함
+     */
+    400: ErrorResponse;
+    /**
+     * 권한 없음 (파티장이 아님)
+     */
+    403: ErrorResponse;
+    /**
+     * 파티나 초대할 유저를 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * 이미 이 경매의 파티에 소속되었거나 초대된 유저
+     */
+    409: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type InviteKaraokePartyMemberError = InviteKaraokePartyMemberErrors[keyof InviteKaraokePartyMemberErrors];
+
+export type InviteKaraokePartyMemberResponses = {
+    /**
+     * 정상적으로 초대 완료
+     */
+    204: void;
+};
+
+export type InviteKaraokePartyMemberResponse = InviteKaraokePartyMemberResponses[keyof InviteKaraokePartyMemberResponses];
+
+export type GetMyKaraokePartyInvitesData = {
+    body?: never;
+    path?: never;
+    query?: never;
+    url: '/karaoke/party/invites/me';
+};
+
+export type GetMyKaraokePartyInvitesResponses = {
+    /**
+     * Successful Response
+     */
+    200: ResponseModelListKaraokeMembers;
+};
+
+export type GetMyKaraokePartyInvitesResponse = GetMyKaraokePartyInvitesResponses[keyof GetMyKaraokePartyInvitesResponses];
+
+export type DecideKaraokePartyInviteData = {
+    body: KaraokeInviteAction;
+    path: {
+        /**
+         * Party Id
+         */
+        party_id: number;
+    };
+    query?: never;
+    url: '/karaoke/party/{party_id}/action';
+};
+
+export type DecideKaraokePartyInviteErrors = {
+    /**
+     * 대기 중인 초대장을 찾을 수 없음
+     */
+    404: ErrorResponse;
+    /**
+     * Validation Error
+     */
+    422: HttpValidationError;
+};
+
+export type DecideKaraokePartyInviteError = DecideKaraokePartyInviteErrors[keyof DecideKaraokePartyInviteErrors];
+
+export type DecideKaraokePartyInviteResponses = {
+    /**
+     * 정상적으로 수락/거절 완료
+     */
+    200: ResponseModelBool;
+};
+
+export type DecideKaraokePartyInviteResponse = DecideKaraokePartyInviteResponses[keyof DecideKaraokePartyInviteResponses];

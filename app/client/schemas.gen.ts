@@ -208,6 +208,452 @@ export const HTTPValidationErrorSchema = {
     title: 'HTTPValidationError'
 } as const;
 
+export const KaraokeBidCreateSchema = {
+    properties: {
+        amount: {
+            type: 'integer',
+            exclusiveMinimum: 0,
+            title: 'Amount',
+            description: '입찰 금액'
+        }
+    },
+    type: 'object',
+    required: [
+        'amount'
+    ],
+    title: 'KaraokeBidCreate'
+} as const;
+
+export const KaraokeBidsSchema = {
+    properties: {
+        id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Id'
+        },
+        auction_id: {
+            type: 'integer',
+            title: 'Auction Id',
+            description: '연결된 경매의 고유 ID'
+        },
+        bidder_id: {
+            type: 'integer',
+            title: 'Bidder Id',
+            description: '입찰한 유저의 고유ID'
+        },
+        party_id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Party Id',
+            description: '입찰한 유저의 파티 고유 ID'
+        },
+        amount: {
+            type: 'integer',
+            title: 'Amount',
+            description: '입찰 금액'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At',
+            description: '입찰된 시간'
+        }
+    },
+    type: 'object',
+    required: [
+        'auction_id',
+        'bidder_id',
+        'party_id',
+        'amount'
+    ],
+    title: 'KaraokeBids'
+} as const;
+
+export const KaraokeCreateSchema = {
+    properties: {
+        date: {
+            type: 'string',
+            format: 'date',
+            title: 'Date',
+            description: '일자'
+        },
+        time: {
+            type: 'integer',
+            maximum: 8,
+            minimum: 1,
+            title: 'Time',
+            description: '시간 (1~7교시, 점심시간 8)'
+        },
+        start_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Time',
+            description: '경매 시작 시간'
+        },
+        end_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Time',
+            description: '경매 종료 시간, \'start_time\' 시간보다 앞서 있으면 안됩니다.'
+        },
+        min_point: {
+            type: 'integer',
+            title: 'Min Point',
+            description: '최소 입찰가',
+            default: 0
+        }
+    },
+    type: 'object',
+    required: [
+        'date',
+        'time',
+        'start_time',
+        'end_time'
+    ],
+    title: 'KaraokeCreate'
+} as const;
+
+export const KaraokeFinalBidResponseSchema = {
+    properties: {
+        id: {
+            type: 'integer',
+            title: 'Id'
+        },
+        auction_id: {
+            type: 'integer',
+            title: 'Auction Id'
+        },
+        party_id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Party Id'
+        },
+        amount: {
+            type: 'integer',
+            title: 'Amount'
+        },
+        created_at: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Created At'
+        },
+        bidder: {
+            $ref: '#/components/schemas/User'
+        }
+    },
+    type: 'object',
+    required: [
+        'id',
+        'auction_id',
+        'party_id',
+        'amount',
+        'created_at',
+        'bidder'
+    ],
+    title: 'KaraokeFinalBidResponse'
+} as const;
+
+export const KaraokeInviteActionSchema = {
+    properties: {
+        accept: {
+            type: 'boolean',
+            title: 'Accept',
+            description: '초대 수락 여부'
+        }
+    },
+    type: 'object',
+    required: [
+        'accept'
+    ],
+    title: 'KaraokeInviteAction'
+} as const;
+
+export const KaraokeInviteCreateSchema = {
+    properties: {
+        user_id: {
+            type: 'integer',
+            title: 'User Id',
+            description: '초대할 유저의 ID'
+        }
+    },
+    type: 'object',
+    required: [
+        'user_id'
+    ],
+    title: 'KaraokeInviteCreate'
+} as const;
+
+export const KaraokeMembersSchema = {
+    properties: {
+        party_id: {
+            type: 'integer',
+            title: 'Party Id',
+            description: '소속된 파티의 고유 ID'
+        },
+        user_id: {
+            type: 'integer',
+            title: 'User Id',
+            description: '파티 멤버의 고유 ID'
+        },
+        pending: {
+            type: 'boolean',
+            title: 'Pending',
+            description: '멤버 참여가 수락 대기중인지 여부',
+            default: true
+        }
+    },
+    type: 'object',
+    required: [
+        'party_id',
+        'user_id'
+    ],
+    title: 'KaraokeMembers'
+} as const;
+
+export const KaraokePartisSchema = {
+    properties: {
+        id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Id'
+        },
+        auction_id: {
+            type: 'integer',
+            title: 'Auction Id',
+            description: '연결된 경매의 고유 ID'
+        },
+        leader_id: {
+            type: 'integer',
+            title: 'Leader Id',
+            description: '파티 대표 유저의 고유ID'
+        },
+        dispersed: {
+            type: 'boolean',
+            title: 'Dispersed',
+            description: '파티 해산 여부',
+            default: false
+        }
+    },
+    type: 'object',
+    required: [
+        'auction_id',
+        'leader_id'
+    ],
+    title: 'KaraokePartis'
+} as const;
+
+export const KaraokePartyDetailSchema = {
+    properties: {
+        id: {
+            type: 'integer',
+            title: 'Id'
+        },
+        auction_id: {
+            type: 'integer',
+            title: 'Auction Id'
+        },
+        leader_id: {
+            type: 'integer',
+            title: 'Leader Id'
+        },
+        dispersed: {
+            type: 'boolean',
+            title: 'Dispersed'
+        },
+        leader: {
+            $ref: '#/components/schemas/User'
+        },
+        members: {
+            items: {
+                $ref: '#/components/schemas/User'
+            },
+            type: 'array',
+            title: 'Members',
+            description: '파티에 소속된 멤버 목록 (초대 수락 완료)'
+        },
+        pending_members: {
+            items: {
+                $ref: '#/components/schemas/User'
+            },
+            type: 'array',
+            title: 'Pending Members',
+            description: '파티에 초대되어 수락 대기중인 멤버 목록'
+        }
+    },
+    type: 'object',
+    required: [
+        'id',
+        'auction_id',
+        'leader_id',
+        'dispersed',
+        'leader',
+        'members',
+        'pending_members'
+    ],
+    title: 'KaraokePartyDetail'
+} as const;
+
+export const KaraokeResponseSchema = {
+    properties: {
+        id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Id'
+        },
+        date: {
+            type: 'string',
+            format: 'date',
+            title: 'Date',
+            description: '예약 일자'
+        },
+        time: {
+            type: 'integer',
+            title: 'Time',
+            description: '예약 시간 (1~7교시, 점심시간 8)'
+        },
+        status: {
+            $ref: '#/components/schemas/KaraokeStatus',
+            description: '현재 예약 상태',
+            default: 'Pending'
+        },
+        start_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Time',
+            description: '경매 시작 시간'
+        },
+        end_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Time',
+            description: '경매 종료 시간'
+        },
+        min_point: {
+            type: 'integer',
+            title: 'Min Point',
+            description: '최소 입찰가',
+            default: 0
+        },
+        highest_bid: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Highest Bid'
+        }
+    },
+    type: 'object',
+    required: [
+        'date',
+        'time',
+        'start_time',
+        'end_time'
+    ],
+    title: 'KaraokeResponse'
+} as const;
+
+export const KaraokeStatusSchema = {
+    type: 'string',
+    enum: [
+        'Pending',
+        'In_Progress',
+        'Confirmed'
+    ],
+    title: 'KaraokeStatus'
+} as const;
+
+export const KaraokesSchema = {
+    properties: {
+        id: {
+            anyOf: [
+                {
+                    type: 'integer'
+                },
+                {
+                    type: 'null'
+                }
+            ],
+            title: 'Id'
+        },
+        date: {
+            type: 'string',
+            format: 'date',
+            title: 'Date',
+            description: '예약 일자'
+        },
+        time: {
+            type: 'integer',
+            title: 'Time',
+            description: '예약 시간 (1~7교시, 점심시간 8)'
+        },
+        status: {
+            $ref: '#/components/schemas/KaraokeStatus',
+            description: '현재 예약 상태',
+            default: 'Pending'
+        },
+        start_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'Start Time',
+            description: '경매 시작 시간'
+        },
+        end_time: {
+            type: 'string',
+            format: 'date-time',
+            title: 'End Time',
+            description: '경매 종료 시간'
+        },
+        min_point: {
+            type: 'integer',
+            title: 'Min Point',
+            description: '최소 입찰가',
+            default: 0
+        }
+    },
+    type: 'object',
+    required: [
+        'date',
+        'time',
+        'start_time',
+        'end_time'
+    ],
+    title: 'Karaokes'
+} as const;
+
 export const LoginFormSchema = {
     properties: {
         id: {
@@ -302,7 +748,9 @@ export const PointHistoryTypeSchema = {
         'grant',
         'quest',
         'stamp',
-        'stamp_bonus'
+        'stamp_bonus',
+        'karaoke_bid',
+        'karaoke_cancel'
     ],
     title: 'PointHistoryType'
 } as const;
@@ -710,6 +1158,139 @@ export const ResponseModel_GetLimitResponse_Schema = {
     title: 'ResponseModel[GetLimitResponse]'
 } as const;
 
+export const ResponseModel_KaraokeBids_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/KaraokeBids',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[KaraokeBids]'
+} as const;
+
+export const ResponseModel_KaraokeFinalBidResponse_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/KaraokeFinalBidResponse',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[KaraokeFinalBidResponse]'
+} as const;
+
+export const ResponseModel_KaraokePartis_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/KaraokePartis',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[KaraokePartis]'
+} as const;
+
+export const ResponseModel_KaraokePartyDetail_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/KaraokePartyDetail',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[KaraokePartyDetail]'
+} as const;
+
+export const ResponseModel_KaraokeResponse_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/KaraokeResponse',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[KaraokeResponse]'
+} as const;
+
+export const ResponseModel_Karaokes_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/Karaokes',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[Karaokes]'
+} as const;
+
+export const ResponseModel_PointHistory_Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            $ref: '#/components/schemas/PointHistory',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[PointHistory]'
+} as const;
+
 export const ResponseModel_Posts_Schema = {
     properties: {
         success: {
@@ -805,6 +1386,52 @@ export const ResponseModel_int_Schema = {
         'data'
     ],
     title: 'ResponseModel[int]'
+} as const;
+
+export const ResponseModel_list_KaraokeMembers__Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            items: {
+                $ref: '#/components/schemas/KaraokeMembers'
+            },
+            type: 'array',
+            title: 'Data',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[list[KaraokeMembers]]'
+} as const;
+
+export const ResponseModel_list_KaraokeResponse__Schema = {
+    properties: {
+        success: {
+            type: 'boolean',
+            title: 'Success'
+        },
+        data: {
+            items: {
+                $ref: '#/components/schemas/KaraokeResponse'
+            },
+            type: 'array',
+            title: 'Data',
+            description: '응답 데이터'
+        }
+    },
+    type: 'object',
+    required: [
+        'success',
+        'data'
+    ],
+    title: 'ResponseModel[list[KaraokeResponse]]'
 } as const;
 
 export const ResponseModel_list_PointHistory__Schema = {
@@ -1084,7 +1711,7 @@ export const UserSchema = {
         permissions: {
             type: 'integer',
             title: 'Permissions',
-            description: '관리자 여부',
+            description: '사용자 권한',
             default: 0
         },
         history_type: {
@@ -1136,9 +1763,12 @@ export const UserPermissionSchema = {
         16384,
         32768,
         65536,
-        119232,
+        262144,
+        524288,
+        1048576,
+        1561024,
         182730,
-        140816
+        665104
     ],
     title: 'UserPermission',
     description: '유저 권한 IntFlag.\n작명시 `동사_목적`으로 작성하며, 대문자로만 작성한다.\n예) 포인트 관리 -> MANAGE_POINT',
@@ -1167,6 +1797,9 @@ export const UserPermissionSchema = {
         'VIEW_POST',
         'VIEW_STAMP',
         'VIEW_QUEST',
+        'JOIN_KARAOKE',
+        'MANAGE_KARAOKE',
+        'VIEW_KARAOKE',
         'STUDENT',
         'TEACHER',
         'ADMIN'
@@ -1196,6 +1829,9 @@ export const UserPermissionSchema = {
         'VIEW_POST',
         'VIEW_STAMP',
         'VIEW_QUEST',
+        'JOIN_KARAOKE',
+        'MANAGE_KARAOKE',
+        'VIEW_KARAOKE',
         'STUDENT',
         'TEACHER',
         'ADMIN'
