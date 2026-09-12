@@ -67,7 +67,7 @@ export const zKaraokeBids = z.object({
     bidder_id: z.int(),
     party_id: z.int().nullable(),
     amount: z.int(),
-    created_at: z.iso.datetime().optional()
+    created_at: z.iso.datetime({ offset: true }).optional()
 });
 
 /**
@@ -76,8 +76,8 @@ export const zKaraokeBids = z.object({
 export const zKaraokeCreate = z.object({
     date: z.iso.date(),
     time: z.int().gte(1).lte(8),
-    start_time: z.iso.datetime(),
-    end_time: z.iso.datetime(),
+    start_time: z.iso.datetime({ offset: true }),
+    end_time: z.iso.datetime({ offset: true }),
     min_point: z.int().optional().default(0)
 });
 
@@ -131,8 +131,8 @@ export const zKaraokeResponse = z.object({
     date: z.iso.date(),
     time: z.int(),
     status: zKaraokeStatus.optional().default('Pending'),
-    start_time: z.iso.datetime(),
-    end_time: z.iso.datetime(),
+    start_time: z.iso.datetime({ offset: true }),
+    end_time: z.iso.datetime({ offset: true }),
     min_point: z.int().optional().default(0),
     highest_bid: z.int().nullish()
 });
@@ -145,8 +145,8 @@ export const zKaraokes = z.object({
     date: z.iso.date(),
     time: z.int(),
     status: zKaraokeStatus.optional().default('Pending'),
-    start_time: z.iso.datetime(),
-    end_time: z.iso.datetime(),
+    start_time: z.iso.datetime({ offset: true }),
+    end_time: z.iso.datetime({ offset: true }),
     min_point: z.int().optional().default(0)
 });
 
@@ -184,7 +184,7 @@ export const zPointHistory = z.object({
     reason: z.string(),
     memo: z.string().nullish(),
     type: zPointHistoryType.nullish(),
-    created_at: z.iso.datetime().optional()
+    created_at: z.iso.datetime({ offset: true }).optional()
 });
 
 /**
@@ -220,8 +220,8 @@ export const zPosts = z.object({
     id: z.int().nullish(),
     title: z.string(),
     views: z.int().optional().default(0),
-    created_at: z.iso.datetime().optional(),
-    updated_at: z.iso.datetime().optional(),
+    created_at: z.iso.datetime({ offset: true }).optional(),
+    updated_at: z.iso.datetime({ offset: true }).optional(),
     author_id: z.int()
 });
 
@@ -232,7 +232,7 @@ export const zQuestOperation = z.object({
     title: z.string(),
     description: z.string(),
     reward: z.int().gt(0),
-    end_date: z.iso.datetime(),
+    end_date: z.iso.datetime({ offset: true }),
     max_repeat: z.int().gte(1)
 });
 
@@ -243,7 +243,7 @@ export const zQuestUpdate = z.object({
     title: z.string().nullish(),
     description: z.string().nullish(),
     reward: z.int().gt(0).nullish(),
-    end_date: z.iso.datetime().nullish(),
+    end_date: z.iso.datetime({ offset: true }).nullish(),
     max_repeat: z.int().gte(1).nullish()
 });
 
@@ -255,9 +255,9 @@ export const zQuests = z.object({
     title: z.string(),
     description: z.string(),
     reward: z.int(),
-    end_date: z.iso.datetime(),
+    end_date: z.iso.datetime({ offset: true }),
     max_repeat: z.int().optional().default(1),
-    created_at: z.iso.datetime().optional(),
+    created_at: z.iso.datetime({ offset: true }).optional(),
     author_id: z.int()
 });
 
@@ -439,7 +439,7 @@ export const zStampsList = z.object({
     stamp: z.string(),
     name: z.string(),
     have: z.boolean(),
-    time: z.iso.datetime().nullable()
+    time: z.iso.datetime({ offset: true }).nullable()
 });
 
 /**
@@ -533,7 +533,7 @@ export const zKaraokeFinalBidResponse = z.object({
     auction_id: z.int(),
     party_id: z.int().nullable(),
     amount: z.int(),
-    created_at: z.iso.datetime(),
+    created_at: z.iso.datetime({ offset: true }),
     bidder: zUser
 });
 
