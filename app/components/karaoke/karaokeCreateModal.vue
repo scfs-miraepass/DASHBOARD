@@ -51,6 +51,10 @@ const onSubmit = async () => {
         toast.add({ title: '종료 시간을 확인해주세요.', description: '종료 시간은 시작 시간보다 늦어야 합니다.', color: 'error' })
         return
     }
+    if (form.value.minPoint % 100 !== 0) {
+        toast.add({ title: '최소 입찰가를 확인해주세요.', description: '최소 입찰가는 100포인트 단위로 입력해야 합니다.', color: 'error' })
+        return
+    }
 
     loading.value = true
 
@@ -116,8 +120,8 @@ const onSubmit = async () => {
                         <UInput v-model="form.endTime" type="datetime-local" class="w-full" />
                     </UFormField>
                 </div>
-                <UFormField label="최소 입찰가" name="min_point">
-                    <UInput v-model="form.minPoint" type="number" min="0" placeholder="미입력 시 0" class="w-full" />
+                <UFormField label="최소 입찰가" name="min_point" description="100포인트 단위로 입력해주세요.">
+                    <UInput v-model="form.minPoint" type="number" min="0" step="100" placeholder="미입력 시 0" class="w-full" />
                 </UFormField>
             </form>
         </template>
