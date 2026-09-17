@@ -4,8 +4,8 @@ import * as z from 'zod';
 
 import type { Client, ClientMeta, Options as Options2, RequestResult, TDataShape } from './client';
 import { client } from './client.gen';
-import type { ChangePasswordAuthPasswordPutData, ChangePasswordAuthPasswordPutErrors, ChangePasswordAuthPasswordPutResponses, ChangePasswordNewAuthPasswordPostData, ChangePasswordNewAuthPasswordPostErrors, ChangePasswordNewAuthPasswordPostResponses, CheckPasswordExistsAuthPasswordExistsUserIdGetData, CheckPasswordExistsAuthPasswordExistsUserIdGetErrors, CheckPasswordExistsAuthPasswordExistsUserIdGetResponses, CompleteQuestQuestQuestIdCompletePostData, CompleteQuestQuestQuestIdCompletePostErrors, CompleteQuestQuestQuestIdCompletePostResponses, CreatePostPostsPostData, CreatePostPostsPostErrors, CreatePostPostsPostResponses, CreateQuestQuestCreatePostData, CreateQuestQuestCreatePostErrors, CreateQuestQuestCreatePostResponses, CreateStampStampPostData, CreateStampStampPostErrors, CreateStampStampPostResponses, CreateUserAdminUserPostData, CreateUserAdminUserPostErrors, CreateUserAdminUserPostResponses, DeductPointsPointDeductPostData, DeductPointsPointDeductPostErrors, DeductPointsPointDeductPostResponses, DeletePostPostsPostIdDeleteData, DeletePostPostsPostIdDeleteErrors, DeletePostPostsPostIdDeleteResponses, DeleteQuestQuestQuestIdDeleteData, DeleteQuestQuestQuestIdDeleteErrors, DeleteQuestQuestQuestIdDeleteResponses, DeleteUserAdminUsersUserIdDeleteData, DeleteUserAdminUsersUserIdDeleteErrors, DeleteUserAdminUsersUserIdDeleteResponses, GetCurrentUserAuthGetData, GetCurrentUserAuthGetErrors, GetCurrentUserAuthGetResponses, GetLimitPointLimitTargetUserIdGetData, GetLimitPointLimitTargetUserIdGetErrors, GetLimitPointLimitTargetUserIdGetResponses, GetLimitSessionPointLimitGetData, GetLimitSessionPointLimitGetErrors, GetLimitSessionPointLimitGetResponses, GetPointBalancePointTargetUserIdGetData, GetPointBalancePointTargetUserIdGetErrors, GetPointBalancePointTargetUserIdGetResponses, GetPostPostsPostIdGetData, GetPostPostsPostIdGetErrors, GetPostPostsPostIdGetResponses, GetPostsPostsGetData, GetPostsPostsGetErrors, GetPostsPostsGetResponses, GetQuestQuestQuestIdGetData, GetQuestQuestQuestIdGetErrors, GetQuestQuestQuestIdGetResponses, GetStudentRankingPointRankingStudentGetData, GetStudentRankingPointRankingStudentGetErrors, GetStudentRankingPointRankingStudentGetResponses, GetTeacherRankingPointRankingTeacherGetData, GetTeacherRankingPointRankingTeacherGetErrors, GetTeacherRankingPointRankingTeacherGetResponses, GetUsersAdminUsersGetData, GetUsersAdminUsersGetErrors, GetUsersAdminUsersGetResponses, GetUserStampsStampGetData, GetUserStampsStampGetErrors, GetUserStampsStampGetResponses, GrantPointsPointGrantPostData, GrantPointsPointGrantPostErrors, GrantPointsPointGrantPostResponses, ListQuestsQuestGetData, ListQuestsQuestGetErrors, ListQuestsQuestGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, LogoutAuthLogoutPostData, LogoutAuthLogoutPostResponses, PointHistoryPointHistoryGetData, PointHistoryPointHistoryGetErrors, PointHistoryPointHistoryGetResponses, ReadRootGetData, ReadRootGetErrors, ReadRootGetResponses, ResetUserPasswordAdminUsersUserIdPasswordPatchData, ResetUserPasswordAdminUsersUserIdPasswordPatchErrors, ResetUserPasswordAdminUsersUserIdPasswordPatchResponses, SearchSearchGetData, SearchSearchGetErrors, SearchSearchGetResponses, TeacherGetByNameSearchTeacherUserNameGetData, TeacherGetByNameSearchTeacherUserNameGetErrors, TeacherGetByNameSearchTeacherUserNameGetResponses, UpdatePostPostsPostIdPatchData, UpdatePostPostsPostIdPatchErrors, UpdatePostPostsPostIdPatchResponses, UpdateQuestQuestQuestIdPutData, UpdateQuestQuestQuestIdPutErrors, UpdateQuestQuestQuestIdPutResponses, UpdateUserAdminUsersUserIdPatchData, UpdateUserAdminUsersUserIdPatchErrors, UpdateUserAdminUsersUserIdPatchResponses, UpdateUsersPointAdminPointPostData, UpdateUsersPointAdminPointPostErrors, UpdateUsersPointAdminPointPostResponses } from './types.gen';
-import { zChangePasswordAuthPasswordPutBody, zChangePasswordAuthPasswordPutResponse, zChangePasswordNewAuthPasswordPostBody, zChangePasswordNewAuthPasswordPostResponse, zCheckPasswordExistsAuthPasswordExistsUserIdGetPath, zCheckPasswordExistsAuthPasswordExistsUserIdGetQuery, zCheckPasswordExistsAuthPasswordExistsUserIdGetResponse, zCompleteQuestQuestQuestIdCompletePostPath, zCompleteQuestQuestQuestIdCompletePostResponse, zCreatePostPostsPostBody, zCreatePostPostsPostResponse, zCreateQuestQuestCreatePostBody, zCreateQuestQuestCreatePostResponse, zCreateStampStampPostBody, zCreateStampStampPostResponse, zCreateUserAdminUserPostBody, zCreateUserAdminUserPostResponse, zDeductPointsPointDeductPostBody, zDeductPointsPointDeductPostResponse, zDeletePostPostsPostIdDeletePath, zDeletePostPostsPostIdDeleteResponse, zDeleteQuestQuestQuestIdDeletePath, zDeleteQuestQuestQuestIdDeleteResponse, zDeleteUserAdminUsersUserIdDeletePath, zDeleteUserAdminUsersUserIdDeleteResponse, zGetCurrentUserAuthGetResponse, zGetLimitPointLimitTargetUserIdGetPath, zGetLimitPointLimitTargetUserIdGetResponse, zGetLimitSessionPointLimitGetResponse, zGetPointBalancePointTargetUserIdGetPath, zGetPointBalancePointTargetUserIdGetResponse, zGetPostPostsPostIdGetPath, zGetPostPostsPostIdGetResponse, zGetPostsPostsGetQuery, zGetPostsPostsGetResponse, zGetQuestQuestQuestIdGetPath, zGetQuestQuestQuestIdGetResponse, zGetStudentRankingPointRankingStudentGetQuery, zGetStudentRankingPointRankingStudentGetResponse, zGetTeacherRankingPointRankingTeacherGetQuery, zGetTeacherRankingPointRankingTeacherGetResponse, zGetUsersAdminUsersGetQuery, zGetUsersAdminUsersGetResponse, zGetUserStampsStampGetResponse, zGrantPointsPointGrantPostBody, zGrantPointsPointGrantPostResponse, zListQuestsQuestGetQuery, zListQuestsQuestGetResponse, zLoginAuthLoginPostBody, zLoginAuthLoginPostResponse, zLogoutAuthLogoutPostResponse, zPointHistoryPointHistoryGetQuery, zPointHistoryPointHistoryGetResponse, zReadRootGetQuery, zResetUserPasswordAdminUsersUserIdPasswordPatchPath, zResetUserPasswordAdminUsersUserIdPasswordPatchResponse, zSearchSearchGetQuery, zSearchSearchGetResponse, zTeacherGetByNameSearchTeacherUserNameGetPath, zTeacherGetByNameSearchTeacherUserNameGetResponse, zUpdatePostPostsPostIdPatchBody, zUpdatePostPostsPostIdPatchPath, zUpdatePostPostsPostIdPatchResponse, zUpdateQuestQuestQuestIdPutBody, zUpdateQuestQuestQuestIdPutPath, zUpdateQuestQuestQuestIdPutResponse, zUpdateUserAdminUsersUserIdPatchBody, zUpdateUserAdminUsersUserIdPatchPath, zUpdateUserAdminUsersUserIdPatchResponse, zUpdateUsersPointAdminPointPostBody, zUpdateUsersPointAdminPointPostResponse } from './zod.gen';
+import type { ChangePasswordAuthPasswordPutData, ChangePasswordAuthPasswordPutErrors, ChangePasswordAuthPasswordPutResponses, ChangePasswordNewAuthPasswordPostData, ChangePasswordNewAuthPasswordPostErrors, ChangePasswordNewAuthPasswordPostResponses, CheckPasswordExistsAuthPasswordExistsUserIdGetData, CheckPasswordExistsAuthPasswordExistsUserIdGetErrors, CheckPasswordExistsAuthPasswordExistsUserIdGetResponses, CompleteQuestQuestQuestIdCompletePostData, CompleteQuestQuestQuestIdCompletePostErrors, CompleteQuestQuestQuestIdCompletePostResponses, CreateKaraokeBidData, CreateKaraokeBidErrors, CreateKaraokeBidResponses, CreateKaraokeData, CreateKaraokeErrors, CreateKaraokePartyData, CreateKaraokePartyErrors, CreateKaraokePartyResponses, CreateKaraokeResponses, CreatePostPostsPostData, CreatePostPostsPostErrors, CreatePostPostsPostResponses, CreateQuestQuestCreatePostData, CreateQuestQuestCreatePostErrors, CreateQuestQuestCreatePostResponses, CreateStampStampPostData, CreateStampStampPostErrors, CreateStampStampPostResponses, CreateUserAdminUserPostData, CreateUserAdminUserPostErrors, CreateUserAdminUserPostResponses, DecideKaraokePartyInviteData, DecideKaraokePartyInviteErrors, DecideKaraokePartyInviteResponses, DeductPointsPointDeductPostData, DeductPointsPointDeductPostErrors, DeductPointsPointDeductPostResponses, DeleteKaraokeData, DeleteKaraokeErrors, DeleteKaraokeResponses, DeletePostPostsPostIdDeleteData, DeletePostPostsPostIdDeleteErrors, DeletePostPostsPostIdDeleteResponses, DeleteQuestQuestQuestIdDeleteData, DeleteQuestQuestQuestIdDeleteErrors, DeleteQuestQuestQuestIdDeleteResponses, DeleteUserAdminUsersUserIdDeleteData, DeleteUserAdminUsersUserIdDeleteErrors, DeleteUserAdminUsersUserIdDeleteResponses, DisperseKaraokePartyData, DisperseKaraokePartyErrors, DisperseKaraokePartyResponses, GetCurrentUserAuthGetData, GetCurrentUserAuthGetErrors, GetCurrentUserAuthGetResponses, GetHistoryListPointHistoryGetData, GetHistoryListPointHistoryGetErrors, GetHistoryListPointHistoryGetResponses, GetHistoryPointHistoryTargetIdGetData, GetHistoryPointHistoryTargetIdGetErrors, GetHistoryPointHistoryTargetIdGetResponses, GetKaraokeData, GetKaraokeErrors, GetKaraokeFinalBidData, GetKaraokeFinalBidErrors, GetKaraokeFinalBidResponses, GetKaraokeListData, GetKaraokeListErrors, GetKaraokeListResponses, GetKaraokePartyData, GetKaraokePartyErrors, GetKaraokePartyResponses, GetKaraokeResponses, GetLimitPointLimitTargetUserIdGetData, GetLimitPointLimitTargetUserIdGetErrors, GetLimitPointLimitTargetUserIdGetResponses, GetLimitSessionPointLimitGetData, GetLimitSessionPointLimitGetErrors, GetLimitSessionPointLimitGetResponses, GetMyKaraokePartyData, GetMyKaraokePartyErrors, GetMyKaraokePartyInvitesData, GetMyKaraokePartyInvitesResponses, GetMyKaraokePartyResponses, GetPointBalancePointTargetUserIdGetData, GetPointBalancePointTargetUserIdGetErrors, GetPointBalancePointTargetUserIdGetResponses, GetPostPostsPostIdGetData, GetPostPostsPostIdGetErrors, GetPostPostsPostIdGetResponses, GetPostsPostsGetData, GetPostsPostsGetErrors, GetPostsPostsGetResponses, GetQuestQuestQuestIdGetData, GetQuestQuestQuestIdGetErrors, GetQuestQuestQuestIdGetResponses, GetStudentRankingPointRankingStudentGetData, GetStudentRankingPointRankingStudentGetErrors, GetStudentRankingPointRankingStudentGetResponses, GetTeacherRankingPointRankingTeacherGetData, GetTeacherRankingPointRankingTeacherGetErrors, GetTeacherRankingPointRankingTeacherGetResponses, GetUsersAdminUsersGetData, GetUsersAdminUsersGetErrors, GetUsersAdminUsersGetResponses, GetUserStampsStampGetData, GetUserStampsStampGetErrors, GetUserStampsStampGetResponses, GrantPointsPointGrantPostData, GrantPointsPointGrantPostErrors, GrantPointsPointGrantPostResponses, InviteKaraokePartyMemberData, InviteKaraokePartyMemberErrors, InviteKaraokePartyMemberResponses, KickKaraokePartyMemberData, KickKaraokePartyMemberErrors, KickKaraokePartyMemberResponses, LeaveKaraokePartyData, LeaveKaraokePartyErrors, LeaveKaraokePartyResponses, ListQuestsQuestGetData, ListQuestsQuestGetErrors, ListQuestsQuestGetResponses, LoginAuthLoginPostData, LoginAuthLoginPostErrors, LoginAuthLoginPostResponses, LogoutAuthLogoutPostData, LogoutAuthLogoutPostResponses, ReadRootGetData, ReadRootGetErrors, ReadRootGetResponses, ResetUserPasswordAdminUsersUserIdPasswordPatchData, ResetUserPasswordAdminUsersUserIdPasswordPatchErrors, ResetUserPasswordAdminUsersUserIdPasswordPatchResponses, SearchSearchGetData, SearchSearchGetErrors, SearchSearchGetResponses, TeacherGetByNameSearchTeacherUserNameGetData, TeacherGetByNameSearchTeacherUserNameGetErrors, TeacherGetByNameSearchTeacherUserNameGetResponses, UpdatePostPostsPostIdPatchData, UpdatePostPostsPostIdPatchErrors, UpdatePostPostsPostIdPatchResponses, UpdateQuestQuestQuestIdPutData, UpdateQuestQuestQuestIdPutErrors, UpdateQuestQuestQuestIdPutResponses, UpdateUserAdminUsersUserIdPatchData, UpdateUserAdminUsersUserIdPatchErrors, UpdateUserAdminUsersUserIdPatchResponses, UpdateUsersPointAdminPointPostData, UpdateUsersPointAdminPointPostErrors, UpdateUsersPointAdminPointPostResponses } from './types.gen';
+import { zChangePasswordAuthPasswordPutBody, zChangePasswordAuthPasswordPutResponse, zChangePasswordNewAuthPasswordPostBody, zChangePasswordNewAuthPasswordPostResponse, zCheckPasswordExistsAuthPasswordExistsUserIdGetPath, zCheckPasswordExistsAuthPasswordExistsUserIdGetQuery, zCheckPasswordExistsAuthPasswordExistsUserIdGetResponse, zCompleteQuestQuestQuestIdCompletePostPath, zCompleteQuestQuestQuestIdCompletePostResponse, zCreateKaraokeBidBody, zCreateKaraokeBidPath, zCreateKaraokeBidResponse, zCreateKaraokeBody, zCreateKaraokePartyPath, zCreateKaraokePartyResponse, zCreateKaraokeResponse, zCreatePostPostsPostBody, zCreatePostPostsPostResponse, zCreateQuestQuestCreatePostBody, zCreateQuestQuestCreatePostResponse, zCreateStampStampPostBody, zCreateStampStampPostResponse, zCreateUserAdminUserPostBody, zCreateUserAdminUserPostResponse, zDecideKaraokePartyInviteBody, zDecideKaraokePartyInvitePath, zDecideKaraokePartyInviteResponse, zDeductPointsPointDeductPostBody, zDeductPointsPointDeductPostResponse, zDeleteKaraokePath, zDeleteKaraokeResponse, zDeletePostPostsPostIdDeletePath, zDeletePostPostsPostIdDeleteResponse, zDeleteQuestQuestQuestIdDeletePath, zDeleteQuestQuestQuestIdDeleteResponse, zDeleteUserAdminUsersUserIdDeletePath, zDeleteUserAdminUsersUserIdDeleteResponse, zDisperseKaraokePartyPath, zDisperseKaraokePartyResponse, zGetCurrentUserAuthGetResponse, zGetHistoryListPointHistoryGetQuery, zGetHistoryListPointHistoryGetResponse, zGetHistoryPointHistoryTargetIdGetPath, zGetHistoryPointHistoryTargetIdGetResponse, zGetKaraokeFinalBidPath, zGetKaraokeFinalBidResponse, zGetKaraokeListQuery, zGetKaraokeListResponse, zGetKaraokePartyPath, zGetKaraokePartyResponse, zGetKaraokePath, zGetKaraokeResponse, zGetLimitPointLimitTargetUserIdGetPath, zGetLimitPointLimitTargetUserIdGetResponse, zGetLimitSessionPointLimitGetResponse, zGetMyKaraokePartyInvitesResponse, zGetMyKaraokePartyPath, zGetMyKaraokePartyResponse, zGetPointBalancePointTargetUserIdGetPath, zGetPointBalancePointTargetUserIdGetResponse, zGetPostPostsPostIdGetPath, zGetPostPostsPostIdGetResponse, zGetPostsPostsGetQuery, zGetPostsPostsGetResponse, zGetQuestQuestQuestIdGetPath, zGetQuestQuestQuestIdGetResponse, zGetStudentRankingPointRankingStudentGetQuery, zGetStudentRankingPointRankingStudentGetResponse, zGetTeacherRankingPointRankingTeacherGetQuery, zGetTeacherRankingPointRankingTeacherGetResponse, zGetUsersAdminUsersGetQuery, zGetUsersAdminUsersGetResponse, zGetUserStampsStampGetResponse, zGrantPointsPointGrantPostBody, zGrantPointsPointGrantPostResponse, zInviteKaraokePartyMemberBody, zInviteKaraokePartyMemberPath, zInviteKaraokePartyMemberResponse, zKickKaraokePartyMemberPath, zKickKaraokePartyMemberResponse, zLeaveKaraokePartyPath, zLeaveKaraokePartyResponse, zListQuestsQuestGetQuery, zListQuestsQuestGetResponse, zLoginAuthLoginPostBody, zLoginAuthLoginPostResponse, zLogoutAuthLogoutPostResponse, zReadRootGetQuery, zResetUserPasswordAdminUsersUserIdPasswordPatchPath, zResetUserPasswordAdminUsersUserIdPasswordPatchResponse, zSearchSearchGetQuery, zSearchSearchGetResponse, zTeacherGetByNameSearchTeacherUserNameGetPath, zTeacherGetByNameSearchTeacherUserNameGetResponse, zUpdatePostPostsPostIdPatchBody, zUpdatePostPostsPostIdPatchPath, zUpdatePostPostsPostIdPatchResponse, zUpdateQuestQuestQuestIdPutBody, zUpdateQuestQuestQuestIdPutPath, zUpdateQuestQuestQuestIdPutResponse, zUpdateUserAdminUsersUserIdPatchBody, zUpdateUserAdminUsersUserIdPatchPath, zUpdateUserAdminUsersUserIdPatchResponse, zUpdateUsersPointAdminPointPostBody, zUpdateUsersPointAdminPointPostResponse } from './zod.gen';
 
 export type Options<TData extends TDataShape = TDataShape, ThrowOnError extends boolean = boolean, TResponse = unknown> = Options2<TData, ThrowOnError, TResponse> & {
     /**
@@ -280,15 +280,33 @@ export class MiraepassApi extends HeyApiClient {
      *
      * 현재 로그인한 자기자신의 포인트 기록을 조회합니다.
      */
-    public pointHistoryPointHistoryGet<ThrowOnError extends boolean = false>(options?: Options<PointHistoryPointHistoryGetData, ThrowOnError>): RequestResult<PointHistoryPointHistoryGetResponses, PointHistoryPointHistoryGetErrors, ThrowOnError> {
-        return (options?.client ?? this.client).get<PointHistoryPointHistoryGetResponses, PointHistoryPointHistoryGetErrors, ThrowOnError>({
+    public getHistoryListPointHistoryGet<ThrowOnError extends boolean = false>(options?: Options<GetHistoryListPointHistoryGetData, ThrowOnError>): RequestResult<GetHistoryListPointHistoryGetResponses, GetHistoryListPointHistoryGetErrors, ThrowOnError> {
+        return (options?.client ?? this.client).get<GetHistoryListPointHistoryGetResponses, GetHistoryListPointHistoryGetErrors, ThrowOnError>({
             requestValidator: async (data) => await z.object({
                 body: z.never().optional(),
                 path: z.never().optional(),
-                query: zPointHistoryPointHistoryGetQuery.optional()
+                query: zGetHistoryListPointHistoryGetQuery.optional()
             }).parseAsync(data),
-            responseTransformer: async (data) => await zPointHistoryPointHistoryGetResponse.parseAsync(data),
+            responseTransformer: async (data) => await zGetHistoryListPointHistoryGetResponse.parseAsync(data),
             url: '/point/history',
+            ...options
+        });
+    }
+    
+    /**
+     * 특정 포인트 기록
+     *
+     * 특정한 포인트 기록의 데이터를 가져옵니다. 자기자신의 기록만 가져올 수 있습니다
+     */
+    public getHistoryPointHistoryTargetIdGet<ThrowOnError extends boolean = false>(options: Options<GetHistoryPointHistoryTargetIdGetData, ThrowOnError>): RequestResult<GetHistoryPointHistoryTargetIdGetResponses, GetHistoryPointHistoryTargetIdGetErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetHistoryPointHistoryTargetIdGetResponses, GetHistoryPointHistoryTargetIdGetErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zGetHistoryPointHistoryTargetIdGetPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetHistoryPointHistoryTargetIdGetResponse.parseAsync(data),
+            url: '/point/history/{target_id}',
             ...options
         });
     }
@@ -749,6 +767,292 @@ export class MiraepassApi extends HeyApiClient {
             }).parseAsync(data),
             responseTransformer: async (data) => await zCreateStampStampPostResponse.parseAsync(data),
             url: '/stamp',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 예약 목록 조회
+     *
+     * 현재 예약할 수 있는 목록을 조회합니다
+     */
+    public getKaraokeList<ThrowOnError extends boolean = false>(options?: Options<GetKaraokeListData, ThrowOnError>): RequestResult<GetKaraokeListResponses, GetKaraokeListErrors, ThrowOnError> {
+        return (options?.client ?? this.client).get<GetKaraokeListResponses, GetKaraokeListErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: z.never().optional(),
+                query: zGetKaraokeListQuery.optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetKaraokeListResponse.parseAsync(data),
+            url: '/karaoke',
+            ...options
+        });
+    }
+    
+    /**
+     * 노래방 경매 생성
+     *
+     * 특정 시간대의 노래방 경매를 생성합니다.
+     */
+    public createKaraoke<ThrowOnError extends boolean = false>(options: Options<CreateKaraokeData, ThrowOnError>): RequestResult<CreateKaraokeResponses, CreateKaraokeErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<CreateKaraokeResponses, CreateKaraokeErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zCreateKaraokeBody,
+                path: z.never().optional(),
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zCreateKaraokeResponse.parseAsync(data),
+            url: '/karaoke',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 예약 삭제
+     *
+     * 특정 예약을 삭제합니다.
+     */
+    public deleteKaraoke<ThrowOnError extends boolean = false>(options: Options<DeleteKaraokeData, ThrowOnError>): RequestResult<DeleteKaraokeResponses, DeleteKaraokeErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<DeleteKaraokeResponses, DeleteKaraokeErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zDeleteKaraokePath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zDeleteKaraokeResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 예약 조회
+     *
+     * 특정 예약을 조회합니다.
+     */
+    public getKaraoke<ThrowOnError extends boolean = false>(options: Options<GetKaraokeData, ThrowOnError>): RequestResult<GetKaraokeResponses, GetKaraokeErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetKaraokeResponses, GetKaraokeErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zGetKaraokePath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetKaraokeResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 예약 경매 파티 생성
+     *
+     * 진행중인 노래방 예약 경매에 파티를 생성합니다.
+     */
+    public createKaraokeParty<ThrowOnError extends boolean = false>(options: Options<CreateKaraokePartyData, ThrowOnError>): RequestResult<CreateKaraokePartyResponses, CreateKaraokePartyErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<CreateKaraokePartyResponses, CreateKaraokePartyErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zCreateKaraokePartyPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zCreateKaraokePartyResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}/party',
+            ...options
+        });
+    }
+    
+    /**
+     * 내 파티 조회
+     *
+     * 특정 노래방 예약 경매에서 자신이 리더이거나 소속되어 있는 파티를 조회합니다.
+     */
+    public getMyKaraokeParty<ThrowOnError extends boolean = false>(options: Options<GetMyKaraokePartyData, ThrowOnError>): RequestResult<GetMyKaraokePartyResponses, GetMyKaraokePartyErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetMyKaraokePartyResponses, GetMyKaraokePartyErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zGetMyKaraokePartyPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetMyKaraokePartyResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}/party/me',
+            ...options
+        });
+    }
+    
+    /**
+     * 예약 경매 입찰
+     *
+     * 진행중인 노래방 예약 경매에 입찰합니다.
+     */
+    public createKaraokeBid<ThrowOnError extends boolean = false>(options: Options<CreateKaraokeBidData, ThrowOnError>): RequestResult<CreateKaraokeBidResponses, CreateKaraokeBidErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<CreateKaraokeBidResponses, CreateKaraokeBidErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zCreateKaraokeBidBody,
+                path: zCreateKaraokeBidPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zCreateKaraokeBidResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}/bid',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 최종 입찰(낙찰자) 조회
+     *
+     * 해당 경매의 최종(마지막) 입찰 기록과 낙찰자 정보를 조회합니다. Redis 캐시(highest_bid)와 달리 DB를 직접 조회하므로 경매 종료 후 캐시가 만료되어도 확인할 수 있습니다.
+     */
+    public getKaraokeFinalBid<ThrowOnError extends boolean = false>(options: Options<GetKaraokeFinalBidData, ThrowOnError>): RequestResult<GetKaraokeFinalBidResponses, GetKaraokeFinalBidErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetKaraokeFinalBidResponses, GetKaraokeFinalBidErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zGetKaraokeFinalBidPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetKaraokeFinalBidResponse.parseAsync(data),
+            url: '/karaoke/{karaoke_id}/final-bid',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티 해산
+     *
+     * 파티장이 자신이 리더인 파티를 자발적으로 해산합니다.
+     */
+    public disperseKaraokeParty<ThrowOnError extends boolean = false>(options: Options<DisperseKaraokePartyData, ThrowOnError>): RequestResult<DisperseKaraokePartyResponses, DisperseKaraokePartyErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<DisperseKaraokePartyResponses, DisperseKaraokePartyErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zDisperseKaraokePartyPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zDisperseKaraokePartyResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티 조회
+     *
+     * 파티 ID로 파티 상세 정보를 조회합니다. 자신이 파티장이거나, 파티에 소속(또는 초대 대기중)인 경우에만 조회할 수 있습니다. 초대장 목록(`/karaoke/party/invites/me`)에서 받은 `party_id`로 초대받은 파티가 어떤 경매의, 누구의 파티인지 확인할 때 사용합니다.
+     */
+    public getKaraokeParty<ThrowOnError extends boolean = false>(options: Options<GetKaraokePartyData, ThrowOnError>): RequestResult<GetKaraokePartyResponses, GetKaraokePartyErrors, ThrowOnError> {
+        return (options.client ?? this.client).get<GetKaraokePartyResponses, GetKaraokePartyErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zGetKaraokePartyPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetKaraokePartyResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티 탈퇴
+     *
+     * 자신이 소속된 파티에서 스스로 탈퇴합니다. 파티장은 이 API를 사용할 수 없으며, 해산 API를 사용해야 합니다.
+     */
+    public leaveKaraokeParty<ThrowOnError extends boolean = false>(options: Options<LeaveKaraokePartyData, ThrowOnError>): RequestResult<LeaveKaraokePartyResponses, LeaveKaraokePartyErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<LeaveKaraokePartyResponses, LeaveKaraokePartyErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zLeaveKaraokePartyPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zLeaveKaraokePartyResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}/leave',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티원 강퇴
+     *
+     * 파티장이 자신이 리더인 파티에서 특정 멤버를 강퇴합니다. 강퇴 시 새 파티가 생성되므로 응답으로 갱신된 파티 정보를 반환합니다.
+     */
+    public kickKaraokePartyMember<ThrowOnError extends boolean = false>(options: Options<KickKaraokePartyMemberData, ThrowOnError>): RequestResult<KickKaraokePartyMemberResponses, KickKaraokePartyMemberErrors, ThrowOnError> {
+        return (options.client ?? this.client).delete<KickKaraokePartyMemberResponses, KickKaraokePartyMemberErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: zKickKaraokePartyMemberPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zKickKaraokePartyMemberResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}/members/{user_id}',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티원 초대
+     *
+     * 자신이 파티장인 파티에 파티원을 초대합니다. 한 유저는 하나의 경매에서 하나의 파티에만 소속될 수 있으므로, 이미 같은 경매의 파티에 소속되었거나 초대 대기중인 유저는 초대할 수 없습니다.
+     */
+    public inviteKaraokePartyMember<ThrowOnError extends boolean = false>(options: Options<InviteKaraokePartyMemberData, ThrowOnError>): RequestResult<InviteKaraokePartyMemberResponses, InviteKaraokePartyMemberErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<InviteKaraokePartyMemberResponses, InviteKaraokePartyMemberErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zInviteKaraokePartyMemberBody,
+                path: zInviteKaraokePartyMemberPath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zInviteKaraokePartyMemberResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}/invite',
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers
+            }
+        });
+    }
+    
+    /**
+     * 파티원 초대장 목록 보기
+     *
+     * 자기 자신에게 온 파티원 초대장 목록을 조회합니다.
+     */
+    public getMyKaraokePartyInvites<ThrowOnError extends boolean = false>(options?: Options<GetMyKaraokePartyInvitesData, ThrowOnError>): RequestResult<GetMyKaraokePartyInvitesResponses, unknown, ThrowOnError> {
+        return (options?.client ?? this.client).get<GetMyKaraokePartyInvitesResponses, unknown, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: z.never().optional(),
+                path: z.never().optional(),
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zGetMyKaraokePartyInvitesResponse.parseAsync(data),
+            url: '/karaoke/party/invites/me',
+            ...options
+        });
+    }
+    
+    /**
+     * 파티원 초대장 수락 및 거절
+     *
+     * 받은 파티원 초대장을 수락하거나 거절합니다.
+     */
+    public decideKaraokePartyInvite<ThrowOnError extends boolean = false>(options: Options<DecideKaraokePartyInviteData, ThrowOnError>): RequestResult<DecideKaraokePartyInviteResponses, DecideKaraokePartyInviteErrors, ThrowOnError> {
+        return (options.client ?? this.client).post<DecideKaraokePartyInviteResponses, DecideKaraokePartyInviteErrors, ThrowOnError>({
+            requestValidator: async (data) => await z.object({
+                body: zDecideKaraokePartyInviteBody,
+                path: zDecideKaraokePartyInvitePath,
+                query: z.never().optional()
+            }).parseAsync(data),
+            responseTransformer: async (data) => await zDecideKaraokePartyInviteResponse.parseAsync(data),
+            url: '/karaoke/party/{party_id}/action',
             ...options,
             headers: {
                 'Content-Type': 'application/json',

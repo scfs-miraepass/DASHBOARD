@@ -21,7 +21,12 @@ export default defineConfig({
                 strategy: "single",
             },
         },
-        "zod",
+        {
+            name: "zod",
+            dates: {
+                offset: true
+            }
+        },
         "@hey-api/transformers",
         "@hey-api/schemas",
     ],
