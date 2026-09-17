@@ -17,6 +17,14 @@ const links = computed(() => {
         })
     }
 
+    if (hasPermission(session.value?.permissions, UserPermission.MANAGE_KARAOKE)) {
+        items.push({
+            label: "노래방 경매 관리",
+            icon: 'i-lucide-mic-vocal',
+            to: '/karaoke'
+        })
+    }
+
     return items
 })
 </script>
