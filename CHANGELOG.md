@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0...v1.2.0) (2026-10-07)
+
+
+### Features
+
+* 사용자 권한 관리에 노래방 권한(참여/관리/보기) 추가 ([0f64e31](https://github.com/scfs-miraepass/DASHBOARD/commit/0f64e317c2d6a9a1035df550466c8d9e183fb834))
+
 # [1.2.0-dev.1](https://github.com/scfs-miraepass/DASHBOARD/compare/v1.1.0...v1.2.0-dev.1) (2026-09-29)
 
 
