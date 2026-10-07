@@ -54,6 +54,9 @@ const permissionList = [
     { label: '게시글 보기', value: UserPermission.VIEW_POST, description: '게시판의 게시물을 읽을 수 있는 권한' },
     { label: '스탬프 보기', value: UserPermission.VIEW_STAMP, description: '보유한 스탬프 목록을 열람할 수 있는 권한' },
     { label: '퀘스트 보기', value: UserPermission.VIEW_QUEST, description: '진행 중인 퀘스트 목록을 열람할 수 있는 권한' },
+    { label: '노래방 참여', value: UserPermission.JOIN_KARAOKE, description: '노래방 예약에 참여(입찰)할 수 있는 권한' },
+    { label: '노래방 관리', value: UserPermission.MANAGE_KARAOKE, description: '노래방 예약을 생성, 삭제, 최종 낙찰 처리 등 전반적으로 관리할 수 있는 권한' },
+    { label: '노래방 보기', value: UserPermission.VIEW_KARAOKE, description: '노래방 예약 목록을 열람할 수 있는 권한' },
 ]
 
 const presetPermissions = [
